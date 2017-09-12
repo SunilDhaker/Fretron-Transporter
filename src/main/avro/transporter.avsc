@@ -1,0 +1,321 @@
+ [
+
+ {
+      "type": "record",
+      "name": "Location",
+      "namespace": "com.transporter.Model",
+      "fields": [
+        {
+          "name": "latitude",
+          "type": "double"
+        },
+        {
+          "name": "longitude",
+          "type": "double"
+        }
+      ]
+    },
+
+
+  {
+       "type": "record",
+       "name": "User",
+       "namespace": "com.transporter.Model",
+       "fields": [
+       {
+           "name": "UUID",
+          "type": [
+          "string",
+          "null"
+
+          ]
+       },
+         {
+           "name": "name",
+           "type": [
+                    "string",
+                    "null"
+
+                    ]
+         },
+         {
+           "name": "email",
+           "type": [
+                    "string",
+                    "null"
+
+                    ]
+         },
+         {
+            "name": "mobile",
+           "type": [
+                    "int",
+                    "null"
+
+           ]
+          }
+       ]
+     },
+
+
+      {
+              "namespace": "com.transporter.Model",
+                         "type": "record",
+                         "name": "Groups",
+                          "fields": [
+                          {
+                                      "name":"subgroups",
+                                       "type": {"type" : "array", "items":"com.transporter.Model.Groups"}
+                          },
+
+                          {
+                          "name":"name",
+                          "type":
+                          [
+                          "null",
+                          "string"
+
+                          ]
+
+                          },
+
+                    {
+                                        "name":"admin",
+                                        "type":
+                                        [
+                                        "null",
+                                        "string"
+
+                                        ]
+
+                                        },
+
+                                         {
+                                                    "name":"members",
+                                                    "type":[
+                                                               "null",
+                                                          {"type":"array","items":"string"}
+                                                                          ],
+                                                     "default":null
+                                         }
+
+
+              ]
+
+             },
+
+
+     {
+          "type": "record",
+          "name": "Transporter",
+          "namespace": "com.transporter.Model",
+          "fields": [
+            {
+                "name":"adminEmail",
+               "type":[
+                     "null",
+                       {"type":"array","items":"string"}
+                      ],
+                       "default":null
+            },
+            {
+            "name":"groups",
+
+             "type":[
+                       "null",
+                       {"type":"array","items":"com.transporter.Model.Groups"}
+                    ],
+                    "default":null
+
+        }
+        ]
+        },
+
+
+  {
+            "namespace": "com.transporter.Model",
+            "type": "record",
+            "name": "Geofence",
+            "fields":[
+              {
+                  "name":"center",
+                  "type":"com.transporter.Model.Location"
+              },
+              {
+                  "name":"boundry",
+                  "type": {"type" : "array", "items":"com.transporter.Model.Location"}
+              }
+            ]
+         },
+
+          {
+             "namespace": "com.transporter.Model",
+             "type": "record",
+             "name": "FreightLocation",
+             "fields":[
+               {
+                 "name":"name",
+                 "type":"string",
+                 "default":null
+               },
+               {
+               "name":"geofence",
+                 "type":[
+                   "null",
+                   "com.transporter.Model.Geofence"
+                   ],
+                 "default":null
+               },
+               {
+                 "name":"material",
+                 "type":[
+                   "null",
+                   {
+                     "type":"array",
+                     "items":"string"
+                   }
+                 ],
+                 "default":null
+               }
+             ]
+             },
+
+   {
+           "namespace": "com.transporter.Model",
+           "type": "record",
+           "name": "FreightLocationOffset",
+
+           "fields": [
+
+           {
+              "name":"freightLocation",
+              "type":"com.transporter.Model.FreightLocation"
+           },
+             {
+               "name": "priceOffset",
+               "type": "int"
+             },
+             {
+               "name": "etdOffset",
+               "type": "int"
+             }
+           ]
+         },
+
+
+
+     {
+              "namespace": "com.transporter.Model",
+             "type": "record",
+             "name": "MaterialOffset",
+
+             "fields": [
+
+             {
+                "name":"material",
+                "type":[
+                "null",
+                "string"
+                ]
+             },
+               {
+                 "name": "materialOffset",
+                 "type": "int"
+               }
+             ]
+           },
+             {
+
+          "namespace": "com.transporter.Model",
+           "type": "record",
+           "name": "Lane",
+            "fields":[
+             {
+                      "name": "transporterID",
+                      "type":
+                        [
+                          "null",
+                          "string"
+                        ]
+             },
+
+           {
+             "name": "type",
+                         "type":
+                         [
+                       "null",
+                       "string"
+                       ]
+          },
+
+           {
+             "name": "baseOrigin",
+               "type":[
+                 "null",
+        "com.transporter.Model.FreightLocation"
+          ],
+            "default":null
+          },
+
+            {
+                "name": "baseDestination",
+                 "type":[
+                       "null",
+                   "com.transporter.Model.FreightLocation"
+                     ],
+                       "default":null
+                     },
+
+
+
+                    {
+                       "name": "basePrice",
+                       "type":[
+                             "null",
+                             "double"
+                             ]
+                    },
+
+
+          {
+          "name": "baseMaterial",
+          "type":
+          [
+          "null",
+          "string"
+
+          ]
+          },
+
+           {
+             "name": "consigner",
+               "type":[
+              "null",
+               "com.transporter.Model.FreightLocationOffset"
+                 ],
+             "default":null
+             },
+
+       {
+          "name": "consignee",
+              "type":[
+                    "null",
+                     "com.transporter.Model.FreightLocationOffset"
+                   ],
+                   "default":null
+       },
+
+
+      {
+               "name": "material",
+                   "type":[
+                         "null",
+                          "com.transporter.Model.MaterialOffset"
+                        ],
+                        "default":null
+      }
+      ]
+  }
+ ]
+ }
+ ]
