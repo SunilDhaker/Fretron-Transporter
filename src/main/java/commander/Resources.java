@@ -2,7 +2,7 @@ package commander;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.transporter.Model.Commands;
+import com.transporter.Model.Command;
 import com.transporter.Model.User;
 import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 @Singleton
 public class Resources {
     ObjectMapper objectMapper = new ObjectMapper();
-    KafkaProducer<String, Commands> producer;
+    KafkaProducer<String, Command> producer;
     SchemaRegistryClient registryClient;
 
     public Resources() {
@@ -43,7 +43,7 @@ public class Resources {
             props.put("schema.registry.url", "http://localhost:8081");
             props.put("value.serializer", KafkaAvroSerializer.class);
             registryClient = new CachedSchemaRegistryClient("http://localhost:8081", 1000);
-            producer = new KafkaProducer<String, Commands>(props);
+            producer = new KafkaProducer<String, Command>(props);
 
 
         }
@@ -57,7 +57,7 @@ public class Resources {
         @Produces(MediaType.APPLICATION_JSON)
         public String getCommands(String jsonCommands)
         {
-            Commands command = new Commands();
+            Command command = new Command();
             try {
 
                 JsonNode node = objectMapper.readTree(jsonCommands);
@@ -81,7 +81,7 @@ public class Resources {
 
 
             try {
-                ProducerRecord<String, Commands> record = new ProducerRecord<String, Commands>("command1", UUID.randomUUID().toString(), command);
+                ProducerRecord<String, Command> record = new ProducerRecord<String, Command>("command1", UUID.randomUUID().toString(), command);
                 producer.send(record);
 
             } catch (Exception e) {

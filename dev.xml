@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE properties SYSTEM 'http://java.sun.com/dtd/properties.dtd'>
+
+<properties>
+
+    <!-- Transporter Management System topic-->
+    <entry key="lanes.topic">lanes</entry>
+    <entry key="users.topic">users</entry>
+    <entry key="transporter.topic">transporter</entry>
+
+    <!-- Common topics -->
+    <entry key="command.topic">command</entry>
+    <entry key="command.result.topic">commandresult</entry>
+
+    <!--Stream Configuration -->
+    <entry key="application.id">transportmanagement</entry>
+    <entry key="bootstrap.server">localhost:9092</entry>
+    <entry key="application.server.config">localhost:2223</entry>
+    <entry key="auto.offset.reset.config">earliest</entry>
+    <entry key="commit.interval.auto.config">500</entry>
+    <entry key="schemaregistry"> http://localhost:8081</entry>
+
+    <!-- State Store -->
+    <entry key="user.state.store">userstatestore</entry>
+</properties>

@@ -1,5 +1,4 @@
  [
-
  {
         "namespace": "com.transporter.Model",
         "type": "record",
@@ -215,7 +214,7 @@
                   "type":"com.transporter.Model.Location"
               },
               {
-                  "name":"boundry",
+                  "name":"boundary",
                   "type": {"type" : "array", "items":"com.transporter.Model.Location"}
               }
             ]
@@ -385,7 +384,56 @@
                "default":null
         }
       ]
-  }
- ]
- }
+  },
+   {
+     "namespace": "com.transporter.Model",
+     "type": "record",
+     "name": "Command",
+     "fields": [
+       {
+         "name": "type",
+         "type": "string"
+       },
+       {
+         "name": "data",
+         "type": "bytes"
+       },
+       {
+         "name": "id",
+         "type": "string"
+       },
+       {
+         "name": "statusCode",
+         "type": [
+           "null",
+           "int"
+         ]
+       },
+       {
+         "name": "errorMessage",
+         "type": [
+           "null",
+           "string"
+         ]
+       },
+       {
+         "name": "startTime",
+         "type": [
+           "null",
+           "long"
+         ],
+         "logicalType": "timestamp-millis",
+         "default": null
+       },
+       {
+         "name": "processTime",
+         "type": [
+           "null",
+           "long"
+         ],
+         "logicalType": "timestamp-millis",
+         "default": null
+       }
+     ]
+   }
  ]
