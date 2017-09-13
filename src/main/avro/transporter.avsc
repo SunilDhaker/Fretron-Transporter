@@ -1,6 +1,58 @@
  [
 
  {
+        "namespace": "com.transporter.Model",
+        "type": "record",
+        "name": "Commands",
+        "fields": [
+          {
+            "name": "type",
+            "type": "string"
+          },
+          {
+            "name": "data",
+            "type": "bytes"
+          },
+          {
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "name": "statusCode",
+            "type": [
+              "null",
+              "int"
+            ]
+          },
+          {
+            "name": "errorMessage",
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          {
+            "name": "startTime",
+            "type": [
+              "null",
+              "long"
+            ],
+            "logicalType": "timestamp-millis",
+            "default": null
+          },
+          {
+            "name": "processTime",
+            "type": [
+              "null",
+              "long"
+            ],
+            "logicalType": "timestamp-millis",
+            "default": null
+          }
+        ]
+      },
+
+ {
       "type": "record",
       "name": "Location",
       "namespace": "com.transporter.Model",
