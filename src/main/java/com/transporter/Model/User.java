@@ -7,9 +7,9 @@ package com.transporter.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class User extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.transporter.Model\",\"fields\":[{\"name\":\"UUID\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"name\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"email\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"mobile\",\"type\":[\"int\",\"null\"]}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.transporter.Model\",\"fields\":[{\"name\":\"userId\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"name\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"email\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"mobile\",\"type\":[\"int\",\"null\"]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-  @Deprecated public java.lang.String UUID;
+  @Deprecated public java.lang.String userId;
   @Deprecated public java.lang.String name;
   @Deprecated public java.lang.String email;
   @Deprecated public java.lang.Integer mobile;
@@ -24,8 +24,8 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   /**
    * All-args constructor.
    */
-  public User(java.lang.String UUID, java.lang.String name, java.lang.String email, java.lang.Integer mobile) {
-    this.UUID = UUID;
+  public User(java.lang.String userId, java.lang.String name, java.lang.String email, java.lang.Integer mobile) {
+    this.userId = userId;
     this.name = name;
     this.email = email;
     this.mobile = mobile;
@@ -35,7 +35,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   // Used by DatumWriter.  Applications should not call. 
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return UUID;
+    case 0: return userId;
     case 1: return name;
     case 2: return email;
     case 3: return mobile;
@@ -46,7 +46,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: UUID = (java.lang.String)value$; break;
+    case 0: userId = (java.lang.String)value$; break;
     case 1: name = (java.lang.String)value$; break;
     case 2: email = (java.lang.String)value$; break;
     case 3: mobile = (java.lang.Integer)value$; break;
@@ -55,18 +55,18 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   }
 
   /**
-   * Gets the value of the 'UUID' field.
+   * Gets the value of the 'userId' field.
    */
-  public java.lang.String getUUID() {
-    return UUID;
+  public java.lang.String getUserId() {
+    return userId;
   }
 
   /**
-   * Sets the value of the 'UUID' field.
+   * Sets the value of the 'userId' field.
    * @param value the value to set.
    */
-  public void setUUID(java.lang.String value) {
-    this.UUID = value;
+  public void setUserId(java.lang.String value) {
+    this.userId = value;
   }
 
   /**
@@ -135,7 +135,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<User>
     implements org.apache.avro.data.RecordBuilder<User> {
 
-    private java.lang.String UUID;
+    private java.lang.String userId;
     private java.lang.String name;
     private java.lang.String email;
     private java.lang.Integer mobile;
@@ -148,8 +148,8 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     /** Creates a Builder by copying an existing Builder */
     private Builder(com.transporter.Model.User.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.UUID)) {
-        this.UUID = data().deepCopy(fields()[0].schema(), other.UUID);
+      if (isValidValue(fields()[0], other.userId)) {
+        this.userId = data().deepCopy(fields()[0].schema(), other.userId);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.name)) {
@@ -169,8 +169,8 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     /** Creates a Builder by copying an existing User instance */
     private Builder(com.transporter.Model.User other) {
             super(com.transporter.Model.User.SCHEMA$);
-      if (isValidValue(fields()[0], other.UUID)) {
-        this.UUID = data().deepCopy(fields()[0].schema(), other.UUID);
+      if (isValidValue(fields()[0], other.userId)) {
+        this.userId = data().deepCopy(fields()[0].schema(), other.userId);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.name)) {
@@ -187,27 +187,27 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       }
     }
 
-    /** Gets the value of the 'UUID' field */
-    public java.lang.String getUUID() {
-      return UUID;
+    /** Gets the value of the 'userId' field */
+    public java.lang.String getUserId() {
+      return userId;
     }
     
-    /** Sets the value of the 'UUID' field */
-    public com.transporter.Model.User.Builder setUUID(java.lang.String value) {
+    /** Sets the value of the 'userId' field */
+    public com.transporter.Model.User.Builder setUserId(java.lang.String value) {
       validate(fields()[0], value);
-      this.UUID = value;
+      this.userId = value;
       fieldSetFlags()[0] = true;
       return this; 
     }
     
-    /** Checks whether the 'UUID' field has been set */
-    public boolean hasUUID() {
+    /** Checks whether the 'userId' field has been set */
+    public boolean hasUserId() {
       return fieldSetFlags()[0];
     }
     
-    /** Clears the value of the 'UUID' field */
-    public com.transporter.Model.User.Builder clearUUID() {
-      UUID = null;
+    /** Clears the value of the 'userId' field */
+    public com.transporter.Model.User.Builder clearUserId() {
+      userId = null;
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -291,7 +291,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     public User build() {
       try {
         User record = new User();
-        record.UUID = fieldSetFlags()[0] ? this.UUID : (java.lang.String) defaultValue(fields()[0]);
+        record.userId = fieldSetFlags()[0] ? this.userId : (java.lang.String) defaultValue(fields()[0]);
         record.name = fieldSetFlags()[1] ? this.name : (java.lang.String) defaultValue(fields()[1]);
         record.email = fieldSetFlags()[2] ? this.email : (java.lang.String) defaultValue(fields()[2]);
         record.mobile = fieldSetFlags()[3] ? this.mobile : (java.lang.Integer) defaultValue(fields()[3]);

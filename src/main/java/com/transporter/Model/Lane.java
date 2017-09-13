@@ -7,9 +7,9 @@ package com.transporter.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Lane extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Lane\",\"namespace\":\"com.transporter.Model\",\"fields\":[{\"name\":\"transporterID\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"baseOrigin\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"FreightLocation\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":null},{\"name\":\"geofence\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Geofence\",\"fields\":[{\"name\":\"center\",\"type\":{\"type\":\"record\",\"name\":\"Location\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}},{\"name\":\"boundry\",\"type\":{\"type\":\"array\",\"items\":\"Location\"}}]}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}],\"default\":null},{\"name\":\"baseDestination\",\"type\":[\"null\",\"FreightLocation\"],\"default\":null},{\"name\":\"basePrice\",\"type\":[\"null\",\"double\"]},{\"name\":\"baseMaterial\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"consigner\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"FreightLocationOffset\",\"fields\":[{\"name\":\"freightLocation\",\"type\":\"FreightLocation\"},{\"name\":\"priceOffset\",\"type\":\"int\"},{\"name\":\"etdOffset\",\"type\":\"int\"}]}],\"default\":null},{\"name\":\"consignee\",\"type\":[\"null\",\"FreightLocationOffset\"],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"MaterialOffset\",\"fields\":[{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"materialOffset\",\"type\":\"int\"}]}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Lane\",\"namespace\":\"com.transporter.Model\",\"fields\":[{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"baseOrigin\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"FreightLocation\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":null},{\"name\":\"geofence\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Geofence\",\"fields\":[{\"name\":\"center\",\"type\":{\"type\":\"record\",\"name\":\"Location\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}},{\"name\":\"boundry\",\"type\":{\"type\":\"array\",\"items\":\"Location\"}}]}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}],\"default\":null},{\"name\":\"baseDestination\",\"type\":[\"null\",\"FreightLocation\"],\"default\":null},{\"name\":\"basePrice\",\"type\":[\"null\",\"double\"]},{\"name\":\"baseMaterial\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"consigner\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"FreightLocationOffset\",\"fields\":[{\"name\":\"freightLocation\",\"type\":\"FreightLocation\"},{\"name\":\"priceOffset\",\"type\":\"int\"},{\"name\":\"etdOffset\",\"type\":\"int\"}]}],\"default\":null},{\"name\":\"consignee\",\"type\":[\"null\",\"FreightLocationOffset\"],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"MaterialOffset\",\"fields\":[{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"materialOffset\",\"type\":\"int\"}]}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-  @Deprecated public java.lang.String transporterID;
+  @Deprecated public java.lang.String transporterId;
   @Deprecated public java.lang.String type;
   @Deprecated public com.transporter.Model.FreightLocation baseOrigin;
   @Deprecated public com.transporter.Model.FreightLocation baseDestination;
@@ -29,8 +29,8 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   /**
    * All-args constructor.
    */
-  public Lane(java.lang.String transporterID, java.lang.String type, com.transporter.Model.FreightLocation baseOrigin, com.transporter.Model.FreightLocation baseDestination, java.lang.Double basePrice, java.lang.String baseMaterial, com.transporter.Model.FreightLocationOffset consigner, com.transporter.Model.FreightLocationOffset consignee, com.transporter.Model.MaterialOffset material) {
-    this.transporterID = transporterID;
+  public Lane(java.lang.String transporterId, java.lang.String type, com.transporter.Model.FreightLocation baseOrigin, com.transporter.Model.FreightLocation baseDestination, java.lang.Double basePrice, java.lang.String baseMaterial, com.transporter.Model.FreightLocationOffset consigner, com.transporter.Model.FreightLocationOffset consignee, com.transporter.Model.MaterialOffset material) {
+    this.transporterId = transporterId;
     this.type = type;
     this.baseOrigin = baseOrigin;
     this.baseDestination = baseDestination;
@@ -45,7 +45,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   // Used by DatumWriter.  Applications should not call. 
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return transporterID;
+    case 0: return transporterId;
     case 1: return type;
     case 2: return baseOrigin;
     case 3: return baseDestination;
@@ -61,7 +61,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: transporterID = (java.lang.String)value$; break;
+    case 0: transporterId = (java.lang.String)value$; break;
     case 1: type = (java.lang.String)value$; break;
     case 2: baseOrigin = (com.transporter.Model.FreightLocation)value$; break;
     case 3: baseDestination = (com.transporter.Model.FreightLocation)value$; break;
@@ -75,18 +75,18 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   }
 
   /**
-   * Gets the value of the 'transporterID' field.
+   * Gets the value of the 'transporterId' field.
    */
-  public java.lang.String getTransporterID() {
-    return transporterID;
+  public java.lang.String getTransporterId() {
+    return transporterId;
   }
 
   /**
-   * Sets the value of the 'transporterID' field.
+   * Sets the value of the 'transporterId' field.
    * @param value the value to set.
    */
-  public void setTransporterID(java.lang.String value) {
-    this.transporterID = value;
+  public void setTransporterId(java.lang.String value) {
+    this.transporterId = value;
   }
 
   /**
@@ -230,7 +230,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<Lane>
     implements org.apache.avro.data.RecordBuilder<Lane> {
 
-    private java.lang.String transporterID;
+    private java.lang.String transporterId;
     private java.lang.String type;
     private com.transporter.Model.FreightLocation baseOrigin;
     private com.transporter.Model.FreightLocation baseDestination;
@@ -248,8 +248,8 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     /** Creates a Builder by copying an existing Builder */
     private Builder(com.transporter.Model.Lane.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.transporterID)) {
-        this.transporterID = data().deepCopy(fields()[0].schema(), other.transporterID);
+      if (isValidValue(fields()[0], other.transporterId)) {
+        this.transporterId = data().deepCopy(fields()[0].schema(), other.transporterId);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.type)) {
@@ -289,8 +289,8 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     /** Creates a Builder by copying an existing Lane instance */
     private Builder(com.transporter.Model.Lane other) {
             super(com.transporter.Model.Lane.SCHEMA$);
-      if (isValidValue(fields()[0], other.transporterID)) {
-        this.transporterID = data().deepCopy(fields()[0].schema(), other.transporterID);
+      if (isValidValue(fields()[0], other.transporterId)) {
+        this.transporterId = data().deepCopy(fields()[0].schema(), other.transporterId);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.type)) {
@@ -327,27 +327,27 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
       }
     }
 
-    /** Gets the value of the 'transporterID' field */
-    public java.lang.String getTransporterID() {
-      return transporterID;
+    /** Gets the value of the 'transporterId' field */
+    public java.lang.String getTransporterId() {
+      return transporterId;
     }
     
-    /** Sets the value of the 'transporterID' field */
-    public com.transporter.Model.Lane.Builder setTransporterID(java.lang.String value) {
+    /** Sets the value of the 'transporterId' field */
+    public com.transporter.Model.Lane.Builder setTransporterId(java.lang.String value) {
       validate(fields()[0], value);
-      this.transporterID = value;
+      this.transporterId = value;
       fieldSetFlags()[0] = true;
       return this; 
     }
     
-    /** Checks whether the 'transporterID' field has been set */
-    public boolean hasTransporterID() {
+    /** Checks whether the 'transporterId' field has been set */
+    public boolean hasTransporterId() {
       return fieldSetFlags()[0];
     }
     
-    /** Clears the value of the 'transporterID' field */
-    public com.transporter.Model.Lane.Builder clearTransporterID() {
-      transporterID = null;
+    /** Clears the value of the 'transporterId' field */
+    public com.transporter.Model.Lane.Builder clearTransporterId() {
+      transporterId = null;
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -556,7 +556,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     public Lane build() {
       try {
         Lane record = new Lane();
-        record.transporterID = fieldSetFlags()[0] ? this.transporterID : (java.lang.String) defaultValue(fields()[0]);
+        record.transporterId = fieldSetFlags()[0] ? this.transporterId : (java.lang.String) defaultValue(fields()[0]);
         record.type = fieldSetFlags()[1] ? this.type : (java.lang.String) defaultValue(fields()[1]);
         record.baseOrigin = fieldSetFlags()[2] ? this.baseOrigin : (com.transporter.Model.FreightLocation) defaultValue(fields()[2]);
         record.baseDestination = fieldSetFlags()[3] ? this.baseDestination : (com.transporter.Model.FreightLocation) defaultValue(fields()[3]);
