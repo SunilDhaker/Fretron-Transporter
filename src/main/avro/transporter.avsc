@@ -16,92 +16,102 @@
       ]
     },
 
-  {
-       "type": "record",
-       "name": "User",
-       "namespace": "com.transporter.Model",
-       "fields": [
+ {
+      "type": "record",
+      "name": "User",
+      "namespace": "com.transporter.Model",
+      "fields": [
+
        {
-           "name": "UUID",
+          "name": "userId",
           "type": [
           "string",
           "null"
-
-          ]
+           ]
        },
          {
            "name": "name",
            "type": [
-                    "string",
-                    "null"
+           "string",
+           "null"
 
-                    ]
+            ]
          },
          {
            "name": "email",
            "type": [
-                    "string",
-                    "null"
-
-                    ]
+           "string",
+           "null"
+               ]
          },
          {
-            "name": "mobile",
+           "name": "mobile",
            "type": [
-                    "int",
-                    "null"
-
-           ]
+              "int",
+              "null"
+                  ]
           }
        ]
      },
 
-
-      {
+          {
               "namespace": "com.transporter.Model",
-                         "type": "record",
-                         "name": "Groups",
-                          "fields": [
-                          {
-                                      "name":"subgroups",
-                                       "type": {"type" : "array", "items":"com.transporter.Model.Groups"}
-                          },
+              "type": "record",
+              "name": "Groups",
+              "fields": [
 
-                          {
-                          "name":"name",
-                          "type":
-                          [
-                          "null",
-                          "string"
+                {
+                  "name":"groupId",
+                   "type":
+                   [
+                       "null",
+                      "string"
 
-                          ]
+                   ]
 
-                          },
+                },
 
-                    {
-                                        "name":"admin",
-                                        "type":
-                                        [
-                                        "null",
-                                        "string"
 
-                                        ]
+              {
+                  "name":"subgroups",
+                  "type": {"type" : "array", "items":"com.transporter.Model.Groups"}
+              },
 
-                                        },
-
-                                         {
-                                                    "name":"members",
-                                                    "type":[
-                                                               "null",
-                                                          {"type":"array","items":"string"}
-                                                                          ],
-                                                     "default":null
-                                         }
-
+              {
+              "name":"name",
+              "type":
+              [
+              "null",
+              "string"
 
               ]
 
-             },
+              },
+
+            {
+               "name":"admin",
+                "type":
+                    [
+                     "null",
+                     "string"
+
+                    ]
+
+            },
+
+            {
+                "name":"members",
+                "type":
+                   [
+                      "null",
+                   {"type":"array","items":"string"}
+
+                   ],
+                     "default":null
+            }
+         ]
+
+        },
 
 
      {
@@ -109,6 +119,18 @@
           "name": "Transporter",
           "namespace": "com.transporter.Model",
           "fields": [
+
+                {
+                    "name":"transporterId",
+                     "type":
+                     [
+                         "null",
+                        "string"
+
+                     ]
+
+                  },
+
             {
                 "name":"adminEmail",
                "type":[
@@ -201,9 +223,7 @@
            ]
          },
 
-
-
-     {
+         {
               "namespace": "com.transporter.Model",
              "type": "record",
              "name": "MaterialOffset",
@@ -228,23 +248,23 @@
           "namespace": "com.transporter.Model",
            "type": "record",
            "name": "Lane",
-            "fields":[
+            "fields":
+            [
              {
-                      "name": "transporterID",
-                      "type":
-                        [
-                          "null",
-                          "string"
-                        ]
+                 "name": "transporterId",
+                 "type":
+                  [    "null",
+                       "string"
+                  ]
              },
 
            {
              "name": "type",
-                         "type":
-                         [
-                       "null",
-                       "string"
-                       ]
+             "type":
+               [
+                 "null",
+                "string"
+               ]
           },
 
            {
@@ -256,24 +276,22 @@
             "default":null
           },
 
-            {
-                "name": "baseDestination",
-                 "type":[
-                       "null",
-                   "com.transporter.Model.FreightLocation"
-                     ],
-                       "default":null
-                     },
+        {
+        "name": "baseDestination",
+        "type":[
+           "null",
+        "com.transporter.Model.FreightLocation"
+         ],
+           "default":null
+         },
 
-
-
-                    {
-                       "name": "basePrice",
-                       "type":[
-                             "null",
-                             "double"
-                             ]
-                    },
+        {
+           "name": "basePrice",
+           "type":[
+                 "null",
+                 "double"
+                 ]
+        },
 
 
           {
@@ -305,14 +323,15 @@
        },
 
 
-      {
-               "name": "material",
-                   "type":[
-                         "null",
-                          "com.transporter.Model.MaterialOffset"
-                        ],
-                        "default":null
-      }
+        {
+           "name": "material",
+               "type":
+               [
+                  "null",
+                 "com.transporter.Model.MaterialOffset"
+               ],
+               "default":null
+        }
       ]
   }
  ]

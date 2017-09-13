@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="FretronTransporter" target="1.6" />
+      <module name="FretronTransporter" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
