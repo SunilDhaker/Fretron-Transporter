@@ -126,8 +126,6 @@ public class Resources {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
     private Object parse(Command value) {
