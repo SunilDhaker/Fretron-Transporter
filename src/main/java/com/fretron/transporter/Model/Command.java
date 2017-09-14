@@ -3,7 +3,7 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.fretron.transporter.Model;
+package com.fretron.transporter.Model;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Command extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
@@ -277,7 +277,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Sets the value of the 'type' field */
-    public com.fretron.transporter.Model.Command.Builder setType(String value) {
+    public com.fretron.transporter.Model.Command.Builder setType(java.lang.String value) {
       validate(fields()[0], value);
       this.type = value;
       fieldSetFlags()[0] = true;
@@ -327,7 +327,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Sets the value of the 'id' field */
-    public com.fretron.transporter.Model.Command.Builder setId(String value) {
+    public com.fretron.transporter.Model.Command.Builder setId(java.lang.String value) {
       validate(fields()[2], value);
       this.id = value;
       fieldSetFlags()[2] = true;

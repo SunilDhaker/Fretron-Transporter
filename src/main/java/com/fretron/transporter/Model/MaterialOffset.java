@@ -3,11 +3,11 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.fretron.transporter.Model;
+package com.fretron.transporter.Model;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MaterialOffset\",\"namespace\":\"com.transporter.Model\",\"fields\":[{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"materialOffset\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MaterialOffset\",\"namespace\":\"com.fretron.transporter.Model\",\"fields\":[{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"materialOffset\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String material;
   @Deprecated public int materialOffset;
@@ -77,18 +77,18 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
   }
 
   /** Creates a new MaterialOffset RecordBuilder */
-  public static MaterialOffset.Builder newBuilder() {
-    return new MaterialOffset.Builder();
+  public static com.fretron.transporter.Model.MaterialOffset.Builder newBuilder() {
+    return new com.fretron.transporter.Model.MaterialOffset.Builder();
   }
   
   /** Creates a new MaterialOffset RecordBuilder by copying an existing Builder */
-  public static MaterialOffset.Builder newBuilder(MaterialOffset.Builder other) {
-    return new MaterialOffset.Builder(other);
+  public static com.fretron.transporter.Model.MaterialOffset.Builder newBuilder(com.fretron.transporter.Model.MaterialOffset.Builder other) {
+    return new com.fretron.transporter.Model.MaterialOffset.Builder(other);
   }
   
   /** Creates a new MaterialOffset RecordBuilder by copying an existing MaterialOffset instance */
-  public static MaterialOffset.Builder newBuilder(MaterialOffset other) {
-    return new MaterialOffset.Builder(other);
+  public static com.fretron.transporter.Model.MaterialOffset.Builder newBuilder(com.fretron.transporter.Model.MaterialOffset other) {
+    return new com.fretron.transporter.Model.MaterialOffset.Builder(other);
   }
   
   /**
@@ -102,11 +102,11 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
 
     /** Creates a new Builder */
     private Builder() {
-      super(MaterialOffset.SCHEMA$);
+      super(com.fretron.transporter.Model.MaterialOffset.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(MaterialOffset.Builder other) {
+    private Builder(com.fretron.transporter.Model.MaterialOffset.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.material)) {
         this.material = data().deepCopy(fields()[0].schema(), other.material);
@@ -119,8 +119,8 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
     }
     
     /** Creates a Builder by copying an existing MaterialOffset instance */
-    private Builder(MaterialOffset other) {
-            super(MaterialOffset.SCHEMA$);
+    private Builder(com.fretron.transporter.Model.MaterialOffset other) {
+            super(com.fretron.transporter.Model.MaterialOffset.SCHEMA$);
       if (isValidValue(fields()[0], other.material)) {
         this.material = data().deepCopy(fields()[0].schema(), other.material);
         fieldSetFlags()[0] = true;
@@ -137,7 +137,7 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
     }
     
     /** Sets the value of the 'material' field */
-    public MaterialOffset.Builder setMaterial(java.lang.String value) {
+    public com.fretron.transporter.Model.MaterialOffset.Builder setMaterial(java.lang.String value) {
       validate(fields()[0], value);
       this.material = value;
       fieldSetFlags()[0] = true;
@@ -150,7 +150,7 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
     }
     
     /** Clears the value of the 'material' field */
-    public MaterialOffset.Builder clearMaterial() {
+    public com.fretron.transporter.Model.MaterialOffset.Builder clearMaterial() {
       material = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -162,7 +162,7 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
     }
     
     /** Sets the value of the 'materialOffset' field */
-    public MaterialOffset.Builder setMaterialOffset(int value) {
+    public com.fretron.transporter.Model.MaterialOffset.Builder setMaterialOffset(int value) {
       validate(fields()[1], value);
       this.materialOffset = value;
       fieldSetFlags()[1] = true;
@@ -175,7 +175,7 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
     }
     
     /** Clears the value of the 'materialOffset' field */
-    public MaterialOffset.Builder clearMaterialOffset() {
+    public com.fretron.transporter.Model.MaterialOffset.Builder clearMaterialOffset() {
       fieldSetFlags()[1] = false;
       return this;
     }

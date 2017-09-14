@@ -7,6 +7,7 @@
     <entry key="lanes.topic">lanes</entry>
     <entry key="user.topic">user</entry>
     <entry key="transporter.topic">transporter</entry>
+    <entry key="user.email.store">userbyemailstore</entry>
 
     <!-- Common topics -->
     <entry key="command.topic">command</entry>

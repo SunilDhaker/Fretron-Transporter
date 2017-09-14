@@ -13,13 +13,13 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   @Deprecated public java.lang.String name;
   @Deprecated public java.lang.String email;
   @Deprecated public java.lang.String mobile;
+
   /**
    * Default constructor.  Note that this does not initialize fields
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>. 
    */
   public User() {}
-
 
   /**
    * All-args constructor.

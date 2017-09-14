@@ -1,65 +1,106 @@
 package com.fretron.transporter.UserManager;
 
-
 import com.fretron.transporter.Context;
 import com.fretron.transporter.Model.Command;
 import com.fretron.transporter.Model.User;
 import com.fretron.transporter.Utils.SpecificAvroSerde;
 import com.fretron.transporter.constants.Constants;
-import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
-import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
+import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
-import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KStreamBuilder;
-import org.apache.kafka.streams.processor.StateStoreSupplier;
-import org.apache.kafka.streams.state.Stores;
+import org.apache.kafka.streams.kstream.KTable;
 
-import java.util.Collections;
-import java.util.Map;
+import java.nio.ByteBuffer;
 import java.util.Properties;
+import java.util.UUID;
 
 public class UserManager {
-    public String stateStore;
+    public KafkaStreams startStream(KStreamBuilder builder, SpecificAvroSerde<User> userSpecificAvroSerde,SpecificAvroSerde<Command> commandSpecificAvroSerde,Properties properties) {
+        KStream<String,Command> commandKStream=builder
+                .stream(Serdes.String(),commandSpecificAvroSerde,Context.getConfig().getString(Constants.KEY_COMMAND_TOPIC))
+                .filter((key,value)->value.getType().contains("user"));
 
-    //get statestore
+        commandKStream.print("commandKS :");
 
-    KStreamBuilder builder = new KStreamBuilder();
-    Properties properties= getProperties();
-    SchemaRegistryClient schemaRegistryClient=new CachedSchemaRegistryClient(Context.getConfig().getString(Constants.KEY_SCHEMA_REGISTRY_URL),10);
+//        commandKStream.mapValues((values)-> userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC),values.getData().array()))
+//                .to(Serdes.String(),userSpecificAvroSerde,Context.getConfig().getString(Constants.KEY_USERS_TOPIC));
 
-    final Map<String, String> serdeProps = Collections.singletonMap("schema.registry.url", Context.getConfig().getString(Constants.KEY_SCHEMA_REGISTRY_URL));
-    SpecificAvroSerde<User> userSpecificAvroSerde=new SpecificAvroSerde<>(schemaRegistryClient, serdeProps);
+        KStream<String,User> existingUserKS=builder.stream(Serdes.String(),userSpecificAvroSerde,
+                Context.getConfig().getString(Constants.KEY_USERS_TOPIC));
 
-    SpecificAvroSerde<Command> commandSpecificAvroSerde=new SpecificAvroSerde<>(schemaRegistryClient, serdeProps);
+        existingUserKS.print("Existing customers");
+        // user create topology
+        KStream<String,Command> createUserCommandKStream=commandKStream
+                .filter((key,value)->value.getType().contains("create"))
+                .selectKey((key,value)->userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC),value.getData().array()).getEmail());
 
-    public KafkaStreams startStream() {
+        createUserCommandKStream.print("create ::");
 
-        //configure stores
-        userSpecificAvroSerde.configure(serdeProps,false);
-        commandSpecificAvroSerde.configure(serdeProps,false);
+        KTable<String,User> userKTable=existingUserKS.selectKey((key, value)->value.getEmail())
+                .groupByKey(Serdes.String(),userSpecificAvroSerde).reduce((value,aggValue)->aggValue,Context.getConfig().getString(Constants.KEY_USER_BYEMAIL_STORE));
 
-        //create state store
-        stateStore=Context.getConfig().getString(Constants.KEY_USER_STATESTORE);
-        StateStoreSupplier userStateStore= Stores.create(stateStore).withStringKeys().withValues(userSpecificAvroSerde).persistent().build();
+        userKTable.print("userKTable");
 
-        builder.addStateStore(userStateStore);
+        KStream<String,UserAndCommand> joinedKStream = createUserCommandKStream.leftJoin(userKTable,
+                (leftValue,rightValue)->new UserAndCommand(rightValue,leftValue),
+                Serdes.String(),commandSpecificAvroSerde);
 
-    KStream<String,User> userKStream=UserCommandHandler.getUserKStream(builder,commandSpecificAvroSerde,userSpecificAvroSerde);
+        KStream<String,UserAndCommand>[] branchedKS=joinedKStream.branch((key,value)->value.user!=null,
+                (key,value)->value.user==null);
 
-    userKStream.transform(new UserTransformer(),stateStore);
+        branchedKS[0].mapValues((values)->{
+            Command command=new Command();
+            command.setType("user.create.failed");
+            command.setErrorMessage("email already Exist");
+            command.setData(ByteBuffer.wrap(userSpecificAvroSerde.serializer().serialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC),values.user)));
+            command.setId(values.command.getId());
+            command.setProcessTime(System.currentTimeMillis());
+            command.setStatusCode(404);
+            return command;
+        }).selectKey((key,value)->value.getId()).to(Serdes.String(),commandSpecificAvroSerde,Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
 
-    KafkaStreams kafkaStreams=new KafkaStreams(builder,properties);
+    KStream<String,UserAndCommand> userCreatedStream = branchedKS[1].mapValues((values)-> {
+                User user = userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), values.command.getData().array());
+                user.setUserId(UUID.randomUUID().toString());
 
-    return kafkaStreams;
-  }
+                values.command.setData(ByteBuffer.wrap(userSpecificAvroSerde.serializer().serialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC),user)));
 
-    public Properties getProperties() {
-        Properties properties=new Properties();
+                UserAndCommand userAndCommand=new UserAndCommand(user,values.command);
+                return userAndCommand;
+            });
 
-        properties.put(StreamsConfig.APPLICATION_ID_CONFIG, Context.getConfig().getString(Constants.KEY_APPLICATION_ID));
-        properties.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG,Context.getConfig().getString(Constants.KEY_BOOTSTRAP_SERVERS));
-        properties.put(StreamsConfig.APPLICATION_SERVER_CONFIG,Context.getConfig().getString(Constants.KEY_APPLICATION_SERVER));
-        return properties;
+
+    userCreatedStream.mapValues((values)->{
+        User user=userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC),values.command.getData().array());
+
+        return user;
+    }).to(Serdes.String(),userSpecificAvroSerde,Context.getConfig().getString(Constants.KEY_USERS_TOPIC));
+
+        userCreatedStream.mapValues((values)->{
+            Command command=new Command();
+            command.setId(values.command.getId());
+            command.setStatusCode(200);
+            command.setProcessTime(System.currentTimeMillis());
+            command.setData(values.command.getData());
+            command.setType("user.create.success");
+            command.setErrorMessage("null");
+
+            return command;
+        }).selectKey((key,value)->value.getId())
+                .to(Serdes.String(),commandSpecificAvroSerde,Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
+
+        KafkaStreams kafkaStreams=new KafkaStreams(builder,properties);
+        return kafkaStreams;
+    }
+
+    static class UserAndCommand {
+        Command command;
+        User user;
+        UserAndCommand(User user,Command command) {
+            this.user=user;
+            this.command=command;
+        }
     }
 }
+

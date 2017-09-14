@@ -3,11 +3,11 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.fretron.transporter.Model;
+package com.fretron.transporter.Model;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Location extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Location\",\"namespace\":\"com.transporter.Model\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Location\",\"namespace\":\"com.fretron.transporter.Model\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public double latitude;
   @Deprecated public double longitude;
@@ -77,18 +77,18 @@ public class Location extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   /** Creates a new Location RecordBuilder */
-  public static Location.Builder newBuilder() {
-    return new Location.Builder();
+  public static com.fretron.transporter.Model.Location.Builder newBuilder() {
+    return new com.fretron.transporter.Model.Location.Builder();
   }
   
   /** Creates a new Location RecordBuilder by copying an existing Builder */
-  public static Location.Builder newBuilder(Location.Builder other) {
-    return new Location.Builder(other);
+  public static com.fretron.transporter.Model.Location.Builder newBuilder(com.fretron.transporter.Model.Location.Builder other) {
+    return new com.fretron.transporter.Model.Location.Builder(other);
   }
   
   /** Creates a new Location RecordBuilder by copying an existing Location instance */
-  public static Location.Builder newBuilder(Location other) {
-    return new Location.Builder(other);
+  public static com.fretron.transporter.Model.Location.Builder newBuilder(com.fretron.transporter.Model.Location other) {
+    return new com.fretron.transporter.Model.Location.Builder(other);
   }
   
   /**
@@ -102,11 +102,11 @@ public class Location extends org.apache.avro.specific.SpecificRecordBase implem
 
     /** Creates a new Builder */
     private Builder() {
-      super(Location.SCHEMA$);
+      super(com.fretron.transporter.Model.Location.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(Location.Builder other) {
+    private Builder(com.fretron.transporter.Model.Location.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.latitude)) {
         this.latitude = data().deepCopy(fields()[0].schema(), other.latitude);
@@ -119,8 +119,8 @@ public class Location extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Creates a Builder by copying an existing Location instance */
-    private Builder(Location other) {
-            super(Location.SCHEMA$);
+    private Builder(com.fretron.transporter.Model.Location other) {
+            super(com.fretron.transporter.Model.Location.SCHEMA$);
       if (isValidValue(fields()[0], other.latitude)) {
         this.latitude = data().deepCopy(fields()[0].schema(), other.latitude);
         fieldSetFlags()[0] = true;
@@ -137,7 +137,7 @@ public class Location extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Sets the value of the 'latitude' field */
-    public Location.Builder setLatitude(double value) {
+    public com.fretron.transporter.Model.Location.Builder setLatitude(double value) {
       validate(fields()[0], value);
       this.latitude = value;
       fieldSetFlags()[0] = true;
@@ -150,7 +150,7 @@ public class Location extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Clears the value of the 'latitude' field */
-    public Location.Builder clearLatitude() {
+    public com.fretron.transporter.Model.Location.Builder clearLatitude() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -161,7 +161,7 @@ public class Location extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Sets the value of the 'longitude' field */
-    public Location.Builder setLongitude(double value) {
+    public com.fretron.transporter.Model.Location.Builder setLongitude(double value) {
       validate(fields()[1], value);
       this.longitude = value;
       fieldSetFlags()[1] = true;
@@ -174,7 +174,7 @@ public class Location extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Clears the value of the 'longitude' field */
-    public Location.Builder clearLongitude() {
+    public com.fretron.transporter.Model.Location.Builder clearLongitude() {
       fieldSetFlags()[1] = false;
       return this;
     }
