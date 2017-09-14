@@ -3,7 +3,7 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.transporter.Model;  
+package com.fretron.transporter.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Lane extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
@@ -11,13 +11,13 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String transporterId;
   @Deprecated public java.lang.String type;
-  @Deprecated public com.transporter.Model.FreightLocation baseOrigin;
-  @Deprecated public com.transporter.Model.FreightLocation baseDestination;
+  @Deprecated public FreightLocation baseOrigin;
+  @Deprecated public FreightLocation baseDestination;
   @Deprecated public java.lang.Double basePrice;
   @Deprecated public java.lang.String baseMaterial;
-  @Deprecated public com.transporter.Model.FreightLocationOffset consigner;
-  @Deprecated public com.transporter.Model.FreightLocationOffset consignee;
-  @Deprecated public com.transporter.Model.MaterialOffset material;
+  @Deprecated public FreightLocationOffset consigner;
+  @Deprecated public FreightLocationOffset consignee;
+  @Deprecated public MaterialOffset material;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -29,7 +29,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   /**
    * All-args constructor.
    */
-  public Lane(java.lang.String transporterId, java.lang.String type, com.transporter.Model.FreightLocation baseOrigin, com.transporter.Model.FreightLocation baseDestination, java.lang.Double basePrice, java.lang.String baseMaterial, com.transporter.Model.FreightLocationOffset consigner, com.transporter.Model.FreightLocationOffset consignee, com.transporter.Model.MaterialOffset material) {
+  public Lane(java.lang.String transporterId, java.lang.String type, FreightLocation baseOrigin, FreightLocation baseDestination, java.lang.Double basePrice, java.lang.String baseMaterial, FreightLocationOffset consigner, FreightLocationOffset consignee, MaterialOffset material) {
     this.transporterId = transporterId;
     this.type = type;
     this.baseOrigin = baseOrigin;
@@ -63,13 +63,13 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     switch (field$) {
     case 0: transporterId = (java.lang.String)value$; break;
     case 1: type = (java.lang.String)value$; break;
-    case 2: baseOrigin = (com.transporter.Model.FreightLocation)value$; break;
-    case 3: baseDestination = (com.transporter.Model.FreightLocation)value$; break;
+    case 2: baseOrigin = (FreightLocation)value$; break;
+    case 3: baseDestination = (FreightLocation)value$; break;
     case 4: basePrice = (java.lang.Double)value$; break;
     case 5: baseMaterial = (java.lang.String)value$; break;
-    case 6: consigner = (com.transporter.Model.FreightLocationOffset)value$; break;
-    case 7: consignee = (com.transporter.Model.FreightLocationOffset)value$; break;
-    case 8: material = (com.transporter.Model.MaterialOffset)value$; break;
+    case 6: consigner = (FreightLocationOffset)value$; break;
+    case 7: consignee = (FreightLocationOffset)value$; break;
+    case 8: material = (MaterialOffset)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -107,7 +107,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   /**
    * Gets the value of the 'baseOrigin' field.
    */
-  public com.transporter.Model.FreightLocation getBaseOrigin() {
+  public FreightLocation getBaseOrigin() {
     return baseOrigin;
   }
 
@@ -115,14 +115,14 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
    * Sets the value of the 'baseOrigin' field.
    * @param value the value to set.
    */
-  public void setBaseOrigin(com.transporter.Model.FreightLocation value) {
+  public void setBaseOrigin(FreightLocation value) {
     this.baseOrigin = value;
   }
 
   /**
    * Gets the value of the 'baseDestination' field.
    */
-  public com.transporter.Model.FreightLocation getBaseDestination() {
+  public FreightLocation getBaseDestination() {
     return baseDestination;
   }
 
@@ -130,7 +130,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
    * Sets the value of the 'baseDestination' field.
    * @param value the value to set.
    */
-  public void setBaseDestination(com.transporter.Model.FreightLocation value) {
+  public void setBaseDestination(FreightLocation value) {
     this.baseDestination = value;
   }
 
@@ -167,7 +167,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   /**
    * Gets the value of the 'consigner' field.
    */
-  public com.transporter.Model.FreightLocationOffset getConsigner() {
+  public FreightLocationOffset getConsigner() {
     return consigner;
   }
 
@@ -175,14 +175,14 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
    * Sets the value of the 'consigner' field.
    * @param value the value to set.
    */
-  public void setConsigner(com.transporter.Model.FreightLocationOffset value) {
+  public void setConsigner(FreightLocationOffset value) {
     this.consigner = value;
   }
 
   /**
    * Gets the value of the 'consignee' field.
    */
-  public com.transporter.Model.FreightLocationOffset getConsignee() {
+  public FreightLocationOffset getConsignee() {
     return consignee;
   }
 
@@ -190,14 +190,14 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
    * Sets the value of the 'consignee' field.
    * @param value the value to set.
    */
-  public void setConsignee(com.transporter.Model.FreightLocationOffset value) {
+  public void setConsignee(FreightLocationOffset value) {
     this.consignee = value;
   }
 
   /**
    * Gets the value of the 'material' field.
    */
-  public com.transporter.Model.MaterialOffset getMaterial() {
+  public MaterialOffset getMaterial() {
     return material;
   }
 
@@ -205,23 +205,23 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
    * Sets the value of the 'material' field.
    * @param value the value to set.
    */
-  public void setMaterial(com.transporter.Model.MaterialOffset value) {
+  public void setMaterial(MaterialOffset value) {
     this.material = value;
   }
 
   /** Creates a new Lane RecordBuilder */
-  public static com.transporter.Model.Lane.Builder newBuilder() {
-    return new com.transporter.Model.Lane.Builder();
+  public static Lane.Builder newBuilder() {
+    return new Lane.Builder();
   }
   
   /** Creates a new Lane RecordBuilder by copying an existing Builder */
-  public static com.transporter.Model.Lane.Builder newBuilder(com.transporter.Model.Lane.Builder other) {
-    return new com.transporter.Model.Lane.Builder(other);
+  public static Lane.Builder newBuilder(Lane.Builder other) {
+    return new Lane.Builder(other);
   }
   
   /** Creates a new Lane RecordBuilder by copying an existing Lane instance */
-  public static com.transporter.Model.Lane.Builder newBuilder(com.transporter.Model.Lane other) {
-    return new com.transporter.Model.Lane.Builder(other);
+  public static Lane.Builder newBuilder(Lane other) {
+    return new Lane.Builder(other);
   }
   
   /**
@@ -232,21 +232,21 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
 
     private java.lang.String transporterId;
     private java.lang.String type;
-    private com.transporter.Model.FreightLocation baseOrigin;
-    private com.transporter.Model.FreightLocation baseDestination;
+    private FreightLocation baseOrigin;
+    private FreightLocation baseDestination;
     private java.lang.Double basePrice;
     private java.lang.String baseMaterial;
-    private com.transporter.Model.FreightLocationOffset consigner;
-    private com.transporter.Model.FreightLocationOffset consignee;
-    private com.transporter.Model.MaterialOffset material;
+    private FreightLocationOffset consigner;
+    private FreightLocationOffset consignee;
+    private MaterialOffset material;
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.transporter.Model.Lane.SCHEMA$);
+      super(Lane.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.transporter.Model.Lane.Builder other) {
+    private Builder(Lane.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.transporterId)) {
         this.transporterId = data().deepCopy(fields()[0].schema(), other.transporterId);
@@ -287,8 +287,8 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Creates a Builder by copying an existing Lane instance */
-    private Builder(com.transporter.Model.Lane other) {
-            super(com.transporter.Model.Lane.SCHEMA$);
+    private Builder(Lane other) {
+            super(Lane.SCHEMA$);
       if (isValidValue(fields()[0], other.transporterId)) {
         this.transporterId = data().deepCopy(fields()[0].schema(), other.transporterId);
         fieldSetFlags()[0] = true;
@@ -333,7 +333,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Sets the value of the 'transporterId' field */
-    public com.transporter.Model.Lane.Builder setTransporterId(java.lang.String value) {
+    public Lane.Builder setTransporterId(java.lang.String value) {
       validate(fields()[0], value);
       this.transporterId = value;
       fieldSetFlags()[0] = true;
@@ -346,7 +346,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'transporterId' field */
-    public com.transporter.Model.Lane.Builder clearTransporterId() {
+    public Lane.Builder clearTransporterId() {
       transporterId = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -358,7 +358,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Sets the value of the 'type' field */
-    public com.transporter.Model.Lane.Builder setType(java.lang.String value) {
+    public Lane.Builder setType(java.lang.String value) {
       validate(fields()[1], value);
       this.type = value;
       fieldSetFlags()[1] = true;
@@ -371,19 +371,19 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'type' field */
-    public com.transporter.Model.Lane.Builder clearType() {
+    public Lane.Builder clearType() {
       type = null;
       fieldSetFlags()[1] = false;
       return this;
     }
 
     /** Gets the value of the 'baseOrigin' field */
-    public com.transporter.Model.FreightLocation getBaseOrigin() {
+    public FreightLocation getBaseOrigin() {
       return baseOrigin;
     }
     
     /** Sets the value of the 'baseOrigin' field */
-    public com.transporter.Model.Lane.Builder setBaseOrigin(com.transporter.Model.FreightLocation value) {
+    public Lane.Builder setBaseOrigin(FreightLocation value) {
       validate(fields()[2], value);
       this.baseOrigin = value;
       fieldSetFlags()[2] = true;
@@ -396,19 +396,19 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'baseOrigin' field */
-    public com.transporter.Model.Lane.Builder clearBaseOrigin() {
+    public Lane.Builder clearBaseOrigin() {
       baseOrigin = null;
       fieldSetFlags()[2] = false;
       return this;
     }
 
     /** Gets the value of the 'baseDestination' field */
-    public com.transporter.Model.FreightLocation getBaseDestination() {
+    public FreightLocation getBaseDestination() {
       return baseDestination;
     }
     
     /** Sets the value of the 'baseDestination' field */
-    public com.transporter.Model.Lane.Builder setBaseDestination(com.transporter.Model.FreightLocation value) {
+    public Lane.Builder setBaseDestination(FreightLocation value) {
       validate(fields()[3], value);
       this.baseDestination = value;
       fieldSetFlags()[3] = true;
@@ -421,7 +421,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'baseDestination' field */
-    public com.transporter.Model.Lane.Builder clearBaseDestination() {
+    public Lane.Builder clearBaseDestination() {
       baseDestination = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -433,7 +433,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Sets the value of the 'basePrice' field */
-    public com.transporter.Model.Lane.Builder setBasePrice(java.lang.Double value) {
+    public Lane.Builder setBasePrice(java.lang.Double value) {
       validate(fields()[4], value);
       this.basePrice = value;
       fieldSetFlags()[4] = true;
@@ -446,7 +446,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'basePrice' field */
-    public com.transporter.Model.Lane.Builder clearBasePrice() {
+    public Lane.Builder clearBasePrice() {
       basePrice = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -458,7 +458,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Sets the value of the 'baseMaterial' field */
-    public com.transporter.Model.Lane.Builder setBaseMaterial(java.lang.String value) {
+    public Lane.Builder setBaseMaterial(java.lang.String value) {
       validate(fields()[5], value);
       this.baseMaterial = value;
       fieldSetFlags()[5] = true;
@@ -471,19 +471,19 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'baseMaterial' field */
-    public com.transporter.Model.Lane.Builder clearBaseMaterial() {
+    public Lane.Builder clearBaseMaterial() {
       baseMaterial = null;
       fieldSetFlags()[5] = false;
       return this;
     }
 
     /** Gets the value of the 'consigner' field */
-    public com.transporter.Model.FreightLocationOffset getConsigner() {
+    public FreightLocationOffset getConsigner() {
       return consigner;
     }
     
     /** Sets the value of the 'consigner' field */
-    public com.transporter.Model.Lane.Builder setConsigner(com.transporter.Model.FreightLocationOffset value) {
+    public Lane.Builder setConsigner(FreightLocationOffset value) {
       validate(fields()[6], value);
       this.consigner = value;
       fieldSetFlags()[6] = true;
@@ -496,19 +496,19 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'consigner' field */
-    public com.transporter.Model.Lane.Builder clearConsigner() {
+    public Lane.Builder clearConsigner() {
       consigner = null;
       fieldSetFlags()[6] = false;
       return this;
     }
 
     /** Gets the value of the 'consignee' field */
-    public com.transporter.Model.FreightLocationOffset getConsignee() {
+    public FreightLocationOffset getConsignee() {
       return consignee;
     }
     
     /** Sets the value of the 'consignee' field */
-    public com.transporter.Model.Lane.Builder setConsignee(com.transporter.Model.FreightLocationOffset value) {
+    public Lane.Builder setConsignee(FreightLocationOffset value) {
       validate(fields()[7], value);
       this.consignee = value;
       fieldSetFlags()[7] = true;
@@ -521,19 +521,19 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'consignee' field */
-    public com.transporter.Model.Lane.Builder clearConsignee() {
+    public Lane.Builder clearConsignee() {
       consignee = null;
       fieldSetFlags()[7] = false;
       return this;
     }
 
     /** Gets the value of the 'material' field */
-    public com.transporter.Model.MaterialOffset getMaterial() {
+    public MaterialOffset getMaterial() {
       return material;
     }
     
     /** Sets the value of the 'material' field */
-    public com.transporter.Model.Lane.Builder setMaterial(com.transporter.Model.MaterialOffset value) {
+    public Lane.Builder setMaterial(MaterialOffset value) {
       validate(fields()[8], value);
       this.material = value;
       fieldSetFlags()[8] = true;
@@ -546,7 +546,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'material' field */
-    public com.transporter.Model.Lane.Builder clearMaterial() {
+    public Lane.Builder clearMaterial() {
       material = null;
       fieldSetFlags()[8] = false;
       return this;
@@ -558,13 +558,13 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
         Lane record = new Lane();
         record.transporterId = fieldSetFlags()[0] ? this.transporterId : (java.lang.String) defaultValue(fields()[0]);
         record.type = fieldSetFlags()[1] ? this.type : (java.lang.String) defaultValue(fields()[1]);
-        record.baseOrigin = fieldSetFlags()[2] ? this.baseOrigin : (com.transporter.Model.FreightLocation) defaultValue(fields()[2]);
-        record.baseDestination = fieldSetFlags()[3] ? this.baseDestination : (com.transporter.Model.FreightLocation) defaultValue(fields()[3]);
+        record.baseOrigin = fieldSetFlags()[2] ? this.baseOrigin : (FreightLocation) defaultValue(fields()[2]);
+        record.baseDestination = fieldSetFlags()[3] ? this.baseDestination : (FreightLocation) defaultValue(fields()[3]);
         record.basePrice = fieldSetFlags()[4] ? this.basePrice : (java.lang.Double) defaultValue(fields()[4]);
         record.baseMaterial = fieldSetFlags()[5] ? this.baseMaterial : (java.lang.String) defaultValue(fields()[5]);
-        record.consigner = fieldSetFlags()[6] ? this.consigner : (com.transporter.Model.FreightLocationOffset) defaultValue(fields()[6]);
-        record.consignee = fieldSetFlags()[7] ? this.consignee : (com.transporter.Model.FreightLocationOffset) defaultValue(fields()[7]);
-        record.material = fieldSetFlags()[8] ? this.material : (com.transporter.Model.MaterialOffset) defaultValue(fields()[8]);
+        record.consigner = fieldSetFlags()[6] ? this.consigner : (FreightLocationOffset) defaultValue(fields()[6]);
+        record.consignee = fieldSetFlags()[7] ? this.consignee : (FreightLocationOffset) defaultValue(fields()[7]);
+        record.material = fieldSetFlags()[8] ? this.material : (MaterialOffset) defaultValue(fields()[8]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

@@ -3,7 +3,7 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.transporter.Model;  
+package com.fretron.transporter.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class User extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
@@ -115,18 +115,18 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   }
 
   /** Creates a new User RecordBuilder */
-  public static com.transporter.Model.User.Builder newBuilder() {
-    return new com.transporter.Model.User.Builder();
+  public static User.Builder newBuilder() {
+    return new User.Builder();
   }
   
   /** Creates a new User RecordBuilder by copying an existing Builder */
-  public static com.transporter.Model.User.Builder newBuilder(com.transporter.Model.User.Builder other) {
-    return new com.transporter.Model.User.Builder(other);
+  public static User.Builder newBuilder(User.Builder other) {
+    return new User.Builder(other);
   }
   
   /** Creates a new User RecordBuilder by copying an existing User instance */
-  public static com.transporter.Model.User.Builder newBuilder(com.transporter.Model.User other) {
-    return new com.transporter.Model.User.Builder(other);
+  public static User.Builder newBuilder(User other) {
+    return new User.Builder(other);
   }
   
   /**
@@ -142,11 +142,11 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.transporter.Model.User.SCHEMA$);
+      super(User.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.transporter.Model.User.Builder other) {
+    private Builder(User.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.userId)) {
         this.userId = data().deepCopy(fields()[0].schema(), other.userId);
@@ -167,8 +167,8 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Creates a Builder by copying an existing User instance */
-    private Builder(com.transporter.Model.User other) {
-            super(com.transporter.Model.User.SCHEMA$);
+    private Builder(User other) {
+            super(User.SCHEMA$);
       if (isValidValue(fields()[0], other.userId)) {
         this.userId = data().deepCopy(fields()[0].schema(), other.userId);
         fieldSetFlags()[0] = true;
@@ -193,7 +193,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Sets the value of the 'userId' field */
-    public com.transporter.Model.User.Builder setUserId(java.lang.String value) {
+    public User.Builder setUserId(java.lang.String value) {
       validate(fields()[0], value);
       this.userId = value;
       fieldSetFlags()[0] = true;
@@ -206,7 +206,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'userId' field */
-    public com.transporter.Model.User.Builder clearUserId() {
+    public User.Builder clearUserId() {
       userId = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -218,7 +218,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Sets the value of the 'name' field */
-    public com.transporter.Model.User.Builder setName(java.lang.String value) {
+    public User.Builder setName(java.lang.String value) {
       validate(fields()[1], value);
       this.name = value;
       fieldSetFlags()[1] = true;
@@ -231,7 +231,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'name' field */
-    public com.transporter.Model.User.Builder clearName() {
+    public User.Builder clearName() {
       name = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -243,7 +243,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Sets the value of the 'email' field */
-    public com.transporter.Model.User.Builder setEmail(java.lang.String value) {
+    public User.Builder setEmail(java.lang.String value) {
       validate(fields()[2], value);
       this.email = value;
       fieldSetFlags()[2] = true;
@@ -256,7 +256,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'email' field */
-    public com.transporter.Model.User.Builder clearEmail() {
+    public User.Builder clearEmail() {
       email = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -268,7 +268,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Sets the value of the 'mobile' field */
-    public com.transporter.Model.User.Builder setMobile(java.lang.Integer value) {
+    public User.Builder setMobile(java.lang.Integer value) {
       validate(fields()[3], value);
       this.mobile = value;
       fieldSetFlags()[3] = true;
@@ -281,7 +281,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'mobile' field */
-    public com.transporter.Model.User.Builder clearMobile() {
+    public User.Builder clearMobile() {
       mobile = null;
       fieldSetFlags()[3] = false;
       return this;

@@ -3,14 +3,14 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.transporter.Model;  
+package com.fretron.transporter.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Geofence extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Geofence\",\"namespace\":\"com.transporter.Model\",\"fields\":[{\"name\":\"center\",\"type\":{\"type\":\"record\",\"name\":\"Location\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}},{\"name\":\"boundary\",\"type\":{\"type\":\"array\",\"items\":\"Location\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-  @Deprecated public com.transporter.Model.Location center;
-  @Deprecated public java.util.List<com.transporter.Model.Location> boundary;
+  @Deprecated public Location center;
+  @Deprecated public java.util.List<Location> boundary;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -22,7 +22,7 @@ public class Geofence extends org.apache.avro.specific.SpecificRecordBase implem
   /**
    * All-args constructor.
    */
-  public Geofence(com.transporter.Model.Location center, java.util.List<com.transporter.Model.Location> boundary) {
+  public Geofence(Location center, java.util.List<Location> boundary) {
     this.center = center;
     this.boundary = boundary;
   }
@@ -40,8 +40,8 @@ public class Geofence extends org.apache.avro.specific.SpecificRecordBase implem
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: center = (com.transporter.Model.Location)value$; break;
-    case 1: boundary = (java.util.List<com.transporter.Model.Location>)value$; break;
+    case 0: center = (Location)value$; break;
+    case 1: boundary = (java.util.List<Location>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -49,7 +49,7 @@ public class Geofence extends org.apache.avro.specific.SpecificRecordBase implem
   /**
    * Gets the value of the 'center' field.
    */
-  public com.transporter.Model.Location getCenter() {
+  public Location getCenter() {
     return center;
   }
 
@@ -57,14 +57,14 @@ public class Geofence extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'center' field.
    * @param value the value to set.
    */
-  public void setCenter(com.transporter.Model.Location value) {
+  public void setCenter(Location value) {
     this.center = value;
   }
 
   /**
    * Gets the value of the 'boundary' field.
    */
-  public java.util.List<com.transporter.Model.Location> getBoundary() {
+  public java.util.List<Location> getBoundary() {
     return boundary;
   }
 
@@ -72,23 +72,23 @@ public class Geofence extends org.apache.avro.specific.SpecificRecordBase implem
    * Sets the value of the 'boundary' field.
    * @param value the value to set.
    */
-  public void setBoundary(java.util.List<com.transporter.Model.Location> value) {
+  public void setBoundary(java.util.List<Location> value) {
     this.boundary = value;
   }
 
   /** Creates a new Geofence RecordBuilder */
-  public static com.transporter.Model.Geofence.Builder newBuilder() {
-    return new com.transporter.Model.Geofence.Builder();
+  public static Geofence.Builder newBuilder() {
+    return new Geofence.Builder();
   }
   
   /** Creates a new Geofence RecordBuilder by copying an existing Builder */
-  public static com.transporter.Model.Geofence.Builder newBuilder(com.transporter.Model.Geofence.Builder other) {
-    return new com.transporter.Model.Geofence.Builder(other);
+  public static Geofence.Builder newBuilder(Geofence.Builder other) {
+    return new Geofence.Builder(other);
   }
   
   /** Creates a new Geofence RecordBuilder by copying an existing Geofence instance */
-  public static com.transporter.Model.Geofence.Builder newBuilder(com.transporter.Model.Geofence other) {
-    return new com.transporter.Model.Geofence.Builder(other);
+  public static Geofence.Builder newBuilder(Geofence other) {
+    return new Geofence.Builder(other);
   }
   
   /**
@@ -97,16 +97,16 @@ public class Geofence extends org.apache.avro.specific.SpecificRecordBase implem
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<Geofence>
     implements org.apache.avro.data.RecordBuilder<Geofence> {
 
-    private com.transporter.Model.Location center;
-    private java.util.List<com.transporter.Model.Location> boundary;
+    private Location center;
+    private java.util.List<Location> boundary;
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.transporter.Model.Geofence.SCHEMA$);
+      super(Geofence.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.transporter.Model.Geofence.Builder other) {
+    private Builder(Geofence.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.center)) {
         this.center = data().deepCopy(fields()[0].schema(), other.center);
@@ -119,8 +119,8 @@ public class Geofence extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Creates a Builder by copying an existing Geofence instance */
-    private Builder(com.transporter.Model.Geofence other) {
-            super(com.transporter.Model.Geofence.SCHEMA$);
+    private Builder(Geofence other) {
+            super(Geofence.SCHEMA$);
       if (isValidValue(fields()[0], other.center)) {
         this.center = data().deepCopy(fields()[0].schema(), other.center);
         fieldSetFlags()[0] = true;
@@ -132,12 +132,12 @@ public class Geofence extends org.apache.avro.specific.SpecificRecordBase implem
     }
 
     /** Gets the value of the 'center' field */
-    public com.transporter.Model.Location getCenter() {
+    public Location getCenter() {
       return center;
     }
     
     /** Sets the value of the 'center' field */
-    public com.transporter.Model.Geofence.Builder setCenter(com.transporter.Model.Location value) {
+    public Geofence.Builder setCenter(Location value) {
       validate(fields()[0], value);
       this.center = value;
       fieldSetFlags()[0] = true;
@@ -150,19 +150,19 @@ public class Geofence extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Clears the value of the 'center' field */
-    public com.transporter.Model.Geofence.Builder clearCenter() {
+    public Geofence.Builder clearCenter() {
       center = null;
       fieldSetFlags()[0] = false;
       return this;
     }
 
     /** Gets the value of the 'boundary' field */
-    public java.util.List<com.transporter.Model.Location> getBoundary() {
+    public java.util.List<Location> getBoundary() {
       return boundary;
     }
     
     /** Sets the value of the 'boundary' field */
-    public com.transporter.Model.Geofence.Builder setBoundary(java.util.List<com.transporter.Model.Location> value) {
+    public Geofence.Builder setBoundary(java.util.List<Location> value) {
       validate(fields()[1], value);
       this.boundary = value;
       fieldSetFlags()[1] = true;
@@ -175,7 +175,7 @@ public class Geofence extends org.apache.avro.specific.SpecificRecordBase implem
     }
     
     /** Clears the value of the 'boundary' field */
-    public com.transporter.Model.Geofence.Builder clearBoundary() {
+    public Geofence.Builder clearBoundary() {
       boundary = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -185,8 +185,8 @@ public class Geofence extends org.apache.avro.specific.SpecificRecordBase implem
     public Geofence build() {
       try {
         Geofence record = new Geofence();
-        record.center = fieldSetFlags()[0] ? this.center : (com.transporter.Model.Location) defaultValue(fields()[0]);
-        record.boundary = fieldSetFlags()[1] ? this.boundary : (java.util.List<com.transporter.Model.Location>) defaultValue(fields()[1]);
+        record.center = fieldSetFlags()[0] ? this.center : (Location) defaultValue(fields()[0]);
+        record.boundary = fieldSetFlags()[1] ? this.boundary : (java.util.List<Location>) defaultValue(fields()[1]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

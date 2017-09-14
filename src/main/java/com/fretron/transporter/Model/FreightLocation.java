@@ -3,14 +3,14 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.transporter.Model;  
+package com.fretron.transporter.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
   public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"FreightLocation\",\"namespace\":\"com.transporter.Model\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":null},{\"name\":\"geofence\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Geofence\",\"fields\":[{\"name\":\"center\",\"type\":{\"type\":\"record\",\"name\":\"Location\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}},{\"name\":\"boundary\",\"type\":{\"type\":\"array\",\"items\":\"Location\"}}]}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String name;
-  @Deprecated public com.transporter.Model.Geofence geofence;
+  @Deprecated public Geofence geofence;
   @Deprecated public java.util.List<java.lang.String> material;
 
   /**
@@ -23,7 +23,7 @@ public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase
   /**
    * All-args constructor.
    */
-  public FreightLocation(java.lang.String name, com.transporter.Model.Geofence geofence, java.util.List<java.lang.String> material) {
+  public FreightLocation(java.lang.String name, Geofence geofence, java.util.List<java.lang.String> material) {
     this.name = name;
     this.geofence = geofence;
     this.material = material;
@@ -44,7 +44,7 @@ public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: name = (java.lang.String)value$; break;
-    case 1: geofence = (com.transporter.Model.Geofence)value$; break;
+    case 1: geofence = (Geofence)value$; break;
     case 2: material = (java.util.List<java.lang.String>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
@@ -68,7 +68,7 @@ public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase
   /**
    * Gets the value of the 'geofence' field.
    */
-  public com.transporter.Model.Geofence getGeofence() {
+  public Geofence getGeofence() {
     return geofence;
   }
 
@@ -76,7 +76,7 @@ public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase
    * Sets the value of the 'geofence' field.
    * @param value the value to set.
    */
-  public void setGeofence(com.transporter.Model.Geofence value) {
+  public void setGeofence(Geofence value) {
     this.geofence = value;
   }
 
@@ -96,18 +96,18 @@ public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase
   }
 
   /** Creates a new FreightLocation RecordBuilder */
-  public static com.transporter.Model.FreightLocation.Builder newBuilder() {
-    return new com.transporter.Model.FreightLocation.Builder();
+  public static FreightLocation.Builder newBuilder() {
+    return new FreightLocation.Builder();
   }
   
   /** Creates a new FreightLocation RecordBuilder by copying an existing Builder */
-  public static com.transporter.Model.FreightLocation.Builder newBuilder(com.transporter.Model.FreightLocation.Builder other) {
-    return new com.transporter.Model.FreightLocation.Builder(other);
+  public static FreightLocation.Builder newBuilder(FreightLocation.Builder other) {
+    return new FreightLocation.Builder(other);
   }
   
   /** Creates a new FreightLocation RecordBuilder by copying an existing FreightLocation instance */
-  public static com.transporter.Model.FreightLocation.Builder newBuilder(com.transporter.Model.FreightLocation other) {
-    return new com.transporter.Model.FreightLocation.Builder(other);
+  public static FreightLocation.Builder newBuilder(FreightLocation other) {
+    return new FreightLocation.Builder(other);
   }
   
   /**
@@ -117,16 +117,16 @@ public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase
     implements org.apache.avro.data.RecordBuilder<FreightLocation> {
 
     private java.lang.String name;
-    private com.transporter.Model.Geofence geofence;
+    private Geofence geofence;
     private java.util.List<java.lang.String> material;
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.transporter.Model.FreightLocation.SCHEMA$);
+      super(FreightLocation.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.transporter.Model.FreightLocation.Builder other) {
+    private Builder(FreightLocation.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.name)) {
         this.name = data().deepCopy(fields()[0].schema(), other.name);
@@ -143,8 +143,8 @@ public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase
     }
     
     /** Creates a Builder by copying an existing FreightLocation instance */
-    private Builder(com.transporter.Model.FreightLocation other) {
-            super(com.transporter.Model.FreightLocation.SCHEMA$);
+    private Builder(FreightLocation other) {
+            super(FreightLocation.SCHEMA$);
       if (isValidValue(fields()[0], other.name)) {
         this.name = data().deepCopy(fields()[0].schema(), other.name);
         fieldSetFlags()[0] = true;
@@ -165,7 +165,7 @@ public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase
     }
     
     /** Sets the value of the 'name' field */
-    public com.transporter.Model.FreightLocation.Builder setName(java.lang.String value) {
+    public FreightLocation.Builder setName(java.lang.String value) {
       validate(fields()[0], value);
       this.name = value;
       fieldSetFlags()[0] = true;
@@ -178,19 +178,19 @@ public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase
     }
     
     /** Clears the value of the 'name' field */
-    public com.transporter.Model.FreightLocation.Builder clearName() {
+    public FreightLocation.Builder clearName() {
       name = null;
       fieldSetFlags()[0] = false;
       return this;
     }
 
     /** Gets the value of the 'geofence' field */
-    public com.transporter.Model.Geofence getGeofence() {
+    public Geofence getGeofence() {
       return geofence;
     }
     
     /** Sets the value of the 'geofence' field */
-    public com.transporter.Model.FreightLocation.Builder setGeofence(com.transporter.Model.Geofence value) {
+    public FreightLocation.Builder setGeofence(Geofence value) {
       validate(fields()[1], value);
       this.geofence = value;
       fieldSetFlags()[1] = true;
@@ -203,7 +203,7 @@ public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase
     }
     
     /** Clears the value of the 'geofence' field */
-    public com.transporter.Model.FreightLocation.Builder clearGeofence() {
+    public FreightLocation.Builder clearGeofence() {
       geofence = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -215,7 +215,7 @@ public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase
     }
     
     /** Sets the value of the 'material' field */
-    public com.transporter.Model.FreightLocation.Builder setMaterial(java.util.List<java.lang.String> value) {
+    public FreightLocation.Builder setMaterial(java.util.List<java.lang.String> value) {
       validate(fields()[2], value);
       this.material = value;
       fieldSetFlags()[2] = true;
@@ -228,7 +228,7 @@ public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase
     }
     
     /** Clears the value of the 'material' field */
-    public com.transporter.Model.FreightLocation.Builder clearMaterial() {
+    public FreightLocation.Builder clearMaterial() {
       material = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -239,7 +239,7 @@ public class FreightLocation extends org.apache.avro.specific.SpecificRecordBase
       try {
         FreightLocation record = new FreightLocation();
         record.name = fieldSetFlags()[0] ? this.name : (java.lang.String) defaultValue(fields()[0]);
-        record.geofence = fieldSetFlags()[1] ? this.geofence : (com.transporter.Model.Geofence) defaultValue(fields()[1]);
+        record.geofence = fieldSetFlags()[1] ? this.geofence : (Geofence) defaultValue(fields()[1]);
         record.material = fieldSetFlags()[2] ? this.material : (java.util.List<java.lang.String>) defaultValue(fields()[2]);
         return record;
       } catch (Exception e) {

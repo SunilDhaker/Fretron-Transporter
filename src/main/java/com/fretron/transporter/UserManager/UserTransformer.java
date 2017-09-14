@@ -1,6 +1,6 @@
-package com.transporter.UserManager;
+package com.fretron.transporter.UserManager;
 
-import com.transporter.Model.User;
+import com.fretron.transporter.Model.User;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Transformer;
 import org.apache.kafka.streams.kstream.TransformerSupplier;

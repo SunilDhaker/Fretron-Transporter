@@ -3,7 +3,7 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.transporter.Model;  
+package com.fretron.transporter.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Transporter extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
@@ -11,7 +11,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String transporterId;
   @Deprecated public java.util.List<java.lang.String> adminEmail;
-  @Deprecated public java.util.List<com.transporter.Model.Groups> groups;
+  @Deprecated public java.util.List<Groups> groups;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -23,7 +23,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
   /**
    * All-args constructor.
    */
-  public Transporter(java.lang.String transporterId, java.util.List<java.lang.String> adminEmail, java.util.List<com.transporter.Model.Groups> groups) {
+  public Transporter(java.lang.String transporterId, java.util.List<java.lang.String> adminEmail, java.util.List<Groups> groups) {
     this.transporterId = transporterId;
     this.adminEmail = adminEmail;
     this.groups = groups;
@@ -45,7 +45,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     switch (field$) {
     case 0: transporterId = (java.lang.String)value$; break;
     case 1: adminEmail = (java.util.List<java.lang.String>)value$; break;
-    case 2: groups = (java.util.List<com.transporter.Model.Groups>)value$; break;
+    case 2: groups = (java.util.List<Groups>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -83,7 +83,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
   /**
    * Gets the value of the 'groups' field.
    */
-  public java.util.List<com.transporter.Model.Groups> getGroups() {
+  public java.util.List<Groups> getGroups() {
     return groups;
   }
 
@@ -91,23 +91,23 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'groups' field.
    * @param value the value to set.
    */
-  public void setGroups(java.util.List<com.transporter.Model.Groups> value) {
+  public void setGroups(java.util.List<Groups> value) {
     this.groups = value;
   }
 
   /** Creates a new Transporter RecordBuilder */
-  public static com.transporter.Model.Transporter.Builder newBuilder() {
-    return new com.transporter.Model.Transporter.Builder();
+  public static Transporter.Builder newBuilder() {
+    return new Transporter.Builder();
   }
   
   /** Creates a new Transporter RecordBuilder by copying an existing Builder */
-  public static com.transporter.Model.Transporter.Builder newBuilder(com.transporter.Model.Transporter.Builder other) {
-    return new com.transporter.Model.Transporter.Builder(other);
+  public static Transporter.Builder newBuilder(Transporter.Builder other) {
+    return new Transporter.Builder(other);
   }
   
   /** Creates a new Transporter RecordBuilder by copying an existing Transporter instance */
-  public static com.transporter.Model.Transporter.Builder newBuilder(com.transporter.Model.Transporter other) {
-    return new com.transporter.Model.Transporter.Builder(other);
+  public static Transporter.Builder newBuilder(Transporter other) {
+    return new Transporter.Builder(other);
   }
   
   /**
@@ -118,15 +118,15 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
 
     private java.lang.String transporterId;
     private java.util.List<java.lang.String> adminEmail;
-    private java.util.List<com.transporter.Model.Groups> groups;
+    private java.util.List<Groups> groups;
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.transporter.Model.Transporter.SCHEMA$);
+      super(Transporter.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.transporter.Model.Transporter.Builder other) {
+    private Builder(Transporter.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.transporterId)) {
         this.transporterId = data().deepCopy(fields()[0].schema(), other.transporterId);
@@ -143,8 +143,8 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     }
     
     /** Creates a Builder by copying an existing Transporter instance */
-    private Builder(com.transporter.Model.Transporter other) {
-            super(com.transporter.Model.Transporter.SCHEMA$);
+    private Builder(Transporter other) {
+            super(Transporter.SCHEMA$);
       if (isValidValue(fields()[0], other.transporterId)) {
         this.transporterId = data().deepCopy(fields()[0].schema(), other.transporterId);
         fieldSetFlags()[0] = true;
@@ -165,7 +165,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     }
     
     /** Sets the value of the 'transporterId' field */
-    public com.transporter.Model.Transporter.Builder setTransporterId(java.lang.String value) {
+    public Transporter.Builder setTransporterId(java.lang.String value) {
       validate(fields()[0], value);
       this.transporterId = value;
       fieldSetFlags()[0] = true;
@@ -178,7 +178,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     }
     
     /** Clears the value of the 'transporterId' field */
-    public com.transporter.Model.Transporter.Builder clearTransporterId() {
+    public Transporter.Builder clearTransporterId() {
       transporterId = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -190,7 +190,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     }
     
     /** Sets the value of the 'adminEmail' field */
-    public com.transporter.Model.Transporter.Builder setAdminEmail(java.util.List<java.lang.String> value) {
+    public Transporter.Builder setAdminEmail(java.util.List<java.lang.String> value) {
       validate(fields()[1], value);
       this.adminEmail = value;
       fieldSetFlags()[1] = true;
@@ -203,19 +203,19 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     }
     
     /** Clears the value of the 'adminEmail' field */
-    public com.transporter.Model.Transporter.Builder clearAdminEmail() {
+    public Transporter.Builder clearAdminEmail() {
       adminEmail = null;
       fieldSetFlags()[1] = false;
       return this;
     }
 
     /** Gets the value of the 'groups' field */
-    public java.util.List<com.transporter.Model.Groups> getGroups() {
+    public java.util.List<Groups> getGroups() {
       return groups;
     }
     
     /** Sets the value of the 'groups' field */
-    public com.transporter.Model.Transporter.Builder setGroups(java.util.List<com.transporter.Model.Groups> value) {
+    public Transporter.Builder setGroups(java.util.List<Groups> value) {
       validate(fields()[2], value);
       this.groups = value;
       fieldSetFlags()[2] = true;
@@ -228,7 +228,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     }
     
     /** Clears the value of the 'groups' field */
-    public com.transporter.Model.Transporter.Builder clearGroups() {
+    public Transporter.Builder clearGroups() {
       groups = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -240,7 +240,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
         Transporter record = new Transporter();
         record.transporterId = fieldSetFlags()[0] ? this.transporterId : (java.lang.String) defaultValue(fields()[0]);
         record.adminEmail = fieldSetFlags()[1] ? this.adminEmail : (java.util.List<java.lang.String>) defaultValue(fields()[1]);
-        record.groups = fieldSetFlags()[2] ? this.groups : (java.util.List<com.transporter.Model.Groups>) defaultValue(fields()[2]);
+        record.groups = fieldSetFlags()[2] ? this.groups : (java.util.List<Groups>) defaultValue(fields()[2]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
