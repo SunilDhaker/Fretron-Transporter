@@ -5,7 +5,7 @@
 
     <!-- Transporter Management System topic-->
     <entry key="lanes.topic">lanes</entry>
-    <entry key="users.topic">users</entry>
+    <entry key="user.topic">user</entry>
     <entry key="transporter.topic">transporter</entry>
 
     <!-- Common topics -->
@@ -19,7 +19,11 @@
     <entry key="auto.offset.reset.config">earliest</entry>
     <entry key="commit.interval.auto.config">500</entry>
     <entry key="schemaregistry"> http://localhost:8081</entry>
+    <entry key="base.url">http://localhost:8082</entry>
 
     <!-- State Store -->
     <entry key="user.state.store">userstatestore</entry>
+    <!-- Model Classes -->
+    <entry key="model.class">user#com.fretron.transporter.Model.User#user.topic
+    </entry>
 </properties>
