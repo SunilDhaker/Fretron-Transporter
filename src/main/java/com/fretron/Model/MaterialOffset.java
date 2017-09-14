@@ -7,10 +7,10 @@ package com.fretron.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MaterialOffset\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"materialOffset\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MaterialOffset\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"materialPriceOffset\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String material;
-  @Deprecated public int materialOffset;
+  @Deprecated public int materialPriceOffset;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -22,9 +22,9 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
   /**
    * All-args constructor.
    */
-  public MaterialOffset(java.lang.String material, java.lang.Integer materialOffset) {
+  public MaterialOffset(java.lang.String material, java.lang.Integer materialPriceOffset) {
     this.material = material;
-    this.materialOffset = materialOffset;
+    this.materialPriceOffset = materialPriceOffset;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -32,7 +32,7 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return material;
-    case 1: return materialOffset;
+    case 1: return materialPriceOffset;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -41,7 +41,7 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: material = (java.lang.String)value$; break;
-    case 1: materialOffset = (java.lang.Integer)value$; break;
+    case 1: materialPriceOffset = (java.lang.Integer)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -62,18 +62,18 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
   }
 
   /**
-   * Gets the value of the 'materialOffset' field.
+   * Gets the value of the 'materialPriceOffset' field.
    */
-  public java.lang.Integer getMaterialOffset() {
-    return materialOffset;
+  public java.lang.Integer getMaterialPriceOffset() {
+    return materialPriceOffset;
   }
 
   /**
-   * Sets the value of the 'materialOffset' field.
+   * Sets the value of the 'materialPriceOffset' field.
    * @param value the value to set.
    */
-  public void setMaterialOffset(java.lang.Integer value) {
-    this.materialOffset = value;
+  public void setMaterialPriceOffset(java.lang.Integer value) {
+    this.materialPriceOffset = value;
   }
 
   /** Creates a new MaterialOffset RecordBuilder */
@@ -98,7 +98,7 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
     implements org.apache.avro.data.RecordBuilder<MaterialOffset> {
 
     private java.lang.String material;
-    private int materialOffset;
+    private int materialPriceOffset;
 
     /** Creates a new Builder */
     private Builder() {
@@ -112,8 +112,8 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
         this.material = data().deepCopy(fields()[0].schema(), other.material);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.materialOffset)) {
-        this.materialOffset = data().deepCopy(fields()[1].schema(), other.materialOffset);
+      if (isValidValue(fields()[1], other.materialPriceOffset)) {
+        this.materialPriceOffset = data().deepCopy(fields()[1].schema(), other.materialPriceOffset);
         fieldSetFlags()[1] = true;
       }
     }
@@ -125,8 +125,8 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
         this.material = data().deepCopy(fields()[0].schema(), other.material);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.materialOffset)) {
-        this.materialOffset = data().deepCopy(fields()[1].schema(), other.materialOffset);
+      if (isValidValue(fields()[1], other.materialPriceOffset)) {
+        this.materialPriceOffset = data().deepCopy(fields()[1].schema(), other.materialPriceOffset);
         fieldSetFlags()[1] = true;
       }
     }
@@ -156,26 +156,26 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
       return this;
     }
 
-    /** Gets the value of the 'materialOffset' field */
-    public java.lang.Integer getMaterialOffset() {
-      return materialOffset;
+    /** Gets the value of the 'materialPriceOffset' field */
+    public java.lang.Integer getMaterialPriceOffset() {
+      return materialPriceOffset;
     }
     
-    /** Sets the value of the 'materialOffset' field */
-    public com.fretron.Model.MaterialOffset.Builder setMaterialOffset(int value) {
+    /** Sets the value of the 'materialPriceOffset' field */
+    public com.fretron.Model.MaterialOffset.Builder setMaterialPriceOffset(int value) {
       validate(fields()[1], value);
-      this.materialOffset = value;
+      this.materialPriceOffset = value;
       fieldSetFlags()[1] = true;
       return this; 
     }
     
-    /** Checks whether the 'materialOffset' field has been set */
-    public boolean hasMaterialOffset() {
+    /** Checks whether the 'materialPriceOffset' field has been set */
+    public boolean hasMaterialPriceOffset() {
       return fieldSetFlags()[1];
     }
     
-    /** Clears the value of the 'materialOffset' field */
-    public com.fretron.Model.MaterialOffset.Builder clearMaterialOffset() {
+    /** Clears the value of the 'materialPriceOffset' field */
+    public com.fretron.Model.MaterialOffset.Builder clearMaterialPriceOffset() {
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -185,7 +185,7 @@ public class MaterialOffset extends org.apache.avro.specific.SpecificRecordBase 
       try {
         MaterialOffset record = new MaterialOffset();
         record.material = fieldSetFlags()[0] ? this.material : (java.lang.String) defaultValue(fields()[0]);
-        record.materialOffset = fieldSetFlags()[1] ? this.materialOffset : (java.lang.Integer) defaultValue(fields()[1]);
+        record.materialPriceOffset = fieldSetFlags()[1] ? this.materialPriceOffset : (java.lang.Integer) defaultValue(fields()[1]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

@@ -7,16 +7,17 @@ package com.fretron.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Lane extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Lane\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"baseOrigin\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"FreightLocation\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":null},{\"name\":\"geofence\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Geofence\",\"fields\":[{\"name\":\"center\",\"type\":{\"type\":\"record\",\"name\":\"Location\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}},{\"name\":\"boundary\",\"type\":{\"type\":\"array\",\"items\":\"Location\"}}]}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}],\"default\":null},{\"name\":\"baseDestination\",\"type\":[\"null\",\"FreightLocation\"],\"default\":null},{\"name\":\"basePrice\",\"type\":[\"null\",\"double\"]},{\"name\":\"baseMaterial\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"consigner\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"FreightLocationOffset\",\"fields\":[{\"name\":\"freightLocation\",\"type\":\"FreightLocation\"},{\"name\":\"priceOffset\",\"type\":\"int\"},{\"name\":\"etdOffset\",\"type\":\"int\"}]}],\"default\":null},{\"name\":\"consignee\",\"type\":[\"null\",\"FreightLocationOffset\"],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"MaterialOffset\",\"fields\":[{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"materialOffset\",\"type\":\"int\"}]}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Lane\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"uuid\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"baseOrigin\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"FreightLocation\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":null},{\"name\":\"geofence\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Geofence\",\"fields\":[{\"name\":\"center\",\"type\":{\"type\":\"record\",\"name\":\"Location\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}},{\"name\":\"boundary\",\"type\":{\"type\":\"array\",\"items\":\"Location\"}}]}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}],\"default\":null},{\"name\":\"baseDestination\",\"type\":[\"null\",\"FreightLocation\"],\"default\":null},{\"name\":\"basePrice\",\"type\":[\"null\",\"double\"]},{\"name\":\"baseMaterial\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"consigner\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"FreightLocationOffset\",\"fields\":[{\"name\":\"freightLocation\",\"type\":\"FreightLocation\"},{\"name\":\"priceOffset\",\"type\":\"int\"},{\"name\":\"etdOffset\",\"type\":\"int\"}]}}],\"default\":null},{\"name\":\"consignee\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"FreightLocationOffset\"}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"MaterialOffset\",\"fields\":[{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"materialPriceOffset\",\"type\":\"int\"}]}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
+  @Deprecated public java.lang.String uuid;
   @Deprecated public java.lang.String transporterId;
   @Deprecated public java.lang.String type;
   @Deprecated public com.fretron.Model.FreightLocation baseOrigin;
   @Deprecated public com.fretron.Model.FreightLocation baseDestination;
   @Deprecated public java.lang.Double basePrice;
   @Deprecated public java.lang.String baseMaterial;
-  @Deprecated public com.fretron.Model.FreightLocationOffset consigner;
-  @Deprecated public com.fretron.Model.FreightLocationOffset consignee;
+  @Deprecated public java.util.List<com.fretron.Model.FreightLocationOffset> consigner;
+  @Deprecated public java.util.List<com.fretron.Model.FreightLocationOffset> consignee;
   @Deprecated public com.fretron.Model.MaterialOffset material;
 
   /**
@@ -29,7 +30,8 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   /**
    * All-args constructor.
    */
-  public Lane(java.lang.String transporterId, java.lang.String type, com.fretron.Model.FreightLocation baseOrigin, com.fretron.Model.FreightLocation baseDestination, java.lang.Double basePrice, java.lang.String baseMaterial, com.fretron.Model.FreightLocationOffset consigner, com.fretron.Model.FreightLocationOffset consignee, com.fretron.Model.MaterialOffset material) {
+  public Lane(java.lang.String uuid, java.lang.String transporterId, java.lang.String type, com.fretron.Model.FreightLocation baseOrigin, com.fretron.Model.FreightLocation baseDestination, java.lang.Double basePrice, java.lang.String baseMaterial, java.util.List<com.fretron.Model.FreightLocationOffset> consigner, java.util.List<com.fretron.Model.FreightLocationOffset> consignee, com.fretron.Model.MaterialOffset material) {
+    this.uuid = uuid;
     this.transporterId = transporterId;
     this.type = type;
     this.baseOrigin = baseOrigin;
@@ -45,15 +47,16 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   // Used by DatumWriter.  Applications should not call. 
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return transporterId;
-    case 1: return type;
-    case 2: return baseOrigin;
-    case 3: return baseDestination;
-    case 4: return basePrice;
-    case 5: return baseMaterial;
-    case 6: return consigner;
-    case 7: return consignee;
-    case 8: return material;
+    case 0: return uuid;
+    case 1: return transporterId;
+    case 2: return type;
+    case 3: return baseOrigin;
+    case 4: return baseDestination;
+    case 5: return basePrice;
+    case 6: return baseMaterial;
+    case 7: return consigner;
+    case 8: return consignee;
+    case 9: return material;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -61,17 +64,33 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: transporterId = (java.lang.String)value$; break;
-    case 1: type = (java.lang.String)value$; break;
-    case 2: baseOrigin = (com.fretron.Model.FreightLocation)value$; break;
-    case 3: baseDestination = (com.fretron.Model.FreightLocation)value$; break;
-    case 4: basePrice = (java.lang.Double)value$; break;
-    case 5: baseMaterial = (java.lang.String)value$; break;
-    case 6: consigner = (com.fretron.Model.FreightLocationOffset)value$; break;
-    case 7: consignee = (com.fretron.Model.FreightLocationOffset)value$; break;
-    case 8: material = (com.fretron.Model.MaterialOffset)value$; break;
+    case 0: uuid = (java.lang.String)value$; break;
+    case 1: transporterId = (java.lang.String)value$; break;
+    case 2: type = (java.lang.String)value$; break;
+    case 3: baseOrigin = (com.fretron.Model.FreightLocation)value$; break;
+    case 4: baseDestination = (com.fretron.Model.FreightLocation)value$; break;
+    case 5: basePrice = (java.lang.Double)value$; break;
+    case 6: baseMaterial = (java.lang.String)value$; break;
+    case 7: consigner = (java.util.List<com.fretron.Model.FreightLocationOffset>)value$; break;
+    case 8: consignee = (java.util.List<com.fretron.Model.FreightLocationOffset>)value$; break;
+    case 9: material = (com.fretron.Model.MaterialOffset)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
+  }
+
+  /**
+   * Gets the value of the 'uuid' field.
+   */
+  public java.lang.String getUuid() {
+    return uuid;
+  }
+
+  /**
+   * Sets the value of the 'uuid' field.
+   * @param value the value to set.
+   */
+  public void setUuid(java.lang.String value) {
+    this.uuid = value;
   }
 
   /**
@@ -167,7 +186,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   /**
    * Gets the value of the 'consigner' field.
    */
-  public com.fretron.Model.FreightLocationOffset getConsigner() {
+  public java.util.List<com.fretron.Model.FreightLocationOffset> getConsigner() {
     return consigner;
   }
 
@@ -175,14 +194,14 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
    * Sets the value of the 'consigner' field.
    * @param value the value to set.
    */
-  public void setConsigner(com.fretron.Model.FreightLocationOffset value) {
+  public void setConsigner(java.util.List<com.fretron.Model.FreightLocationOffset> value) {
     this.consigner = value;
   }
 
   /**
    * Gets the value of the 'consignee' field.
    */
-  public com.fretron.Model.FreightLocationOffset getConsignee() {
+  public java.util.List<com.fretron.Model.FreightLocationOffset> getConsignee() {
     return consignee;
   }
 
@@ -190,7 +209,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
    * Sets the value of the 'consignee' field.
    * @param value the value to set.
    */
-  public void setConsignee(com.fretron.Model.FreightLocationOffset value) {
+  public void setConsignee(java.util.List<com.fretron.Model.FreightLocationOffset> value) {
     this.consignee = value;
   }
 
@@ -230,14 +249,15 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<Lane>
     implements org.apache.avro.data.RecordBuilder<Lane> {
 
+    private java.lang.String uuid;
     private java.lang.String transporterId;
     private java.lang.String type;
     private com.fretron.Model.FreightLocation baseOrigin;
     private com.fretron.Model.FreightLocation baseDestination;
     private java.lang.Double basePrice;
     private java.lang.String baseMaterial;
-    private com.fretron.Model.FreightLocationOffset consigner;
-    private com.fretron.Model.FreightLocationOffset consignee;
+    private java.util.List<com.fretron.Model.FreightLocationOffset> consigner;
+    private java.util.List<com.fretron.Model.FreightLocationOffset> consignee;
     private com.fretron.Model.MaterialOffset material;
 
     /** Creates a new Builder */
@@ -248,83 +268,116 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     /** Creates a Builder by copying an existing Builder */
     private Builder(com.fretron.Model.Lane.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.transporterId)) {
-        this.transporterId = data().deepCopy(fields()[0].schema(), other.transporterId);
+      if (isValidValue(fields()[0], other.uuid)) {
+        this.uuid = data().deepCopy(fields()[0].schema(), other.uuid);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.type)) {
-        this.type = data().deepCopy(fields()[1].schema(), other.type);
+      if (isValidValue(fields()[1], other.transporterId)) {
+        this.transporterId = data().deepCopy(fields()[1].schema(), other.transporterId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.baseOrigin)) {
-        this.baseOrigin = data().deepCopy(fields()[2].schema(), other.baseOrigin);
+      if (isValidValue(fields()[2], other.type)) {
+        this.type = data().deepCopy(fields()[2].schema(), other.type);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.baseDestination)) {
-        this.baseDestination = data().deepCopy(fields()[3].schema(), other.baseDestination);
+      if (isValidValue(fields()[3], other.baseOrigin)) {
+        this.baseOrigin = data().deepCopy(fields()[3].schema(), other.baseOrigin);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.basePrice)) {
-        this.basePrice = data().deepCopy(fields()[4].schema(), other.basePrice);
+      if (isValidValue(fields()[4], other.baseDestination)) {
+        this.baseDestination = data().deepCopy(fields()[4].schema(), other.baseDestination);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.baseMaterial)) {
-        this.baseMaterial = data().deepCopy(fields()[5].schema(), other.baseMaterial);
+      if (isValidValue(fields()[5], other.basePrice)) {
+        this.basePrice = data().deepCopy(fields()[5].schema(), other.basePrice);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.consigner)) {
-        this.consigner = data().deepCopy(fields()[6].schema(), other.consigner);
+      if (isValidValue(fields()[6], other.baseMaterial)) {
+        this.baseMaterial = data().deepCopy(fields()[6].schema(), other.baseMaterial);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.consignee)) {
-        this.consignee = data().deepCopy(fields()[7].schema(), other.consignee);
+      if (isValidValue(fields()[7], other.consigner)) {
+        this.consigner = data().deepCopy(fields()[7].schema(), other.consigner);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.material)) {
-        this.material = data().deepCopy(fields()[8].schema(), other.material);
+      if (isValidValue(fields()[8], other.consignee)) {
+        this.consignee = data().deepCopy(fields()[8].schema(), other.consignee);
         fieldSetFlags()[8] = true;
+      }
+      if (isValidValue(fields()[9], other.material)) {
+        this.material = data().deepCopy(fields()[9].schema(), other.material);
+        fieldSetFlags()[9] = true;
       }
     }
     
     /** Creates a Builder by copying an existing Lane instance */
     private Builder(com.fretron.Model.Lane other) {
             super(com.fretron.Model.Lane.SCHEMA$);
-      if (isValidValue(fields()[0], other.transporterId)) {
-        this.transporterId = data().deepCopy(fields()[0].schema(), other.transporterId);
+      if (isValidValue(fields()[0], other.uuid)) {
+        this.uuid = data().deepCopy(fields()[0].schema(), other.uuid);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.type)) {
-        this.type = data().deepCopy(fields()[1].schema(), other.type);
+      if (isValidValue(fields()[1], other.transporterId)) {
+        this.transporterId = data().deepCopy(fields()[1].schema(), other.transporterId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.baseOrigin)) {
-        this.baseOrigin = data().deepCopy(fields()[2].schema(), other.baseOrigin);
+      if (isValidValue(fields()[2], other.type)) {
+        this.type = data().deepCopy(fields()[2].schema(), other.type);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.baseDestination)) {
-        this.baseDestination = data().deepCopy(fields()[3].schema(), other.baseDestination);
+      if (isValidValue(fields()[3], other.baseOrigin)) {
+        this.baseOrigin = data().deepCopy(fields()[3].schema(), other.baseOrigin);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.basePrice)) {
-        this.basePrice = data().deepCopy(fields()[4].schema(), other.basePrice);
+      if (isValidValue(fields()[4], other.baseDestination)) {
+        this.baseDestination = data().deepCopy(fields()[4].schema(), other.baseDestination);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.baseMaterial)) {
-        this.baseMaterial = data().deepCopy(fields()[5].schema(), other.baseMaterial);
+      if (isValidValue(fields()[5], other.basePrice)) {
+        this.basePrice = data().deepCopy(fields()[5].schema(), other.basePrice);
         fieldSetFlags()[5] = true;
       }
-      if (isValidValue(fields()[6], other.consigner)) {
-        this.consigner = data().deepCopy(fields()[6].schema(), other.consigner);
+      if (isValidValue(fields()[6], other.baseMaterial)) {
+        this.baseMaterial = data().deepCopy(fields()[6].schema(), other.baseMaterial);
         fieldSetFlags()[6] = true;
       }
-      if (isValidValue(fields()[7], other.consignee)) {
-        this.consignee = data().deepCopy(fields()[7].schema(), other.consignee);
+      if (isValidValue(fields()[7], other.consigner)) {
+        this.consigner = data().deepCopy(fields()[7].schema(), other.consigner);
         fieldSetFlags()[7] = true;
       }
-      if (isValidValue(fields()[8], other.material)) {
-        this.material = data().deepCopy(fields()[8].schema(), other.material);
+      if (isValidValue(fields()[8], other.consignee)) {
+        this.consignee = data().deepCopy(fields()[8].schema(), other.consignee);
         fieldSetFlags()[8] = true;
       }
+      if (isValidValue(fields()[9], other.material)) {
+        this.material = data().deepCopy(fields()[9].schema(), other.material);
+        fieldSetFlags()[9] = true;
+      }
+    }
+
+    /** Gets the value of the 'uuid' field */
+    public java.lang.String getUuid() {
+      return uuid;
+    }
+    
+    /** Sets the value of the 'uuid' field */
+    public com.fretron.Model.Lane.Builder setUuid(java.lang.String value) {
+      validate(fields()[0], value);
+      this.uuid = value;
+      fieldSetFlags()[0] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'uuid' field has been set */
+    public boolean hasUuid() {
+      return fieldSetFlags()[0];
+    }
+    
+    /** Clears the value of the 'uuid' field */
+    public com.fretron.Model.Lane.Builder clearUuid() {
+      uuid = null;
+      fieldSetFlags()[0] = false;
+      return this;
     }
 
     /** Gets the value of the 'transporterId' field */
@@ -334,21 +387,21 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     
     /** Sets the value of the 'transporterId' field */
     public com.fretron.Model.Lane.Builder setTransporterId(java.lang.String value) {
-      validate(fields()[0], value);
+      validate(fields()[1], value);
       this.transporterId = value;
-      fieldSetFlags()[0] = true;
+      fieldSetFlags()[1] = true;
       return this; 
     }
     
     /** Checks whether the 'transporterId' field has been set */
     public boolean hasTransporterId() {
-      return fieldSetFlags()[0];
+      return fieldSetFlags()[1];
     }
     
     /** Clears the value of the 'transporterId' field */
     public com.fretron.Model.Lane.Builder clearTransporterId() {
       transporterId = null;
-      fieldSetFlags()[0] = false;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -359,21 +412,21 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     
     /** Sets the value of the 'type' field */
     public com.fretron.Model.Lane.Builder setType(java.lang.String value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.type = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this; 
     }
     
     /** Checks whether the 'type' field has been set */
     public boolean hasType() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
     
     /** Clears the value of the 'type' field */
     public com.fretron.Model.Lane.Builder clearType() {
       type = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -384,21 +437,21 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     
     /** Sets the value of the 'baseOrigin' field */
     public com.fretron.Model.Lane.Builder setBaseOrigin(com.fretron.Model.FreightLocation value) {
-      validate(fields()[2], value);
+      validate(fields()[3], value);
       this.baseOrigin = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[3] = true;
       return this; 
     }
     
     /** Checks whether the 'baseOrigin' field has been set */
     public boolean hasBaseOrigin() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[3];
     }
     
     /** Clears the value of the 'baseOrigin' field */
     public com.fretron.Model.Lane.Builder clearBaseOrigin() {
       baseOrigin = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -409,21 +462,21 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     
     /** Sets the value of the 'baseDestination' field */
     public com.fretron.Model.Lane.Builder setBaseDestination(com.fretron.Model.FreightLocation value) {
-      validate(fields()[3], value);
+      validate(fields()[4], value);
       this.baseDestination = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[4] = true;
       return this; 
     }
     
     /** Checks whether the 'baseDestination' field has been set */
     public boolean hasBaseDestination() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[4];
     }
     
     /** Clears the value of the 'baseDestination' field */
     public com.fretron.Model.Lane.Builder clearBaseDestination() {
       baseDestination = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -434,21 +487,21 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     
     /** Sets the value of the 'basePrice' field */
     public com.fretron.Model.Lane.Builder setBasePrice(java.lang.Double value) {
-      validate(fields()[4], value);
+      validate(fields()[5], value);
       this.basePrice = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[5] = true;
       return this; 
     }
     
     /** Checks whether the 'basePrice' field has been set */
     public boolean hasBasePrice() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[5];
     }
     
     /** Clears the value of the 'basePrice' field */
     public com.fretron.Model.Lane.Builder clearBasePrice() {
       basePrice = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -459,71 +512,71 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     
     /** Sets the value of the 'baseMaterial' field */
     public com.fretron.Model.Lane.Builder setBaseMaterial(java.lang.String value) {
-      validate(fields()[5], value);
+      validate(fields()[6], value);
       this.baseMaterial = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[6] = true;
       return this; 
     }
     
     /** Checks whether the 'baseMaterial' field has been set */
     public boolean hasBaseMaterial() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[6];
     }
     
     /** Clears the value of the 'baseMaterial' field */
     public com.fretron.Model.Lane.Builder clearBaseMaterial() {
       baseMaterial = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
     /** Gets the value of the 'consigner' field */
-    public com.fretron.Model.FreightLocationOffset getConsigner() {
+    public java.util.List<com.fretron.Model.FreightLocationOffset> getConsigner() {
       return consigner;
     }
     
     /** Sets the value of the 'consigner' field */
-    public com.fretron.Model.Lane.Builder setConsigner(com.fretron.Model.FreightLocationOffset value) {
-      validate(fields()[6], value);
+    public com.fretron.Model.Lane.Builder setConsigner(java.util.List<com.fretron.Model.FreightLocationOffset> value) {
+      validate(fields()[7], value);
       this.consigner = value;
-      fieldSetFlags()[6] = true;
+      fieldSetFlags()[7] = true;
       return this; 
     }
     
     /** Checks whether the 'consigner' field has been set */
     public boolean hasConsigner() {
-      return fieldSetFlags()[6];
+      return fieldSetFlags()[7];
     }
     
     /** Clears the value of the 'consigner' field */
     public com.fretron.Model.Lane.Builder clearConsigner() {
       consigner = null;
-      fieldSetFlags()[6] = false;
+      fieldSetFlags()[7] = false;
       return this;
     }
 
     /** Gets the value of the 'consignee' field */
-    public com.fretron.Model.FreightLocationOffset getConsignee() {
+    public java.util.List<com.fretron.Model.FreightLocationOffset> getConsignee() {
       return consignee;
     }
     
     /** Sets the value of the 'consignee' field */
-    public com.fretron.Model.Lane.Builder setConsignee(com.fretron.Model.FreightLocationOffset value) {
-      validate(fields()[7], value);
+    public com.fretron.Model.Lane.Builder setConsignee(java.util.List<com.fretron.Model.FreightLocationOffset> value) {
+      validate(fields()[8], value);
       this.consignee = value;
-      fieldSetFlags()[7] = true;
+      fieldSetFlags()[8] = true;
       return this; 
     }
     
     /** Checks whether the 'consignee' field has been set */
     public boolean hasConsignee() {
-      return fieldSetFlags()[7];
+      return fieldSetFlags()[8];
     }
     
     /** Clears the value of the 'consignee' field */
     public com.fretron.Model.Lane.Builder clearConsignee() {
       consignee = null;
-      fieldSetFlags()[7] = false;
+      fieldSetFlags()[8] = false;
       return this;
     }
 
@@ -534,21 +587,21 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     
     /** Sets the value of the 'material' field */
     public com.fretron.Model.Lane.Builder setMaterial(com.fretron.Model.MaterialOffset value) {
-      validate(fields()[8], value);
+      validate(fields()[9], value);
       this.material = value;
-      fieldSetFlags()[8] = true;
+      fieldSetFlags()[9] = true;
       return this; 
     }
     
     /** Checks whether the 'material' field has been set */
     public boolean hasMaterial() {
-      return fieldSetFlags()[8];
+      return fieldSetFlags()[9];
     }
     
     /** Clears the value of the 'material' field */
     public com.fretron.Model.Lane.Builder clearMaterial() {
       material = null;
-      fieldSetFlags()[8] = false;
+      fieldSetFlags()[9] = false;
       return this;
     }
 
@@ -556,15 +609,16 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     public Lane build() {
       try {
         Lane record = new Lane();
-        record.transporterId = fieldSetFlags()[0] ? this.transporterId : (java.lang.String) defaultValue(fields()[0]);
-        record.type = fieldSetFlags()[1] ? this.type : (java.lang.String) defaultValue(fields()[1]);
-        record.baseOrigin = fieldSetFlags()[2] ? this.baseOrigin : (com.fretron.Model.FreightLocation) defaultValue(fields()[2]);
-        record.baseDestination = fieldSetFlags()[3] ? this.baseDestination : (com.fretron.Model.FreightLocation) defaultValue(fields()[3]);
-        record.basePrice = fieldSetFlags()[4] ? this.basePrice : (java.lang.Double) defaultValue(fields()[4]);
-        record.baseMaterial = fieldSetFlags()[5] ? this.baseMaterial : (java.lang.String) defaultValue(fields()[5]);
-        record.consigner = fieldSetFlags()[6] ? this.consigner : (com.fretron.Model.FreightLocationOffset) defaultValue(fields()[6]);
-        record.consignee = fieldSetFlags()[7] ? this.consignee : (com.fretron.Model.FreightLocationOffset) defaultValue(fields()[7]);
-        record.material = fieldSetFlags()[8] ? this.material : (com.fretron.Model.MaterialOffset) defaultValue(fields()[8]);
+        record.uuid = fieldSetFlags()[0] ? this.uuid : (java.lang.String) defaultValue(fields()[0]);
+        record.transporterId = fieldSetFlags()[1] ? this.transporterId : (java.lang.String) defaultValue(fields()[1]);
+        record.type = fieldSetFlags()[2] ? this.type : (java.lang.String) defaultValue(fields()[2]);
+        record.baseOrigin = fieldSetFlags()[3] ? this.baseOrigin : (com.fretron.Model.FreightLocation) defaultValue(fields()[3]);
+        record.baseDestination = fieldSetFlags()[4] ? this.baseDestination : (com.fretron.Model.FreightLocation) defaultValue(fields()[4]);
+        record.basePrice = fieldSetFlags()[5] ? this.basePrice : (java.lang.Double) defaultValue(fields()[5]);
+        record.baseMaterial = fieldSetFlags()[6] ? this.baseMaterial : (java.lang.String) defaultValue(fields()[6]);
+        record.consigner = fieldSetFlags()[7] ? this.consigner : (java.util.List<com.fretron.Model.FreightLocationOffset>) defaultValue(fields()[7]);
+        record.consignee = fieldSetFlags()[8] ? this.consignee : (java.util.List<com.fretron.Model.FreightLocationOffset>) defaultValue(fields()[8]);
+        record.material = fieldSetFlags()[9] ? this.material : (com.fretron.Model.MaterialOffset) defaultValue(fields()[9]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

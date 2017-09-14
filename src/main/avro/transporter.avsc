@@ -239,7 +239,7 @@
                 ]
              },
                {
-                 "name": "materialOffset",
+                 "name": "materialPriceOffset",
                  "type": "int"
                }
              ]
@@ -251,6 +251,16 @@
            "name": "Lane",
             "fields":
             [
+            {
+             "name":"uuid",
+             "type":
+             [
+               "null",
+               "string"
+
+             ]
+
+            },
              {
                  "name": "transporterId",
                  "type":
@@ -307,18 +317,19 @@
 
            {
              "name": "consigner",
-               "type":[
-              "null",
-               "FreightLocationOffset"
-                 ],
-             "default":null
+                "type":[
+                          "null",
+                          {"type":"array","items":"FreightLocationOffset"}
+                        ],
+                   "default":null
+
              },
 
        {
           "name": "consignee",
-              "type":[
-                    "null",
-                     "FreightLocationOffset"
+             "type":[
+                       "null",
+                       {"type":"array","items":"FreightLocationOffset"}
                    ],
                    "default":null
        },
