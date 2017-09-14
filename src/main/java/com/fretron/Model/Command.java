@@ -3,11 +3,11 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.fretron.transporter.Model;  
+package com.fretron.Model;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Command extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Command\",\"namespace\":\"com.fretron.transporter.Model\",\"fields\":[{\"name\":\"type\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"statusCode\",\"type\":[\"null\",\"int\"]},{\"name\":\"errorMessage\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"startTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"},{\"name\":\"processTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Command\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"type\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"statusCode\",\"type\":[\"null\",\"int\"]},{\"name\":\"errorMessage\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"startTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"},{\"name\":\"processTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String type;
   @Deprecated public java.nio.ByteBuffer data;
@@ -172,18 +172,18 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
   }
 
   /** Creates a new Command RecordBuilder */
-  public static com.fretron.transporter.Model.Command.Builder newBuilder() {
-    return new com.fretron.transporter.Model.Command.Builder();
+  public static com.fretron.Model.Command.Builder newBuilder() {
+    return new com.fretron.Model.Command.Builder();
   }
   
   /** Creates a new Command RecordBuilder by copying an existing Builder */
-  public static com.fretron.transporter.Model.Command.Builder newBuilder(com.fretron.transporter.Model.Command.Builder other) {
-    return new com.fretron.transporter.Model.Command.Builder(other);
+  public static com.fretron.Model.Command.Builder newBuilder(com.fretron.Model.Command.Builder other) {
+    return new com.fretron.Model.Command.Builder(other);
   }
   
   /** Creates a new Command RecordBuilder by copying an existing Command instance */
-  public static com.fretron.transporter.Model.Command.Builder newBuilder(com.fretron.transporter.Model.Command other) {
-    return new com.fretron.transporter.Model.Command.Builder(other);
+  public static com.fretron.Model.Command.Builder newBuilder(com.fretron.Model.Command other) {
+    return new com.fretron.Model.Command.Builder(other);
   }
   
   /**
@@ -202,11 +202,11 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.fretron.transporter.Model.Command.SCHEMA$);
+      super(com.fretron.Model.Command.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.fretron.transporter.Model.Command.Builder other) {
+    private Builder(com.fretron.Model.Command.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.type)) {
         this.type = data().deepCopy(fields()[0].schema(), other.type);
@@ -239,8 +239,8 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Creates a Builder by copying an existing Command instance */
-    private Builder(com.fretron.transporter.Model.Command other) {
-            super(com.fretron.transporter.Model.Command.SCHEMA$);
+    private Builder(com.fretron.Model.Command other) {
+            super(com.fretron.Model.Command.SCHEMA$);
       if (isValidValue(fields()[0], other.type)) {
         this.type = data().deepCopy(fields()[0].schema(), other.type);
         fieldSetFlags()[0] = true;
@@ -277,7 +277,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Sets the value of the 'type' field */
-    public com.fretron.transporter.Model.Command.Builder setType(java.lang.String value) {
+    public com.fretron.Model.Command.Builder setType(java.lang.String value) {
       validate(fields()[0], value);
       this.type = value;
       fieldSetFlags()[0] = true;
@@ -290,7 +290,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'type' field */
-    public com.fretron.transporter.Model.Command.Builder clearType() {
+    public com.fretron.Model.Command.Builder clearType() {
       type = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -302,7 +302,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Sets the value of the 'data' field */
-    public com.fretron.transporter.Model.Command.Builder setData(java.nio.ByteBuffer value) {
+    public com.fretron.Model.Command.Builder setData(java.nio.ByteBuffer value) {
       validate(fields()[1], value);
       this.data = value;
       fieldSetFlags()[1] = true;
@@ -315,7 +315,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'data' field */
-    public com.fretron.transporter.Model.Command.Builder clearData() {
+    public com.fretron.Model.Command.Builder clearData() {
       data = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -327,7 +327,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Sets the value of the 'id' field */
-    public com.fretron.transporter.Model.Command.Builder setId(java.lang.String value) {
+    public com.fretron.Model.Command.Builder setId(java.lang.String value) {
       validate(fields()[2], value);
       this.id = value;
       fieldSetFlags()[2] = true;
@@ -340,7 +340,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'id' field */
-    public com.fretron.transporter.Model.Command.Builder clearId() {
+    public com.fretron.Model.Command.Builder clearId() {
       id = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -352,7 +352,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Sets the value of the 'statusCode' field */
-    public com.fretron.transporter.Model.Command.Builder setStatusCode(java.lang.Integer value) {
+    public com.fretron.Model.Command.Builder setStatusCode(java.lang.Integer value) {
       validate(fields()[3], value);
       this.statusCode = value;
       fieldSetFlags()[3] = true;
@@ -365,7 +365,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'statusCode' field */
-    public com.fretron.transporter.Model.Command.Builder clearStatusCode() {
+    public com.fretron.Model.Command.Builder clearStatusCode() {
       statusCode = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -377,7 +377,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Sets the value of the 'errorMessage' field */
-    public com.fretron.transporter.Model.Command.Builder setErrorMessage(java.lang.String value) {
+    public com.fretron.Model.Command.Builder setErrorMessage(java.lang.String value) {
       validate(fields()[4], value);
       this.errorMessage = value;
       fieldSetFlags()[4] = true;
@@ -390,7 +390,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'errorMessage' field */
-    public com.fretron.transporter.Model.Command.Builder clearErrorMessage() {
+    public com.fretron.Model.Command.Builder clearErrorMessage() {
       errorMessage = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -402,7 +402,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Sets the value of the 'startTime' field */
-    public com.fretron.transporter.Model.Command.Builder setStartTime(java.lang.Long value) {
+    public com.fretron.Model.Command.Builder setStartTime(java.lang.Long value) {
       validate(fields()[5], value);
       this.startTime = value;
       fieldSetFlags()[5] = true;
@@ -415,7 +415,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'startTime' field */
-    public com.fretron.transporter.Model.Command.Builder clearStartTime() {
+    public com.fretron.Model.Command.Builder clearStartTime() {
       startTime = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -427,7 +427,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Sets the value of the 'processTime' field */
-    public com.fretron.transporter.Model.Command.Builder setProcessTime(java.lang.Long value) {
+    public com.fretron.Model.Command.Builder setProcessTime(java.lang.Long value) {
       validate(fields()[6], value);
       this.processTime = value;
       fieldSetFlags()[6] = true;
@@ -440,7 +440,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'processTime' field */
-    public com.fretron.transporter.Model.Command.Builder clearProcessTime() {
+    public com.fretron.Model.Command.Builder clearProcessTime() {
       processTime = null;
       fieldSetFlags()[6] = false;
       return this;

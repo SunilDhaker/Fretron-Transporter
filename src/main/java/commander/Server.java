@@ -1,7 +1,7 @@
 package commander;
 
-import com.fretron.transporter.Context;
-import com.fretron.transporter.constants.Constants;
+import com.fretron.Context;
+import com.fretron.constants.Constants;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;

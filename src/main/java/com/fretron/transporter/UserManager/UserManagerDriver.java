@@ -1,9 +1,9 @@
 package com.fretron.transporter.UserManager;
 
-import com.fretron.transporter.Context;
+import com.fretron.Context;
+import com.fretron.Utils.SpecificAvroSerde;
 import com.fretron.transporter.Model.Command;
-import com.fretron.transporter.Utils.SpecificAvroSerde;
-import com.fretron.transporter.constants.Constants;
+import com.fretron.constants.Constants;
 import com.fretron.transporter.Model.User;
 import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;

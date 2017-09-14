@@ -1,4 +1,4 @@
-package com.fretron.transporter; /**
+package com.fretron; /**
  * Created by sdhaker on 28/06/17.
  */
 

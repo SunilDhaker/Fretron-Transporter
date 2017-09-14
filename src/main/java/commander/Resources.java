@@ -2,11 +2,11 @@ package commander;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fretron.transporter.Context;
+import com.fretron.Context;
 import com.fretron.transporter.Model.Command;
 import com.fretron.transporter.Model.User;
-import com.fretron.transporter.Utils.SpecificAvroDeserializer;
-import com.fretron.transporter.constants.Constants;
+import com.fretron.Utils.SpecificAvroDeserializer;
+import com.fretron.constants.Constants;
 import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;

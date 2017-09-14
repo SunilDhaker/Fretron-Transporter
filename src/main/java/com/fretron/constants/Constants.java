@@ -1,4 +1,4 @@
-package com.fretron.transporter.constants;
+package com.fretron.constants;
 
 public class Constants {
 

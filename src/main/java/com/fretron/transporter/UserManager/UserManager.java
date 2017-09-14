@@ -1,10 +1,10 @@
 package com.fretron.transporter.UserManager;
 
-import com.fretron.transporter.Context;
+import com.fretron.Context;
+import com.fretron.Utils.SpecificAvroSerde;
+import com.fretron.constants.Constants;
 import com.fretron.transporter.Model.Command;
 import com.fretron.transporter.Model.User;
-import com.fretron.transporter.Utils.SpecificAvroSerde;
-import com.fretron.transporter.constants.Constants;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.kstream.KStream;
@@ -16,12 +16,12 @@ import java.util.Properties;
 import java.util.UUID;
 
 public class UserManager {
-    public KafkaStreams startStream(KStreamBuilder builder, SpecificAvroSerde<User> userSpecificAvroSerde,SpecificAvroSerde<Command> commandSpecificAvroSerde,Properties properties) {
+    public KafkaStreams startStream(KStreamBuilder builder, SpecificAvroSerde<User> userSpecificAvroSerde, SpecificAvroSerde<Command> commandSpecificAvroSerde, Properties properties) {
         KStream<String,Command> commandKStream=builder
-                .stream(Serdes.String(),commandSpecificAvroSerde,Context.getConfig().getString(Constants.KEY_COMMAND_TOPIC))
+                .stream(Serdes.String(),commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_TOPIC))
                 .filter((key,value)->value.getType().contains("user"));
 
-        commandKStream.print("commandKS :");
+        //commandKStream.print("commandKS :");
 
 //        commandKStream.mapValues((values)-> userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC),values.getData().array()))
 //                .to(Serdes.String(),userSpecificAvroSerde,Context.getConfig().getString(Constants.KEY_USERS_TOPIC));
@@ -84,7 +84,7 @@ public class UserManager {
             command.setProcessTime(System.currentTimeMillis());
             command.setData(values.command.getData());
             command.setType("user.create.success");
-            command.setErrorMessage("null");
+            command.setErrorMessage("");
 
             return command;
         }).selectKey((key,value)->value.getId())

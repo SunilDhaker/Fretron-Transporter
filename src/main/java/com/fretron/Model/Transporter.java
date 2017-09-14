@@ -3,15 +3,15 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.fretron.transporter.Model;  
+package com.fretron.Model;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Transporter extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Transporter\",\"namespace\":\"com.fretron.transporter.Model\",\"fields\":[{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"adminEmail\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null},{\"name\":\"groups\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Groups\",\"fields\":[{\"name\":\"groupId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"subgroups\",\"type\":{\"type\":\"array\",\"items\":\"Groups\"}},{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"admin\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"members\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Transporter\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"adminEmail\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null},{\"name\":\"groups\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Groups\",\"fields\":[{\"name\":\"groupId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"subgroups\",\"type\":{\"type\":\"array\",\"items\":\"Groups\"}},{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"admin\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"members\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String transporterId;
   @Deprecated public java.util.List<java.lang.String> adminEmail;
-  @Deprecated public java.util.List<com.fretron.transporter.Model.Groups> groups;
+  @Deprecated public java.util.List<com.fretron.Model.Groups> groups;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -23,7 +23,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
   /**
    * All-args constructor.
    */
-  public Transporter(java.lang.String transporterId, java.util.List<java.lang.String> adminEmail, java.util.List<com.fretron.transporter.Model.Groups> groups) {
+  public Transporter(java.lang.String transporterId, java.util.List<java.lang.String> adminEmail, java.util.List<com.fretron.Model.Groups> groups) {
     this.transporterId = transporterId;
     this.adminEmail = adminEmail;
     this.groups = groups;
@@ -45,7 +45,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     switch (field$) {
     case 0: transporterId = (java.lang.String)value$; break;
     case 1: adminEmail = (java.util.List<java.lang.String>)value$; break;
-    case 2: groups = (java.util.List<com.fretron.transporter.Model.Groups>)value$; break;
+    case 2: groups = (java.util.List<com.fretron.Model.Groups>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -83,7 +83,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
   /**
    * Gets the value of the 'groups' field.
    */
-  public java.util.List<com.fretron.transporter.Model.Groups> getGroups() {
+  public java.util.List<com.fretron.Model.Groups> getGroups() {
     return groups;
   }
 
@@ -91,23 +91,23 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
    * Sets the value of the 'groups' field.
    * @param value the value to set.
    */
-  public void setGroups(java.util.List<com.fretron.transporter.Model.Groups> value) {
+  public void setGroups(java.util.List<com.fretron.Model.Groups> value) {
     this.groups = value;
   }
 
   /** Creates a new Transporter RecordBuilder */
-  public static com.fretron.transporter.Model.Transporter.Builder newBuilder() {
-    return new com.fretron.transporter.Model.Transporter.Builder();
+  public static com.fretron.Model.Transporter.Builder newBuilder() {
+    return new com.fretron.Model.Transporter.Builder();
   }
   
   /** Creates a new Transporter RecordBuilder by copying an existing Builder */
-  public static com.fretron.transporter.Model.Transporter.Builder newBuilder(com.fretron.transporter.Model.Transporter.Builder other) {
-    return new com.fretron.transporter.Model.Transporter.Builder(other);
+  public static com.fretron.Model.Transporter.Builder newBuilder(com.fretron.Model.Transporter.Builder other) {
+    return new com.fretron.Model.Transporter.Builder(other);
   }
   
   /** Creates a new Transporter RecordBuilder by copying an existing Transporter instance */
-  public static com.fretron.transporter.Model.Transporter.Builder newBuilder(com.fretron.transporter.Model.Transporter other) {
-    return new com.fretron.transporter.Model.Transporter.Builder(other);
+  public static com.fretron.Model.Transporter.Builder newBuilder(com.fretron.Model.Transporter other) {
+    return new com.fretron.Model.Transporter.Builder(other);
   }
   
   /**
@@ -118,15 +118,15 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
 
     private java.lang.String transporterId;
     private java.util.List<java.lang.String> adminEmail;
-    private java.util.List<com.fretron.transporter.Model.Groups> groups;
+    private java.util.List<com.fretron.Model.Groups> groups;
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.fretron.transporter.Model.Transporter.SCHEMA$);
+      super(com.fretron.Model.Transporter.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.fretron.transporter.Model.Transporter.Builder other) {
+    private Builder(com.fretron.Model.Transporter.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.transporterId)) {
         this.transporterId = data().deepCopy(fields()[0].schema(), other.transporterId);
@@ -143,8 +143,8 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     }
     
     /** Creates a Builder by copying an existing Transporter instance */
-    private Builder(com.fretron.transporter.Model.Transporter other) {
-            super(com.fretron.transporter.Model.Transporter.SCHEMA$);
+    private Builder(com.fretron.Model.Transporter other) {
+            super(com.fretron.Model.Transporter.SCHEMA$);
       if (isValidValue(fields()[0], other.transporterId)) {
         this.transporterId = data().deepCopy(fields()[0].schema(), other.transporterId);
         fieldSetFlags()[0] = true;
@@ -165,7 +165,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     }
     
     /** Sets the value of the 'transporterId' field */
-    public com.fretron.transporter.Model.Transporter.Builder setTransporterId(java.lang.String value) {
+    public com.fretron.Model.Transporter.Builder setTransporterId(java.lang.String value) {
       validate(fields()[0], value);
       this.transporterId = value;
       fieldSetFlags()[0] = true;
@@ -178,7 +178,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     }
     
     /** Clears the value of the 'transporterId' field */
-    public com.fretron.transporter.Model.Transporter.Builder clearTransporterId() {
+    public com.fretron.Model.Transporter.Builder clearTransporterId() {
       transporterId = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -190,7 +190,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     }
     
     /** Sets the value of the 'adminEmail' field */
-    public com.fretron.transporter.Model.Transporter.Builder setAdminEmail(java.util.List<java.lang.String> value) {
+    public com.fretron.Model.Transporter.Builder setAdminEmail(java.util.List<java.lang.String> value) {
       validate(fields()[1], value);
       this.adminEmail = value;
       fieldSetFlags()[1] = true;
@@ -203,19 +203,19 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     }
     
     /** Clears the value of the 'adminEmail' field */
-    public com.fretron.transporter.Model.Transporter.Builder clearAdminEmail() {
+    public com.fretron.Model.Transporter.Builder clearAdminEmail() {
       adminEmail = null;
       fieldSetFlags()[1] = false;
       return this;
     }
 
     /** Gets the value of the 'groups' field */
-    public java.util.List<com.fretron.transporter.Model.Groups> getGroups() {
+    public java.util.List<com.fretron.Model.Groups> getGroups() {
       return groups;
     }
     
     /** Sets the value of the 'groups' field */
-    public com.fretron.transporter.Model.Transporter.Builder setGroups(java.util.List<com.fretron.transporter.Model.Groups> value) {
+    public com.fretron.Model.Transporter.Builder setGroups(java.util.List<com.fretron.Model.Groups> value) {
       validate(fields()[2], value);
       this.groups = value;
       fieldSetFlags()[2] = true;
@@ -228,7 +228,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     }
     
     /** Clears the value of the 'groups' field */
-    public com.fretron.transporter.Model.Transporter.Builder clearGroups() {
+    public com.fretron.Model.Transporter.Builder clearGroups() {
       groups = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -240,7 +240,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
         Transporter record = new Transporter();
         record.transporterId = fieldSetFlags()[0] ? this.transporterId : (java.lang.String) defaultValue(fields()[0]);
         record.adminEmail = fieldSetFlags()[1] ? this.adminEmail : (java.util.List<java.lang.String>) defaultValue(fields()[1]);
-        record.groups = fieldSetFlags()[2] ? this.groups : (java.util.List<com.fretron.transporter.Model.Groups>) defaultValue(fields()[2]);
+        record.groups = fieldSetFlags()[2] ? this.groups : (java.util.List<com.fretron.Model.Groups>) defaultValue(fields()[2]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

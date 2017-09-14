@@ -3,11 +3,11 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.fretron.transporter.Model;  
+package com.fretron.Model;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class User extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.fretron.transporter.Model\",\"fields\":[{\"name\":\"userId\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"name\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"email\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"mobile\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"userId\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"name\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"email\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"mobile\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String userId;
   @Deprecated public java.lang.String name;
@@ -115,18 +115,18 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   }
 
   /** Creates a new User RecordBuilder */
-  public static com.fretron.transporter.Model.User.Builder newBuilder() {
-    return new com.fretron.transporter.Model.User.Builder();
+  public static com.fretron.Model.User.Builder newBuilder() {
+    return new com.fretron.Model.User.Builder();
   }
   
   /** Creates a new User RecordBuilder by copying an existing Builder */
-  public static com.fretron.transporter.Model.User.Builder newBuilder(com.fretron.transporter.Model.User.Builder other) {
-    return new com.fretron.transporter.Model.User.Builder(other);
+  public static com.fretron.Model.User.Builder newBuilder(com.fretron.Model.User.Builder other) {
+    return new com.fretron.Model.User.Builder(other);
   }
   
   /** Creates a new User RecordBuilder by copying an existing User instance */
-  public static com.fretron.transporter.Model.User.Builder newBuilder(com.fretron.transporter.Model.User other) {
-    return new com.fretron.transporter.Model.User.Builder(other);
+  public static com.fretron.Model.User.Builder newBuilder(com.fretron.Model.User other) {
+    return new com.fretron.Model.User.Builder(other);
   }
   
   /**
@@ -142,11 +142,11 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.fretron.transporter.Model.User.SCHEMA$);
+      super(com.fretron.Model.User.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.fretron.transporter.Model.User.Builder other) {
+    private Builder(com.fretron.Model.User.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.userId)) {
         this.userId = data().deepCopy(fields()[0].schema(), other.userId);
@@ -167,8 +167,8 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Creates a Builder by copying an existing User instance */
-    private Builder(com.fretron.transporter.Model.User other) {
-            super(com.fretron.transporter.Model.User.SCHEMA$);
+    private Builder(com.fretron.Model.User other) {
+            super(com.fretron.Model.User.SCHEMA$);
       if (isValidValue(fields()[0], other.userId)) {
         this.userId = data().deepCopy(fields()[0].schema(), other.userId);
         fieldSetFlags()[0] = true;
@@ -193,7 +193,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Sets the value of the 'userId' field */
-    public com.fretron.transporter.Model.User.Builder setUserId(java.lang.String value) {
+    public com.fretron.Model.User.Builder setUserId(java.lang.String value) {
       validate(fields()[0], value);
       this.userId = value;
       fieldSetFlags()[0] = true;
@@ -206,7 +206,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'userId' field */
-    public com.fretron.transporter.Model.User.Builder clearUserId() {
+    public com.fretron.Model.User.Builder clearUserId() {
       userId = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -218,7 +218,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Sets the value of the 'name' field */
-    public com.fretron.transporter.Model.User.Builder setName(java.lang.String value) {
+    public com.fretron.Model.User.Builder setName(java.lang.String value) {
       validate(fields()[1], value);
       this.name = value;
       fieldSetFlags()[1] = true;
@@ -231,7 +231,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'name' field */
-    public com.fretron.transporter.Model.User.Builder clearName() {
+    public com.fretron.Model.User.Builder clearName() {
       name = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -243,7 +243,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Sets the value of the 'email' field */
-    public com.fretron.transporter.Model.User.Builder setEmail(java.lang.String value) {
+    public com.fretron.Model.User.Builder setEmail(java.lang.String value) {
       validate(fields()[2], value);
       this.email = value;
       fieldSetFlags()[2] = true;
@@ -256,7 +256,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'email' field */
-    public com.fretron.transporter.Model.User.Builder clearEmail() {
+    public com.fretron.Model.User.Builder clearEmail() {
       email = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -268,7 +268,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Sets the value of the 'mobile' field */
-    public com.fretron.transporter.Model.User.Builder setMobile(java.lang.String value) {
+    public com.fretron.Model.User.Builder setMobile(java.lang.String value) {
       validate(fields()[3], value);
       this.mobile = value;
       fieldSetFlags()[3] = true;
@@ -281,7 +281,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     }
     
     /** Clears the value of the 'mobile' field */
-    public com.fretron.transporter.Model.User.Builder clearMobile() {
+    public com.fretron.Model.User.Builder clearMobile() {
       mobile = null;
       fieldSetFlags()[3] = false;
       return this;

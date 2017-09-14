@@ -2,7 +2,7 @@
  {
       "type": "record",
       "name": "Location",
-      "namespace": "com.fretron.transporter.Model",
+      "namespace": "com.fretron.Model",
       "fields": [
         {
           "name": "latitude",
@@ -20,7 +20,7 @@
  {
       "type": "record",
       "name": "User",
-      "namespace": "com.fretron.transporter.Model",
+      "namespace": "com.fretron.Model",
       "fields": [
 
        {
@@ -56,7 +56,7 @@
      },
 
           {
-              "namespace": "com.fretron.transporter.Model",
+              "namespace": "com.fretron.Model",
               "type": "record",
               "name": "Groups",
               "fields": [
@@ -118,7 +118,7 @@
      {
           "type": "record",
           "name": "Transporter",
-          "namespace": "com.fretron.transporter.Model",
+          "namespace": "com.fretron.Model",
           "fields": [
 
                 {
@@ -155,7 +155,7 @@
 
 
   {
-            "namespace": "com.fretron.transporter.Model",
+            "namespace": "com.fretron.Model",
             "type": "record",
             "name": "Geofence",
             "fields":[
@@ -171,7 +171,7 @@
          },
 
           {
-             "namespace": "com.fretron.transporter.Model",
+             "namespace": "com.fretron.Model",
              "type": "record",
              "name": "FreightLocation",
              "fields":[
@@ -203,7 +203,7 @@
              },
 
    {
-           "namespace": "com.fretron.transporter.Model",
+           "namespace": "com.fretron.Model",
            "type": "record",
            "name": "FreightLocationOffset",
 
@@ -225,7 +225,7 @@
          },
 
          {
-              "namespace": "com.fretron.transporter.Model",
+              "namespace": "com.fretron.Model",
              "type": "record",
              "name": "MaterialOffset",
 
@@ -246,7 +246,7 @@
            },
              {
 
-          "namespace": "com.fretron.transporter.Model",
+          "namespace": "com.fretron.Model",
            "type": "record",
            "name": "Lane",
             "fields":
@@ -336,7 +336,7 @@
       ]
   },
    {
-     "namespace": "com.fretron.transporter.Model",
+     "namespace": "com.fretron.Model",
      "type": "record",
      "name": "Command",
      "fields": [

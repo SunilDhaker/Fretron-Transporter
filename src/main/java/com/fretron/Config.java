@@ -1,4 +1,4 @@
-package com.fretron.transporter;
+package com.fretron;
 
 import java.io.FileInputStream;
 import java.io.IOException;
