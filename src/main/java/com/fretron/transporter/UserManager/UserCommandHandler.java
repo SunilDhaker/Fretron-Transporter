@@ -1,20 +1,19 @@
-package com.transporter.UserManager;
+package com.fretron.transporter.UserManager;
 
-import com.transporter.Context;
-import com.transporter.Model.Command;
-import com.transporter.Model.User;
-import com.transporter.Utils.SpecificAvroSerde;
-import com.transporter.constants.Constants;
+import com.fretron.transporter.Context;
+import com.fretron.transporter.Utils.SpecificAvroSerde;
+import com.fretron.transporter.Model.Command;
+import com.fretron.transporter.Model.User;
+import com.fretron.transporter.constants.Constants;
 import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KStreamBuilder;
 
 public class UserCommandHandler {
 
-   public static KStream getUserKStream(KStreamBuilder builder, SpecificAvroSerde<Command> commandSerde,SpecificAvroSerde<User> userSerde) {
+   public static KStream getUserKStream(KStreamBuilder builder, SpecificAvroSerde<Command> commandSerde, SpecificAvroSerde<User> userSerde) {
       KStream<String,Command> commandKStream=builder
-               .stream(Serdes.String(),commandSerde,Context.getConfig().getString(Constants.KEY_COMMAND_TOPIC))
+               .stream(Serdes.String(),commandSerde, Context.getConfig().getString(Constants.KEY_COMMAND_TOPIC))
               .filter((key,value)->value.getType().contains("user.create.command"));
 
       commandKStream.mapValues((values)->{

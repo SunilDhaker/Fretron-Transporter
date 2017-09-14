@@ -1,5 +1,7 @@
 package commander;
 
+import com.fretron.transporter.Context;
+import com.fretron.transporter.constants.Constants;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -13,15 +15,16 @@ import java.net.URI;
  */
 public class Server implements Runnable  {
 
-        public static final String BASE_URI = "http://localhost:8082/";
+        public static String BASE_URI="" ;
 
         public static void main( String[] args ) throws Exception
         {
+            Context.init(args);
+            BASE_URI=Context.getConfig().getString(Constants.KEY_BASE_URL);
             new Thread(new Server()).start();
 
         }
         public static ResourceConfig create() {
-            //final ResourceConfig resourceConfig = new ResourceConfig().packages("com.app");
             final ResourceConfig resourceConfig=new ResourceConfig().registerClasses(Resources.class);
 
             return resourceConfig;
@@ -30,7 +33,7 @@ public class Server implements Runnable  {
         public void run() {
             URI rui = UriBuilder.fromUri(BASE_URI).build();
             final HttpServer grizzlyServer = GrizzlyHttpServerFactory.createHttpServer(rui, create() , false);
-            //grizzlyServer.getServerConfiguration().addHttpHandler(new StaticHttpHandler("src/main/webapp"));
+
             try {
                 grizzlyServer.start();
             } catch (IOException e) {

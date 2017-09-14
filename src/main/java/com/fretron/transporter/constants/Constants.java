@@ -1,4 +1,4 @@
-package com.transporter.constants;
+package com.fretron.transporter.constants;
 
 public class Constants {
 
@@ -12,4 +12,9 @@ public class Constants {
     public static String KEY_APPLICATION_SERVER="application.server.config";
     public static String KEY_SCHEMA_REGISTRY_URL="schemaregistry";
     public static String KEY_USER_STATESTORE="user.state.store";
+    public static String KEY_BASE_URL="base.url";
+    public static final String KEY_GET_TYPE="type";
+    public static final String KEY_GET_ERROR="errorMessage";
+    public static final String KEY_GET_STATUS="StatusCode";
+    public static final String KEY_MODEL_CLASS="model.class";
 }

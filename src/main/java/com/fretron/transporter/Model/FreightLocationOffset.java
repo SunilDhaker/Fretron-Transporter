@@ -3,13 +3,13 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.transporter.Model;  
+package com.fretron.transporter.Model;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class FreightLocationOffset extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"FreightLocationOffset\",\"namespace\":\"com.transporter.Model\",\"fields\":[{\"name\":\"freightLocation\",\"type\":{\"type\":\"record\",\"name\":\"FreightLocation\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":null},{\"name\":\"geofence\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Geofence\",\"fields\":[{\"name\":\"center\",\"type\":{\"type\":\"record\",\"name\":\"Location\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}},{\"name\":\"boundary\",\"type\":{\"type\":\"array\",\"items\":\"Location\"}}]}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}},{\"name\":\"priceOffset\",\"type\":\"int\"},{\"name\":\"etdOffset\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"FreightLocationOffset\",\"namespace\":\"com.fretron.transporter.Model\",\"fields\":[{\"name\":\"freightLocation\",\"type\":{\"type\":\"record\",\"name\":\"FreightLocation\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":null},{\"name\":\"geofence\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Geofence\",\"fields\":[{\"name\":\"center\",\"type\":{\"type\":\"record\",\"name\":\"Location\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}},{\"name\":\"boundary\",\"type\":{\"type\":\"array\",\"items\":\"Location\"}}]}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}},{\"name\":\"priceOffset\",\"type\":\"int\"},{\"name\":\"etdOffset\",\"type\":\"int\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-  @Deprecated public com.transporter.Model.FreightLocation freightLocation;
+  @Deprecated public com.fretron.transporter.Model.FreightLocation freightLocation;
   @Deprecated public int priceOffset;
   @Deprecated public int etdOffset;
 
@@ -23,7 +23,7 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
   /**
    * All-args constructor.
    */
-  public FreightLocationOffset(com.transporter.Model.FreightLocation freightLocation, java.lang.Integer priceOffset, java.lang.Integer etdOffset) {
+  public FreightLocationOffset(com.fretron.transporter.Model.FreightLocation freightLocation, java.lang.Integer priceOffset, java.lang.Integer etdOffset) {
     this.freightLocation = freightLocation;
     this.priceOffset = priceOffset;
     this.etdOffset = etdOffset;
@@ -43,7 +43,7 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: freightLocation = (com.transporter.Model.FreightLocation)value$; break;
+    case 0: freightLocation = (com.fretron.transporter.Model.FreightLocation)value$; break;
     case 1: priceOffset = (java.lang.Integer)value$; break;
     case 2: etdOffset = (java.lang.Integer)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
@@ -53,7 +53,7 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
   /**
    * Gets the value of the 'freightLocation' field.
    */
-  public com.transporter.Model.FreightLocation getFreightLocation() {
+  public com.fretron.transporter.Model.FreightLocation getFreightLocation() {
     return freightLocation;
   }
 
@@ -61,7 +61,7 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
    * Sets the value of the 'freightLocation' field.
    * @param value the value to set.
    */
-  public void setFreightLocation(com.transporter.Model.FreightLocation value) {
+  public void setFreightLocation(com.fretron.transporter.Model.FreightLocation value) {
     this.freightLocation = value;
   }
 
@@ -96,18 +96,18 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
   }
 
   /** Creates a new FreightLocationOffset RecordBuilder */
-  public static com.transporter.Model.FreightLocationOffset.Builder newBuilder() {
-    return new com.transporter.Model.FreightLocationOffset.Builder();
+  public static com.fretron.transporter.Model.FreightLocationOffset.Builder newBuilder() {
+    return new com.fretron.transporter.Model.FreightLocationOffset.Builder();
   }
   
   /** Creates a new FreightLocationOffset RecordBuilder by copying an existing Builder */
-  public static com.transporter.Model.FreightLocationOffset.Builder newBuilder(com.transporter.Model.FreightLocationOffset.Builder other) {
-    return new com.transporter.Model.FreightLocationOffset.Builder(other);
+  public static com.fretron.transporter.Model.FreightLocationOffset.Builder newBuilder(com.fretron.transporter.Model.FreightLocationOffset.Builder other) {
+    return new com.fretron.transporter.Model.FreightLocationOffset.Builder(other);
   }
   
   /** Creates a new FreightLocationOffset RecordBuilder by copying an existing FreightLocationOffset instance */
-  public static com.transporter.Model.FreightLocationOffset.Builder newBuilder(com.transporter.Model.FreightLocationOffset other) {
-    return new com.transporter.Model.FreightLocationOffset.Builder(other);
+  public static com.fretron.transporter.Model.FreightLocationOffset.Builder newBuilder(com.fretron.transporter.Model.FreightLocationOffset other) {
+    return new com.fretron.transporter.Model.FreightLocationOffset.Builder(other);
   }
   
   /**
@@ -116,17 +116,17 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<FreightLocationOffset>
     implements org.apache.avro.data.RecordBuilder<FreightLocationOffset> {
 
-    private com.transporter.Model.FreightLocation freightLocation;
+    private com.fretron.transporter.Model.FreightLocation freightLocation;
     private int priceOffset;
     private int etdOffset;
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.transporter.Model.FreightLocationOffset.SCHEMA$);
+      super(com.fretron.transporter.Model.FreightLocationOffset.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.transporter.Model.FreightLocationOffset.Builder other) {
+    private Builder(com.fretron.transporter.Model.FreightLocationOffset.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.freightLocation)) {
         this.freightLocation = data().deepCopy(fields()[0].schema(), other.freightLocation);
@@ -143,8 +143,8 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
     }
     
     /** Creates a Builder by copying an existing FreightLocationOffset instance */
-    private Builder(com.transporter.Model.FreightLocationOffset other) {
-            super(com.transporter.Model.FreightLocationOffset.SCHEMA$);
+    private Builder(com.fretron.transporter.Model.FreightLocationOffset other) {
+            super(com.fretron.transporter.Model.FreightLocationOffset.SCHEMA$);
       if (isValidValue(fields()[0], other.freightLocation)) {
         this.freightLocation = data().deepCopy(fields()[0].schema(), other.freightLocation);
         fieldSetFlags()[0] = true;
@@ -160,12 +160,12 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
     }
 
     /** Gets the value of the 'freightLocation' field */
-    public com.transporter.Model.FreightLocation getFreightLocation() {
+    public com.fretron.transporter.Model.FreightLocation getFreightLocation() {
       return freightLocation;
     }
     
     /** Sets the value of the 'freightLocation' field */
-    public com.transporter.Model.FreightLocationOffset.Builder setFreightLocation(com.transporter.Model.FreightLocation value) {
+    public com.fretron.transporter.Model.FreightLocationOffset.Builder setFreightLocation(com.fretron.transporter.Model.FreightLocation value) {
       validate(fields()[0], value);
       this.freightLocation = value;
       fieldSetFlags()[0] = true;
@@ -178,7 +178,7 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
     }
     
     /** Clears the value of the 'freightLocation' field */
-    public com.transporter.Model.FreightLocationOffset.Builder clearFreightLocation() {
+    public com.fretron.transporter.Model.FreightLocationOffset.Builder clearFreightLocation() {
       freightLocation = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -190,7 +190,7 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
     }
     
     /** Sets the value of the 'priceOffset' field */
-    public com.transporter.Model.FreightLocationOffset.Builder setPriceOffset(int value) {
+    public com.fretron.transporter.Model.FreightLocationOffset.Builder setPriceOffset(int value) {
       validate(fields()[1], value);
       this.priceOffset = value;
       fieldSetFlags()[1] = true;
@@ -203,7 +203,7 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
     }
     
     /** Clears the value of the 'priceOffset' field */
-    public com.transporter.Model.FreightLocationOffset.Builder clearPriceOffset() {
+    public com.fretron.transporter.Model.FreightLocationOffset.Builder clearPriceOffset() {
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -214,7 +214,7 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
     }
     
     /** Sets the value of the 'etdOffset' field */
-    public com.transporter.Model.FreightLocationOffset.Builder setEtdOffset(int value) {
+    public com.fretron.transporter.Model.FreightLocationOffset.Builder setEtdOffset(int value) {
       validate(fields()[2], value);
       this.etdOffset = value;
       fieldSetFlags()[2] = true;
@@ -227,7 +227,7 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
     }
     
     /** Clears the value of the 'etdOffset' field */
-    public com.transporter.Model.FreightLocationOffset.Builder clearEtdOffset() {
+    public com.fretron.transporter.Model.FreightLocationOffset.Builder clearEtdOffset() {
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -236,7 +236,7 @@ public class FreightLocationOffset extends org.apache.avro.specific.SpecificReco
     public FreightLocationOffset build() {
       try {
         FreightLocationOffset record = new FreightLocationOffset();
-        record.freightLocation = fieldSetFlags()[0] ? this.freightLocation : (com.transporter.Model.FreightLocation) defaultValue(fields()[0]);
+        record.freightLocation = fieldSetFlags()[0] ? this.freightLocation : (com.fretron.transporter.Model.FreightLocation) defaultValue(fields()[0]);
         record.priceOffset = fieldSetFlags()[1] ? this.priceOffset : (java.lang.Integer) defaultValue(fields()[1]);
         record.etdOffset = fieldSetFlags()[2] ? this.etdOffset : (java.lang.Integer) defaultValue(fields()[2]);
         return record;

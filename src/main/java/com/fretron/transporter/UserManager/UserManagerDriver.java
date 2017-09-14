@@ -1,6 +1,6 @@
-package com.transporter.UserManager;
+package com.fretron.transporter.UserManager;
 
-import com.transporter.Context;
+import com.fretron.transporter.Context;
 
 public class UserManagerDriver {
     public static void main(String args[]) throws Exception {

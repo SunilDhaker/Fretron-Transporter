@@ -3,19 +3,19 @@
  * 
  * DO NOT EDIT DIRECTLY
  */
-package com.transporter.Model;  
+package com.fretron.transporter.Model;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Command extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Command\",\"namespace\":\"com.transporter.Model\",\"fields\":[{\"name\":\"type\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"statusCode\",\"type\":[\"null\",\"int\"]},{\"name\":\"errorMessage\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"startTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"},{\"name\":\"processTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Command\",\"namespace\":\"com.fretron.transporter.Model\",\"fields\":[{\"name\":\"type\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"statusCode\",\"type\":[\"null\",\"int\"]},{\"name\":\"errorMessage\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"startTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"},{\"name\":\"processTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-  @Deprecated public java.lang.String type;
+  @Deprecated public String type;
   @Deprecated public java.nio.ByteBuffer data;
-  @Deprecated public java.lang.String id;
-  @Deprecated public java.lang.Integer statusCode;
-  @Deprecated public java.lang.String errorMessage;
-  @Deprecated public java.lang.Long startTime;
-  @Deprecated public java.lang.Long processTime;
+  @Deprecated public String id;
+  @Deprecated public Integer statusCode;
+  @Deprecated public String errorMessage;
+  @Deprecated public Long startTime;
+  @Deprecated public Long processTime;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -27,7 +27,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
   /**
    * All-args constructor.
    */
-  public Command(java.lang.String type, java.nio.ByteBuffer data, java.lang.String id, java.lang.Integer statusCode, java.lang.String errorMessage, java.lang.Long startTime, java.lang.Long processTime) {
+  public Command(String type, java.nio.ByteBuffer data, String id, Integer statusCode, String errorMessage, Long startTime, Long processTime) {
     this.type = type;
     this.data = data;
     this.id = id;
@@ -39,7 +39,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
   // Used by DatumWriter.  Applications should not call. 
-  public java.lang.Object get(int field$) {
+  public Object get(int field$) {
     switch (field$) {
     case 0: return type;
     case 1: return data;
@@ -53,15 +53,15 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
   }
   // Used by DatumReader.  Applications should not call. 
   @SuppressWarnings(value="unchecked")
-  public void put(int field$, java.lang.Object value$) {
+  public void put(int field$, Object value$) {
     switch (field$) {
-    case 0: type = (java.lang.String)value$; break;
+    case 0: type = (String)value$; break;
     case 1: data = (java.nio.ByteBuffer)value$; break;
-    case 2: id = (java.lang.String)value$; break;
-    case 3: statusCode = (java.lang.Integer)value$; break;
-    case 4: errorMessage = (java.lang.String)value$; break;
-    case 5: startTime = (java.lang.Long)value$; break;
-    case 6: processTime = (java.lang.Long)value$; break;
+    case 2: id = (String)value$; break;
+    case 3: statusCode = (Integer)value$; break;
+    case 4: errorMessage = (String)value$; break;
+    case 5: startTime = (Long)value$; break;
+    case 6: processTime = (Long)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -69,7 +69,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
   /**
    * Gets the value of the 'type' field.
    */
-  public java.lang.String getType() {
+  public String getType() {
     return type;
   }
 
@@ -77,7 +77,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
    * Sets the value of the 'type' field.
    * @param value the value to set.
    */
-  public void setType(java.lang.String value) {
+  public void setType(String value) {
     this.type = value;
   }
 
@@ -99,7 +99,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
   /**
    * Gets the value of the 'id' field.
    */
-  public java.lang.String getId() {
+  public String getId() {
     return id;
   }
 
@@ -107,14 +107,14 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
    * Sets the value of the 'id' field.
    * @param value the value to set.
    */
-  public void setId(java.lang.String value) {
+  public void setId(String value) {
     this.id = value;
   }
 
   /**
    * Gets the value of the 'statusCode' field.
    */
-  public java.lang.Integer getStatusCode() {
+  public Integer getStatusCode() {
     return statusCode;
   }
 
@@ -122,14 +122,14 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
    * Sets the value of the 'statusCode' field.
    * @param value the value to set.
    */
-  public void setStatusCode(java.lang.Integer value) {
+  public void setStatusCode(Integer value) {
     this.statusCode = value;
   }
 
   /**
    * Gets the value of the 'errorMessage' field.
    */
-  public java.lang.String getErrorMessage() {
+  public String getErrorMessage() {
     return errorMessage;
   }
 
@@ -137,14 +137,14 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
    * Sets the value of the 'errorMessage' field.
    * @param value the value to set.
    */
-  public void setErrorMessage(java.lang.String value) {
+  public void setErrorMessage(String value) {
     this.errorMessage = value;
   }
 
   /**
    * Gets the value of the 'startTime' field.
    */
-  public java.lang.Long getStartTime() {
+  public Long getStartTime() {
     return startTime;
   }
 
@@ -152,14 +152,14 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
    * Sets the value of the 'startTime' field.
    * @param value the value to set.
    */
-  public void setStartTime(java.lang.Long value) {
+  public void setStartTime(Long value) {
     this.startTime = value;
   }
 
   /**
    * Gets the value of the 'processTime' field.
    */
-  public java.lang.Long getProcessTime() {
+  public Long getProcessTime() {
     return processTime;
   }
 
@@ -167,23 +167,23 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
    * Sets the value of the 'processTime' field.
    * @param value the value to set.
    */
-  public void setProcessTime(java.lang.Long value) {
+  public void setProcessTime(Long value) {
     this.processTime = value;
   }
 
   /** Creates a new Command RecordBuilder */
-  public static com.transporter.Model.Command.Builder newBuilder() {
-    return new com.transporter.Model.Command.Builder();
+  public static com.fretron.transporter.Model.Command.Builder newBuilder() {
+    return new com.fretron.transporter.Model.Command.Builder();
   }
   
   /** Creates a new Command RecordBuilder by copying an existing Builder */
-  public static com.transporter.Model.Command.Builder newBuilder(com.transporter.Model.Command.Builder other) {
-    return new com.transporter.Model.Command.Builder(other);
+  public static com.fretron.transporter.Model.Command.Builder newBuilder(com.fretron.transporter.Model.Command.Builder other) {
+    return new com.fretron.transporter.Model.Command.Builder(other);
   }
   
   /** Creates a new Command RecordBuilder by copying an existing Command instance */
-  public static com.transporter.Model.Command.Builder newBuilder(com.transporter.Model.Command other) {
-    return new com.transporter.Model.Command.Builder(other);
+  public static com.fretron.transporter.Model.Command.Builder newBuilder(com.fretron.transporter.Model.Command other) {
+    return new com.fretron.transporter.Model.Command.Builder(other);
   }
   
   /**
@@ -192,21 +192,21 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<Command>
     implements org.apache.avro.data.RecordBuilder<Command> {
 
-    private java.lang.String type;
+    private String type;
     private java.nio.ByteBuffer data;
-    private java.lang.String id;
-    private java.lang.Integer statusCode;
-    private java.lang.String errorMessage;
-    private java.lang.Long startTime;
-    private java.lang.Long processTime;
+    private String id;
+    private Integer statusCode;
+    private String errorMessage;
+    private Long startTime;
+    private Long processTime;
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.transporter.Model.Command.SCHEMA$);
+      super(com.fretron.transporter.Model.Command.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.transporter.Model.Command.Builder other) {
+    private Builder(com.fretron.transporter.Model.Command.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.type)) {
         this.type = data().deepCopy(fields()[0].schema(), other.type);
@@ -239,8 +239,8 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Creates a Builder by copying an existing Command instance */
-    private Builder(com.transporter.Model.Command other) {
-            super(com.transporter.Model.Command.SCHEMA$);
+    private Builder(com.fretron.transporter.Model.Command other) {
+            super(com.fretron.transporter.Model.Command.SCHEMA$);
       if (isValidValue(fields()[0], other.type)) {
         this.type = data().deepCopy(fields()[0].schema(), other.type);
         fieldSetFlags()[0] = true;
@@ -272,12 +272,12 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
 
     /** Gets the value of the 'type' field */
-    public java.lang.String getType() {
+    public String getType() {
       return type;
     }
     
     /** Sets the value of the 'type' field */
-    public com.transporter.Model.Command.Builder setType(java.lang.String value) {
+    public com.fretron.transporter.Model.Command.Builder setType(String value) {
       validate(fields()[0], value);
       this.type = value;
       fieldSetFlags()[0] = true;
@@ -290,7 +290,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'type' field */
-    public com.transporter.Model.Command.Builder clearType() {
+    public com.fretron.transporter.Model.Command.Builder clearType() {
       type = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -302,7 +302,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Sets the value of the 'data' field */
-    public com.transporter.Model.Command.Builder setData(java.nio.ByteBuffer value) {
+    public com.fretron.transporter.Model.Command.Builder setData(java.nio.ByteBuffer value) {
       validate(fields()[1], value);
       this.data = value;
       fieldSetFlags()[1] = true;
@@ -315,19 +315,19 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'data' field */
-    public com.transporter.Model.Command.Builder clearData() {
+    public com.fretron.transporter.Model.Command.Builder clearData() {
       data = null;
       fieldSetFlags()[1] = false;
       return this;
     }
 
     /** Gets the value of the 'id' field */
-    public java.lang.String getId() {
+    public String getId() {
       return id;
     }
     
     /** Sets the value of the 'id' field */
-    public com.transporter.Model.Command.Builder setId(java.lang.String value) {
+    public com.fretron.transporter.Model.Command.Builder setId(String value) {
       validate(fields()[2], value);
       this.id = value;
       fieldSetFlags()[2] = true;
@@ -340,19 +340,19 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'id' field */
-    public com.transporter.Model.Command.Builder clearId() {
+    public com.fretron.transporter.Model.Command.Builder clearId() {
       id = null;
       fieldSetFlags()[2] = false;
       return this;
     }
 
     /** Gets the value of the 'statusCode' field */
-    public java.lang.Integer getStatusCode() {
+    public Integer getStatusCode() {
       return statusCode;
     }
     
     /** Sets the value of the 'statusCode' field */
-    public com.transporter.Model.Command.Builder setStatusCode(java.lang.Integer value) {
+    public com.fretron.transporter.Model.Command.Builder setStatusCode(Integer value) {
       validate(fields()[3], value);
       this.statusCode = value;
       fieldSetFlags()[3] = true;
@@ -365,19 +365,19 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'statusCode' field */
-    public com.transporter.Model.Command.Builder clearStatusCode() {
+    public com.fretron.transporter.Model.Command.Builder clearStatusCode() {
       statusCode = null;
       fieldSetFlags()[3] = false;
       return this;
     }
 
     /** Gets the value of the 'errorMessage' field */
-    public java.lang.String getErrorMessage() {
+    public String getErrorMessage() {
       return errorMessage;
     }
     
     /** Sets the value of the 'errorMessage' field */
-    public com.transporter.Model.Command.Builder setErrorMessage(java.lang.String value) {
+    public com.fretron.transporter.Model.Command.Builder setErrorMessage(String value) {
       validate(fields()[4], value);
       this.errorMessage = value;
       fieldSetFlags()[4] = true;
@@ -390,19 +390,19 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'errorMessage' field */
-    public com.transporter.Model.Command.Builder clearErrorMessage() {
+    public com.fretron.transporter.Model.Command.Builder clearErrorMessage() {
       errorMessage = null;
       fieldSetFlags()[4] = false;
       return this;
     }
 
     /** Gets the value of the 'startTime' field */
-    public java.lang.Long getStartTime() {
+    public Long getStartTime() {
       return startTime;
     }
     
     /** Sets the value of the 'startTime' field */
-    public com.transporter.Model.Command.Builder setStartTime(java.lang.Long value) {
+    public com.fretron.transporter.Model.Command.Builder setStartTime(Long value) {
       validate(fields()[5], value);
       this.startTime = value;
       fieldSetFlags()[5] = true;
@@ -415,19 +415,19 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'startTime' field */
-    public com.transporter.Model.Command.Builder clearStartTime() {
+    public com.fretron.transporter.Model.Command.Builder clearStartTime() {
       startTime = null;
       fieldSetFlags()[5] = false;
       return this;
     }
 
     /** Gets the value of the 'processTime' field */
-    public java.lang.Long getProcessTime() {
+    public Long getProcessTime() {
       return processTime;
     }
     
     /** Sets the value of the 'processTime' field */
-    public com.transporter.Model.Command.Builder setProcessTime(java.lang.Long value) {
+    public com.fretron.transporter.Model.Command.Builder setProcessTime(Long value) {
       validate(fields()[6], value);
       this.processTime = value;
       fieldSetFlags()[6] = true;
@@ -440,7 +440,7 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     }
     
     /** Clears the value of the 'processTime' field */
-    public com.transporter.Model.Command.Builder clearProcessTime() {
+    public com.fretron.transporter.Model.Command.Builder clearProcessTime() {
       processTime = null;
       fieldSetFlags()[6] = false;
       return this;
@@ -450,13 +450,13 @@ public class Command extends org.apache.avro.specific.SpecificRecordBase impleme
     public Command build() {
       try {
         Command record = new Command();
-        record.type = fieldSetFlags()[0] ? this.type : (java.lang.String) defaultValue(fields()[0]);
+        record.type = fieldSetFlags()[0] ? this.type : (String) defaultValue(fields()[0]);
         record.data = fieldSetFlags()[1] ? this.data : (java.nio.ByteBuffer) defaultValue(fields()[1]);
-        record.id = fieldSetFlags()[2] ? this.id : (java.lang.String) defaultValue(fields()[2]);
-        record.statusCode = fieldSetFlags()[3] ? this.statusCode : (java.lang.Integer) defaultValue(fields()[3]);
-        record.errorMessage = fieldSetFlags()[4] ? this.errorMessage : (java.lang.String) defaultValue(fields()[4]);
-        record.startTime = fieldSetFlags()[5] ? this.startTime : (java.lang.Long) defaultValue(fields()[5]);
-        record.processTime = fieldSetFlags()[6] ? this.processTime : (java.lang.Long) defaultValue(fields()[6]);
+        record.id = fieldSetFlags()[2] ? this.id : (String) defaultValue(fields()[2]);
+        record.statusCode = fieldSetFlags()[3] ? this.statusCode : (Integer) defaultValue(fields()[3]);
+        record.errorMessage = fieldSetFlags()[4] ? this.errorMessage : (String) defaultValue(fields()[4]);
+        record.startTime = fieldSetFlags()[5] ? this.startTime : (Long) defaultValue(fields()[5]);
+        record.processTime = fieldSetFlags()[6] ? this.processTime : (Long) defaultValue(fields()[6]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

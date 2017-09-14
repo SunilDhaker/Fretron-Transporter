@@ -1,4 +1,4 @@
-package com.transporter.Utils;
+package com.fretron.transporter.Utils;
 
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
 import org.apache.kafka.common.serialization.Deserializer;

@@ -1,18 +1,17 @@
-package com.transporter.UserManager;
+package com.fretron.transporter.UserManager;
 
 
-import com.transporter.Context;
-import com.transporter.Model.Command;
-import com.transporter.Model.User;
-import com.transporter.Utils.SpecificAvroSerde;
-import com.transporter.constants.Constants;
+import com.fretron.transporter.Context;
+import com.fretron.transporter.Model.Command;
+import com.fretron.transporter.Model.User;
+import com.fretron.transporter.Utils.SpecificAvroSerde;
+import com.fretron.transporter.constants.Constants;
 import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
 import org.apache.kafka.streams.kstream.KStreamBuilder;
-import org.apache.kafka.streams.processor.StateStore;
 import org.apache.kafka.streams.processor.StateStoreSupplier;
 import org.apache.kafka.streams.state.Stores;
 
