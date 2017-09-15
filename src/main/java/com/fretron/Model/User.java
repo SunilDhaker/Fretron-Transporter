@@ -7,12 +7,13 @@ package com.fretron.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class User extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"userId\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"name\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"email\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"mobile\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"userId\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"name\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"email\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"mobile\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"isDeleted\",\"type\":[\"boolean\",\"null\"]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String userId;
   @Deprecated public java.lang.String name;
   @Deprecated public java.lang.String email;
   @Deprecated public java.lang.String mobile;
+  @Deprecated public java.lang.Boolean isDeleted;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -24,11 +25,12 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   /**
    * All-args constructor.
    */
-  public User(java.lang.String userId, java.lang.String name, java.lang.String email, java.lang.String mobile) {
+  public User(java.lang.String userId, java.lang.String name, java.lang.String email, java.lang.String mobile, java.lang.Boolean isDeleted) {
     this.userId = userId;
     this.name = name;
     this.email = email;
     this.mobile = mobile;
+    this.isDeleted = isDeleted;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -39,6 +41,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     case 1: return name;
     case 2: return email;
     case 3: return mobile;
+    case 4: return isDeleted;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -50,6 +53,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     case 1: name = (java.lang.String)value$; break;
     case 2: email = (java.lang.String)value$; break;
     case 3: mobile = (java.lang.String)value$; break;
+    case 4: isDeleted = (java.lang.Boolean)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -114,6 +118,21 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     this.mobile = value;
   }
 
+  /**
+   * Gets the value of the 'isDeleted' field.
+   */
+  public java.lang.Boolean getIsDeleted() {
+    return isDeleted;
+  }
+
+  /**
+   * Sets the value of the 'isDeleted' field.
+   * @param value the value to set.
+   */
+  public void setIsDeleted(java.lang.Boolean value) {
+    this.isDeleted = value;
+  }
+
   /** Creates a new User RecordBuilder */
   public static com.fretron.Model.User.Builder newBuilder() {
     return new com.fretron.Model.User.Builder();
@@ -139,6 +158,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     private java.lang.String name;
     private java.lang.String email;
     private java.lang.String mobile;
+    private java.lang.Boolean isDeleted;
 
     /** Creates a new Builder */
     private Builder() {
@@ -164,6 +184,10 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
         this.mobile = data().deepCopy(fields()[3].schema(), other.mobile);
         fieldSetFlags()[3] = true;
       }
+      if (isValidValue(fields()[4], other.isDeleted)) {
+        this.isDeleted = data().deepCopy(fields()[4].schema(), other.isDeleted);
+        fieldSetFlags()[4] = true;
+      }
     }
     
     /** Creates a Builder by copying an existing User instance */
@@ -184,6 +208,10 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       if (isValidValue(fields()[3], other.mobile)) {
         this.mobile = data().deepCopy(fields()[3].schema(), other.mobile);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.isDeleted)) {
+        this.isDeleted = data().deepCopy(fields()[4].schema(), other.isDeleted);
+        fieldSetFlags()[4] = true;
       }
     }
 
@@ -287,6 +315,31 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       return this;
     }
 
+    /** Gets the value of the 'isDeleted' field */
+    public java.lang.Boolean getIsDeleted() {
+      return isDeleted;
+    }
+    
+    /** Sets the value of the 'isDeleted' field */
+    public com.fretron.Model.User.Builder setIsDeleted(java.lang.Boolean value) {
+      validate(fields()[4], value);
+      this.isDeleted = value;
+      fieldSetFlags()[4] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'isDeleted' field has been set */
+    public boolean hasIsDeleted() {
+      return fieldSetFlags()[4];
+    }
+    
+    /** Clears the value of the 'isDeleted' field */
+    public com.fretron.Model.User.Builder clearIsDeleted() {
+      isDeleted = null;
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
     @Override
     public User build() {
       try {
@@ -295,6 +348,7 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
         record.name = fieldSetFlags()[1] ? this.name : (java.lang.String) defaultValue(fields()[1]);
         record.email = fieldSetFlags()[2] ? this.email : (java.lang.String) defaultValue(fields()[2]);
         record.mobile = fieldSetFlags()[3] ? this.mobile : (java.lang.String) defaultValue(fields()[3]);
+        record.isDeleted = fieldSetFlags()[4] ? this.isDeleted : (java.lang.Boolean) defaultValue(fields()[4]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

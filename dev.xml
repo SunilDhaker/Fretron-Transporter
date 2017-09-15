@@ -4,7 +4,7 @@
 <properties>
 
     <!-- Transporter Management System topic-->
-    <entry key="lanes.topic">lanes</entry>
+    <entry key="lanes.topic">lane</entry>
     <entry key="user.topic">user</entry>
     <entry key="transporter.topic">transporter</entry>
     <entry key="user.email.store">userbyemailstore</entry>
@@ -28,6 +28,6 @@
     <!-- State Store -->
     <entry key="user.state.store">userstatestore</entry>
     <!-- Model Classes -->
-    <entry key="model.class">user#com.fretron.transporter.Model.User#user.topic
+    <entry key="model.class">user#com.fretron.Model.User#user.topic lane#com.fretron.Model.Lane#lane.topic
     </entry>
 </properties>

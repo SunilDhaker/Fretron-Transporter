@@ -52,6 +52,13 @@
               "string"
                ]
           }
+          ,{
+             "name": "isDeleted",
+             "type": [
+             "boolean",
+             "null"
+              ]
+          }
        ]
      },
 
