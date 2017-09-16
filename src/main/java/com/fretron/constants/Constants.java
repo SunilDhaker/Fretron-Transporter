@@ -21,5 +21,6 @@ public class Constants {
     public static final String KEY_AUTO_OFFSET_RESET_CONFIG="auto.offset.reset.config";
     public static final String KEY_COMMIT_INTERVAL_AUTO_CONFIG="commit.interval.auto.config";
     public static final String KEY_TRANSPORTER_APP_ID="transporter.manager.id";
+    public  static  final  String KEY_TRANSPORTER_ID_STORE="transporter.state.store";
 
 }

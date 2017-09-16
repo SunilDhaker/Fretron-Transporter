@@ -9,7 +9,7 @@ public class TransporterManagerDriver {
 
     public static void main(String[] args) throws Exception {
         Context.init(args);
-        new TransporterManager().startStream();
+        new TransporterManager().createStream();
 
     }
 }

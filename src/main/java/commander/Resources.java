@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fretron.Context;
 import com.fretron.Model.Command;
+import com.fretron.Model.Groups;
+import com.fretron.Model.Transporter;
 import com.fretron.Model.User;
 import com.fretron.Utils.SpecificAvroDeserializer;
 import com.fretron.constants.Constants;
@@ -158,6 +160,26 @@ public class Resources {
 
         }
         return value;
+
+    }
+
+
+    @GET
+    @Path("admin")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String sendAdmin()
+    {
+        ArrayList<String> emailList=new ArrayList<>();
+        ArrayList<String> members=new ArrayList<>();
+        List<Groups> groups = new ArrayList<>();
+        List<Groups> subgroups = new ArrayList<>();
+        emailList.add("abhishek.16891@");
+        emailList.add("umesh@");
+
+        Groups group = new Groups("1",subgroups,"darcl","abhishek",members);
+        groups.add(group);
+        Transporter transporter =new Transporter("123",emailList,groups);
+        return transporter.toString();
 
     }
 
