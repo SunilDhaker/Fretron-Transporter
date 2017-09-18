@@ -7,12 +7,14 @@ package com.fretron.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class User extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"userId\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"name\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"email\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"mobile\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"isDeleted\",\"type\":\"boolean\",\"default\":false}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"User\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"userId\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"name\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"email\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"mobile\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transporterId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"groupId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"isDeleted\",\"type\":\"boolean\",\"default\":false}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String userId;
   @Deprecated public java.lang.String name;
   @Deprecated public java.lang.String email;
   @Deprecated public java.lang.String mobile;
+  @Deprecated public java.lang.String transporterId;
+  @Deprecated public java.lang.String groupId;
   @Deprecated public boolean isDeleted;
 
   /**
@@ -25,11 +27,13 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   /**
    * All-args constructor.
    */
-  public User(java.lang.String userId, java.lang.String name, java.lang.String email, java.lang.String mobile, java.lang.Boolean isDeleted) {
+  public User(java.lang.String userId, java.lang.String name, java.lang.String email, java.lang.String mobile, java.lang.String transporterId, java.lang.String groupId, java.lang.Boolean isDeleted) {
     this.userId = userId;
     this.name = name;
     this.email = email;
     this.mobile = mobile;
+    this.transporterId = transporterId;
+    this.groupId = groupId;
     this.isDeleted = isDeleted;
   }
 
@@ -41,7 +45,9 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     case 1: return name;
     case 2: return email;
     case 3: return mobile;
-    case 4: return isDeleted;
+    case 4: return transporterId;
+    case 5: return groupId;
+    case 6: return isDeleted;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -53,7 +59,9 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     case 1: name = (java.lang.String)value$; break;
     case 2: email = (java.lang.String)value$; break;
     case 3: mobile = (java.lang.String)value$; break;
-    case 4: isDeleted = (java.lang.Boolean)value$; break;
+    case 4: transporterId = (java.lang.String)value$; break;
+    case 5: groupId = (java.lang.String)value$; break;
+    case 6: isDeleted = (java.lang.Boolean)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -119,6 +127,36 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
   }
 
   /**
+   * Gets the value of the 'transporterId' field.
+   */
+  public java.lang.String getTransporterId() {
+    return transporterId;
+  }
+
+  /**
+   * Sets the value of the 'transporterId' field.
+   * @param value the value to set.
+   */
+  public void setTransporterId(java.lang.String value) {
+    this.transporterId = value;
+  }
+
+  /**
+   * Gets the value of the 'groupId' field.
+   */
+  public java.lang.String getGroupId() {
+    return groupId;
+  }
+
+  /**
+   * Sets the value of the 'groupId' field.
+   * @param value the value to set.
+   */
+  public void setGroupId(java.lang.String value) {
+    this.groupId = value;
+  }
+
+  /**
    * Gets the value of the 'isDeleted' field.
    */
   public java.lang.Boolean getIsDeleted() {
@@ -158,6 +196,8 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     private java.lang.String name;
     private java.lang.String email;
     private java.lang.String mobile;
+    private java.lang.String transporterId;
+    private java.lang.String groupId;
     private boolean isDeleted;
 
     /** Creates a new Builder */
@@ -184,9 +224,17 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
         this.mobile = data().deepCopy(fields()[3].schema(), other.mobile);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.isDeleted)) {
-        this.isDeleted = data().deepCopy(fields()[4].schema(), other.isDeleted);
+      if (isValidValue(fields()[4], other.transporterId)) {
+        this.transporterId = data().deepCopy(fields()[4].schema(), other.transporterId);
         fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.groupId)) {
+        this.groupId = data().deepCopy(fields()[5].schema(), other.groupId);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.isDeleted)) {
+        this.isDeleted = data().deepCopy(fields()[6].schema(), other.isDeleted);
+        fieldSetFlags()[6] = true;
       }
     }
     
@@ -209,9 +257,17 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
         this.mobile = data().deepCopy(fields()[3].schema(), other.mobile);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.isDeleted)) {
-        this.isDeleted = data().deepCopy(fields()[4].schema(), other.isDeleted);
+      if (isValidValue(fields()[4], other.transporterId)) {
+        this.transporterId = data().deepCopy(fields()[4].schema(), other.transporterId);
         fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.groupId)) {
+        this.groupId = data().deepCopy(fields()[5].schema(), other.groupId);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.isDeleted)) {
+        this.isDeleted = data().deepCopy(fields()[6].schema(), other.isDeleted);
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -315,6 +371,56 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
       return this;
     }
 
+    /** Gets the value of the 'transporterId' field */
+    public java.lang.String getTransporterId() {
+      return transporterId;
+    }
+    
+    /** Sets the value of the 'transporterId' field */
+    public com.fretron.Model.User.Builder setTransporterId(java.lang.String value) {
+      validate(fields()[4], value);
+      this.transporterId = value;
+      fieldSetFlags()[4] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'transporterId' field has been set */
+    public boolean hasTransporterId() {
+      return fieldSetFlags()[4];
+    }
+    
+    /** Clears the value of the 'transporterId' field */
+    public com.fretron.Model.User.Builder clearTransporterId() {
+      transporterId = null;
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
+    /** Gets the value of the 'groupId' field */
+    public java.lang.String getGroupId() {
+      return groupId;
+    }
+    
+    /** Sets the value of the 'groupId' field */
+    public com.fretron.Model.User.Builder setGroupId(java.lang.String value) {
+      validate(fields()[5], value);
+      this.groupId = value;
+      fieldSetFlags()[5] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'groupId' field has been set */
+    public boolean hasGroupId() {
+      return fieldSetFlags()[5];
+    }
+    
+    /** Clears the value of the 'groupId' field */
+    public com.fretron.Model.User.Builder clearGroupId() {
+      groupId = null;
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
     /** Gets the value of the 'isDeleted' field */
     public java.lang.Boolean getIsDeleted() {
       return isDeleted;
@@ -322,20 +428,20 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
     
     /** Sets the value of the 'isDeleted' field */
     public com.fretron.Model.User.Builder setIsDeleted(boolean value) {
-      validate(fields()[4], value);
+      validate(fields()[6], value);
       this.isDeleted = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[6] = true;
       return this; 
     }
     
     /** Checks whether the 'isDeleted' field has been set */
     public boolean hasIsDeleted() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[6];
     }
     
     /** Clears the value of the 'isDeleted' field */
     public com.fretron.Model.User.Builder clearIsDeleted() {
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -347,7 +453,9 @@ public class User extends org.apache.avro.specific.SpecificRecordBase implements
         record.name = fieldSetFlags()[1] ? this.name : (java.lang.String) defaultValue(fields()[1]);
         record.email = fieldSetFlags()[2] ? this.email : (java.lang.String) defaultValue(fields()[2]);
         record.mobile = fieldSetFlags()[3] ? this.mobile : (java.lang.String) defaultValue(fields()[3]);
-        record.isDeleted = fieldSetFlags()[4] ? this.isDeleted : (java.lang.Boolean) defaultValue(fields()[4]);
+        record.transporterId = fieldSetFlags()[4] ? this.transporterId : (java.lang.String) defaultValue(fields()[4]);
+        record.groupId = fieldSetFlags()[5] ? this.groupId : (java.lang.String) defaultValue(fields()[5]);
+        record.isDeleted = fieldSetFlags()[6] ? this.isDeleted : (java.lang.Boolean) defaultValue(fields()[6]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

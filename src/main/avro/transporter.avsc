@@ -51,8 +51,16 @@
               "null",
               "string"
                ]
-          }
-          ,{
+          },
+        {
+          "name":"transporterId",
+          "type":"string"
+        },
+        {
+          "name":"groupId",
+          "type":"string"
+        },
+        {
              "name": "isDeleted",
              "type": "boolean",
              "default":false
@@ -407,6 +415,41 @@
          ],
          "logicalType": "timestamp-millis",
          "default": null
+       }
+     ]
+   },
+   {
+     "namespace":"com.fretron.Model",
+     "name":"CommandOfUserGroupsAndTransporter",
+     "type":"record",
+     "fields":[
+       {
+         "name": "command",
+         "type":"com.fretron.Model.Command"
+       },
+       {
+         "name":"user",
+         "type":[
+           "null",
+           "com.fretron.Model.User"
+           ],
+         "default":null
+       },
+       {
+         "name":"transporter",
+         "type":[
+           "null",
+         "com.fretron.Model.Transporter"
+           ],
+         "default":null
+       },
+       {
+         "name":"group",
+         "type":[
+           "null",
+           "com.fretron.Model.Groups"
+         ],
+         "default":null
        }
      ]
    },

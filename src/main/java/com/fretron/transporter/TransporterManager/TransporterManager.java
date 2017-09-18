@@ -220,8 +220,6 @@ public class TransporterManager {
             return v.getId();
         }).to(Serdes.String(), commandSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
 
-
-
     }
 
     public static void  deleteTransporter(KStream<String,Command> commandResult,KStream<String,Command> commandFilterKStream,KTable<String,Transporter> transporterKTableByTransporterId,SpecificAvroSerde<Command> commandSerde,SpecificAvroSerde<CommandOfTransporter> commandOfTransporterSerde, SpecificAvroSerde<Transporter> transporterSpecificAvroSerde)

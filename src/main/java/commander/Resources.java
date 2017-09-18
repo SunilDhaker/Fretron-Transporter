@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fretron.Context;
 import com.fretron.Model.Command;
-import com.fretron.Model.Groups;
-import com.fretron.Model.Transporter;
 import com.fretron.Model.User;
 import com.fretron.Utils.SpecificAvroDeserializer;
 import com.fretron.constants.Constants;
@@ -115,8 +113,7 @@ public class Resources {
                     while (iterator.hasNext()) {
                         ConsumerRecord<String, Command> currentRecord = iterator.next();
                         if (pendingResponces.containsKey(currentRecord.value().getId())) {
-                            pendingResponces.get(currentRecord.key()).resume(
-                                    parse(currentRecord.value()).toString());
+                            pendingResponces.get(currentRecord.key()).resume(parse(currentRecord.value()).toString());
                         }
                     }
                 }
@@ -163,26 +160,6 @@ public class Resources {
 
     }
 
-
-    @GET
-    @Path("admin")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String sendAdmin()
-    {
-        ArrayList<String> emailList=new ArrayList<>();
-        ArrayList<String> members=new ArrayList<>();
-        List<Groups> groups = new ArrayList<>();
-        List<Groups> subgroups = new ArrayList<>();
-        emailList.add("abhishek.16891@");
-        emailList.add("umesh@");
-
-        Groups group = new Groups("1",subgroups,"darcl","abhishek",members);
-        groups.add(group);
-        Transporter transporter =new Transporter("123",emailList,groups,false);
-        return transporter.toString();
-
-    }
-
     @POST
     @Path("commandSync")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -215,7 +192,7 @@ public class Resources {
 
 
         try {
-            ProducerRecord<String, Command> record = new ProducerRecord<>(COMMAND_TOPIC, UUID.randomUUID().toString(), commandBuilder);
+            ProducerRecord<String, Command> record = new ProducerRecord<>(COMMAND_TOPIC,UUID.randomUUID().toString(), commandBuilder);
             System.out.println(record.toString());
             producer.send(record);
             pendingResponces.put(commandBuilder.getId(), ar);
@@ -236,5 +213,3 @@ public class Resources {
     }
 
 }
-
-

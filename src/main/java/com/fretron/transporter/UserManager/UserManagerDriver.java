@@ -1,10 +1,9 @@
 package com.fretron.transporter.UserManager;
 
 import com.fretron.Context;
+import com.fretron.Model.*;
 import com.fretron.Utils.SpecificAvroSerde;
-import com.fretron.Model.Command;
 import com.fretron.constants.Constants;
-import com.fretron.Model.User;
 import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
 import org.apache.kafka.streams.StreamsConfig;
@@ -27,11 +26,17 @@ public class UserManagerDriver {
         final Map<String, String> serdeProps = Collections.singletonMap("schema.registry.url", Context.getConfig().getString(Constants.KEY_SCHEMA_REGISTRY_URL));
         SpecificAvroSerde<User> userSpecificAvroSerde=new SpecificAvroSerde<>(schemaRegistryClient, serdeProps);
         SpecificAvroSerde<Command> commandSpecificAvroSerde = new SpecificAvroSerde<>(schemaRegistryClient, serdeProps);
+        SpecificAvroSerde<CommandOfUserGroupsAndTransporter> commandOfUserGroupsAndTransporterSerde=new SpecificAvroSerde<>(schemaRegistryClient,serdeProps);
+        SpecificAvroSerde<Transporter> transporterSpecificAvroSerde=new SpecificAvroSerde<>(schemaRegistryClient,serdeProps);
+        SpecificAvroSerde<Groups> groupsSerde=new SpecificAvroSerde<>(schemaRegistryClient,serdeProps);
 
         userSpecificAvroSerde.configure(serdeProps, false);
         commandSpecificAvroSerde.configure(serdeProps, false);
+        commandOfUserGroupsAndTransporterSerde.configure(serdeProps,false);
+        transporterSpecificAvroSerde.configure(serdeProps,false);
+        groupsSerde.configure(serdeProps,false);
 
-        new UserManager().startStream(builder,userSpecificAvroSerde,commandSpecificAvroSerde,properties).start();
+        new UserManager().startStream(builder,userSpecificAvroSerde,commandSpecificAvroSerde,transporterSpecificAvroSerde,commandOfUserGroupsAndTransporterSerde,groupsSerde,properties).start();
     }
 
     public static Properties getProperties() {
