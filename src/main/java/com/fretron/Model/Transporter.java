@@ -7,11 +7,12 @@ package com.fretron.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Transporter extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Transporter\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"adminEmail\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null},{\"name\":\"groups\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Groups\",\"fields\":[{\"name\":\"groupId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"subgroups\",\"type\":{\"type\":\"array\",\"items\":\"Groups\"}},{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"admin\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"members\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Transporter\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"adminEmail\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null},{\"name\":\"groups\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Groups\",\"fields\":[{\"name\":\"groupId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"subgroups\",\"type\":{\"type\":\"array\",\"items\":\"Groups\"}},{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"admin\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"members\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}}],\"default\":null},{\"name\":\"isDeleted\",\"type\":\"boolean\",\"default\":false}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String transporterId;
   @Deprecated public java.util.List<java.lang.String> adminEmail;
   @Deprecated public java.util.List<com.fretron.Model.Groups> groups;
+  @Deprecated public boolean isDeleted;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -23,10 +24,11 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
   /**
    * All-args constructor.
    */
-  public Transporter(java.lang.String transporterId, java.util.List<java.lang.String> adminEmail, java.util.List<com.fretron.Model.Groups> groups) {
+  public Transporter(java.lang.String transporterId, java.util.List<java.lang.String> adminEmail, java.util.List<com.fretron.Model.Groups> groups, java.lang.Boolean isDeleted) {
     this.transporterId = transporterId;
     this.adminEmail = adminEmail;
     this.groups = groups;
+    this.isDeleted = isDeleted;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -36,6 +38,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     case 0: return transporterId;
     case 1: return adminEmail;
     case 2: return groups;
+    case 3: return isDeleted;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -46,6 +49,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     case 0: transporterId = (java.lang.String)value$; break;
     case 1: adminEmail = (java.util.List<java.lang.String>)value$; break;
     case 2: groups = (java.util.List<com.fretron.Model.Groups>)value$; break;
+    case 3: isDeleted = (java.lang.Boolean)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -95,6 +99,21 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     this.groups = value;
   }
 
+  /**
+   * Gets the value of the 'isDeleted' field.
+   */
+  public java.lang.Boolean getIsDeleted() {
+    return isDeleted;
+  }
+
+  /**
+   * Sets the value of the 'isDeleted' field.
+   * @param value the value to set.
+   */
+  public void setIsDeleted(java.lang.Boolean value) {
+    this.isDeleted = value;
+  }
+
   /** Creates a new Transporter RecordBuilder */
   public static com.fretron.Model.Transporter.Builder newBuilder() {
     return new com.fretron.Model.Transporter.Builder();
@@ -119,6 +138,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
     private java.lang.String transporterId;
     private java.util.List<java.lang.String> adminEmail;
     private java.util.List<com.fretron.Model.Groups> groups;
+    private boolean isDeleted;
 
     /** Creates a new Builder */
     private Builder() {
@@ -140,6 +160,10 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
         this.groups = data().deepCopy(fields()[2].schema(), other.groups);
         fieldSetFlags()[2] = true;
       }
+      if (isValidValue(fields()[3], other.isDeleted)) {
+        this.isDeleted = data().deepCopy(fields()[3].schema(), other.isDeleted);
+        fieldSetFlags()[3] = true;
+      }
     }
     
     /** Creates a Builder by copying an existing Transporter instance */
@@ -156,6 +180,10 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
       if (isValidValue(fields()[2], other.groups)) {
         this.groups = data().deepCopy(fields()[2].schema(), other.groups);
         fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.isDeleted)) {
+        this.isDeleted = data().deepCopy(fields()[3].schema(), other.isDeleted);
+        fieldSetFlags()[3] = true;
       }
     }
 
@@ -234,6 +262,30 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
       return this;
     }
 
+    /** Gets the value of the 'isDeleted' field */
+    public java.lang.Boolean getIsDeleted() {
+      return isDeleted;
+    }
+    
+    /** Sets the value of the 'isDeleted' field */
+    public com.fretron.Model.Transporter.Builder setIsDeleted(boolean value) {
+      validate(fields()[3], value);
+      this.isDeleted = value;
+      fieldSetFlags()[3] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'isDeleted' field has been set */
+    public boolean hasIsDeleted() {
+      return fieldSetFlags()[3];
+    }
+    
+    /** Clears the value of the 'isDeleted' field */
+    public com.fretron.Model.Transporter.Builder clearIsDeleted() {
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
     @Override
     public Transporter build() {
       try {
@@ -241,6 +293,7 @@ public class Transporter extends org.apache.avro.specific.SpecificRecordBase imp
         record.transporterId = fieldSetFlags()[0] ? this.transporterId : (java.lang.String) defaultValue(fields()[0]);
         record.adminEmail = fieldSetFlags()[1] ? this.adminEmail : (java.util.List<java.lang.String>) defaultValue(fields()[1]);
         record.groups = fieldSetFlags()[2] ? this.groups : (java.util.List<com.fretron.Model.Groups>) defaultValue(fields()[2]);
+        record.isDeleted = fieldSetFlags()[3] ? this.isDeleted : (java.lang.Boolean) defaultValue(fields()[3]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

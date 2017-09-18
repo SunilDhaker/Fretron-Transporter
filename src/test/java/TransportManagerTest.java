@@ -67,7 +67,7 @@ public class TransportManagerTest {
         SpecificAvroSerde<Command> commandSpecificAvroSerde= SerdeUtils.createSerde(CLUSTER.schemaRegistryUrl());
         SpecificAvroSerde<Transporter> transporterManagerSpecificAvroSerde= SerdeUtils.createSerde(CLUSTER.schemaRegistryUrl());
 
-        Transporter transporter = new Transporter("123",null,null);
+        Transporter transporter = new Transporter("123",null,null,false);
 
         String commandId=  UUID.randomUUID().toString();
         Command command = new Command( "transporter.create.command",

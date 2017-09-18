@@ -31,7 +31,6 @@ public class TransporterManager {
     public static void createStream()
 
     {
-        String TRANSPORTER_TOPIC = Context.getConfig().getString(Constants.KEY_TRANSPORTER_TOPIC);
 
         final Properties streamsConfiguration = PropertiesUtil.initializeProperties(Context.getConfig().getString(Constants.KEY_TRANSPORTER_APP_ID),Context.getConfig().getString(Constants.KEY_SCHEMA_REGISTRY_URL), Context.getConfig().getString(Constants.KEY_BOOTSTRAP_SERVERS), Context.getConfig());
 
@@ -75,6 +74,7 @@ public class TransporterManager {
 
         updateTransporter(commandResult,commandFilterKStream,transporterKTableByTransporterId,commandSerde,commandOfTransporterSerde, transporterSpecificAvroSerde);
 
+        deleteTransporter(commandResult,commandFilterKStream,transporterKTableByTransporterId,commandSerde,commandOfTransporterSerde, transporterSpecificAvroSerde);
 
         KafkaStreams streams = new KafkaStreams(streamBuilder, streamsConfiguration);
         streams.start();
@@ -102,7 +102,7 @@ public class TransporterManager {
             return commandOfTransporter;
         }).selectKey((k,v)->v.getData().getTransporterId());
 
-        commandTransporterKStreamByID.print("command of customer :");
+        commandTransporterKStreamByID.print("command Of Transporter By transporterID :");
 
         KStream<String,EnrichedJoinedCommand> enrichedJoinedCommandKStreamBranch[] =
                 commandTransporterKStreamByID
@@ -110,8 +110,10 @@ public class TransporterManager {
                                 (leftValue,rightValue)->new EnrichedJoinedCommand(leftValue,rightValue),
                                 Serdes.String(),commandOfTransporterSerde)
 
-                        .branch((key,value)->value.existingTransporter!=null,
-                                (key,value)->value.existingTransporter==null);
+                        .branch((key,value)->value.existingTransporter!=null&& value.existingTransporter.isDeleted==false,
+                                (key,value)->true);
+        enrichedJoinedCommandKStreamBranch[0].print("brach 0");
+        enrichedJoinedCommandKStreamBranch[1].print("branch 1");
 
         enrichedJoinedCommandKStreamBranch[0].mapValues((values)->{
             Command command=new Command();
@@ -148,8 +150,6 @@ public class TransporterManager {
 
     public static void  updateTransporter(KStream<String,Command> commandResult,KStream<String,Command> commandFilterKStream,KTable<String,Transporter> transporterKTableByTransporterId,SpecificAvroSerde<Command> commandSerde,SpecificAvroSerde<CommandOfTransporter> commandOfTransporterSerde, SpecificAvroSerde<Transporter> transporterSpecificAvroSerde)
     {
-        KStream<String,Transporter> transporterKStream=commandResult.mapValues((values)->
-                transporterSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_TRANSPORTER_TOPIC),values.getData().array()));
 
         KStream<String,Command> commandTransporterUpdateKStream =commandFilterKStream.filter((k,v)->v.getType().contains("update.command"))
                 .selectKey((key,value)->transporterSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_TRANSPORTER_TOPIC),value.getData().array()).getTransporterId());
@@ -220,6 +220,70 @@ public class TransporterManager {
             return v.getId();
         }).to(Serdes.String(), commandSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
 
+
+
+    }
+
+    public static void  deleteTransporter(KStream<String,Command> commandResult,KStream<String,Command> commandFilterKStream,KTable<String,Transporter> transporterKTableByTransporterId,SpecificAvroSerde<Command> commandSerde,SpecificAvroSerde<CommandOfTransporter> commandOfTransporterSerde, SpecificAvroSerde<Transporter> transporterSpecificAvroSerde)
+
+    {
+        KStream<String,Command> commandTransporterUpdateKStream =commandFilterKStream.filter((k,v)->v.getType().contains("delete.command"))
+                .selectKey((key,value)->transporterSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_TRANSPORTER_TOPIC),value.getData().array()).getTransporterId());
+
+        KStream<String,CommandOfTransporter> commandTransporterKStreamByID=commandTransporterUpdateKStream.mapValues((v) ->{
+            Transporter transporter=transporterSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_TRANSPORTER_TOPIC), v.getData().array());
+
+            CommandOfTransporter commandOfTransporter=new CommandOfTransporter();
+            commandOfTransporter.setData(transporter);
+            commandOfTransporter.setId(v.getId());
+            commandOfTransporter.setType(v.getType());
+            commandOfTransporter.setErrorMessage(null);
+            commandOfTransporter.setProcessTime(System.currentTimeMillis());
+            commandOfTransporter.setStartTime(v.getStartTime());
+            commandOfTransporter.setStatusCode(200);
+            return commandOfTransporter;
+        }).selectKey((k,v)->v.getData().getTransporterId());
+
+        commandTransporterKStreamByID.print(" delete command KStream by uuid :");
+
+
+        KStream<String,EnrichedJoinedCommand> enrichedJoinedCommandKStreamBranch[] =
+                commandTransporterKStreamByID
+                        .leftJoin(transporterKTableByTransporterId,
+                                (leftValue,rightValue)->new EnrichedJoinedCommand(leftValue,rightValue),
+                                Serdes.String(),commandOfTransporterSerde)
+
+                        .branch((key,value)->value.existingTransporter!=null,
+                                (key,value)->value.existingTransporter==null);
+
+        enrichedJoinedCommandKStreamBranch[0].mapValues((values)->{
+            Transporter oldTransporter=values.existingTransporter;
+            oldTransporter.setIsDeleted(true);
+
+            Command command=new Command();
+            command.setType("transporter.deleted");
+            command.setData(ByteBuffer.wrap(transporterSpecificAvroSerde.serializer().serialize(Context.getConfig().getString(Constants.KEY_TRANSPORTER_TOPIC),oldTransporter)));
+            command.setId(values.commandOfTransporter.getId());
+            command.setProcessTime(System.currentTimeMillis());
+            command.setStatusCode(200);
+            return command;
+        }).selectKey((key,value)->value.getId()).to(Serdes.String(),commandSerde,Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
+
+        enrichedJoinedCommandKStreamBranch[1].mapValues((values)->{
+            CommandOfTransporter commandOfTransporter=values.commandOfTransporter;
+
+            Command command = new Command();
+            command.setStartTime(commandOfTransporter.getStartTime());
+            command.setType("transporter.delete.fail");
+            command.setId(commandOfTransporter.getId());
+            command.setProcessTime(System.currentTimeMillis());
+            command.setErrorMessage("transporter does not exist");
+            command.setStatusCode(404);
+            command.setData(ByteBuffer.wrap(transporterSpecificAvroSerde.serializer().serialize(Context.getConfig().getString(Constants.KEY_TRANSPORTER_TOPIC), commandOfTransporter.getData())));
+            return command;
+        }).selectKey((k, v) -> {
+            return v.getId();
+        }).to(Serdes.String(), commandSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
 
 
     }

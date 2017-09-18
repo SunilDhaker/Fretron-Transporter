@@ -52,6 +52,12 @@
               "string"
                ]
           }
+          ,{
+             "name": "isDeleted",
+             "type": "boolean",
+             "default":false
+
+             }
        ]
      },
 
@@ -150,6 +156,13 @@
                     "default":null
 
         }
+
+         ,{
+              "name": "isDeleted",
+              "type": "boolean",
+              "default":false
+
+         }
         ]
         },
 
