@@ -4,6 +4,9 @@ import com.fretron.Context;
 import com.fretron.Model.*;
 import com.fretron.Utils.SpecificAvroSerde;
 import com.fretron.constants.Constants;
+import com.fretron.constants.ErrorMessages;
+import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
+import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.KeyValue;
@@ -12,12 +15,37 @@ import org.apache.kafka.streams.kstream.KStreamBuilder;
 import org.apache.kafka.streams.kstream.KTable;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Properties;
-import java.util.UUID;
+import java.util.*;
 
 public class UserManager {
-    public KafkaStreams startStream(KStreamBuilder builder, SpecificAvroSerde<User> userSpecificAvroSerde, SpecificAvroSerde<Command> commandSpecificAvroSerde, SpecificAvroSerde<Transporter> transporterSerde, SpecificAvroSerde<CommandOfUserGroupsAndTransporter> commandOfUserGroupsAndTransporterSerde, SpecificAvroSerde<Groups> groupsSerde, Properties properties) {
+    KStreamBuilder builder;
+    SchemaRegistryClient schemaRegistryClient = new CachedSchemaRegistryClient(Context.getConfig().getString(Constants.KEY_SCHEMA_REGISTRY_URL), 10);
+
+    final Map<String, String> serdeProps = Collections.singletonMap("schema.registry.url", Context.getConfig().getString(Constants.KEY_SCHEMA_REGISTRY_URL));
+    SpecificAvroSerde<User> userSpecificAvroSerde;
+    SpecificAvroSerde<Command> commandSpecificAvroSerde;
+    SpecificAvroSerde<CommandOfUserGroupsAndTransporter> commandOfUserGroupsAndTransporterSerde;
+    SpecificAvroSerde<Transporter> transporterSpecificAvroSerde;
+    SpecificAvroSerde<Groups> groupsSerde;
+
+
+
+
+
+    public UserManager(){
+        builder = new KStreamBuilder();
+        userSpecificAvroSerde = new SpecificAvroSerde<>(schemaRegistryClient, serdeProps);
+        commandSpecificAvroSerde = new SpecificAvroSerde<>(schemaRegistryClient, serdeProps);
+        commandOfUserGroupsAndTransporterSerde = new SpecificAvroSerde<>(schemaRegistryClient, serdeProps);
+        transporterSpecificAvroSerde = new SpecificAvroSerde<>(schemaRegistryClient, serdeProps);
+        groupsSerde = new SpecificAvroSerde<>(schemaRegistryClient, serdeProps);
+        userSpecificAvroSerde.configure(serdeProps, false);
+        commandSpecificAvroSerde.configure(serdeProps, false);
+        commandOfUserGroupsAndTransporterSerde.configure(serdeProps, false);
+        transporterSpecificAvroSerde.configure(serdeProps, false);
+        groupsSerde.configure(serdeProps, false);
+    }
+    public KafkaStreams startStream(Properties properties) {
         KStream<String, Command> commandKStream = builder
                 .stream(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_TOPIC))
                 .filter((key, value) -> value.getType().contains("user"));
@@ -33,15 +61,11 @@ public class UserManager {
         */
         KStream<String, Transporter> transporterKStream = commandResultKS
                 .filter((key, value) -> value.getType().contains("transporter.created"))
-                .mapValues((value) -> transporterSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_TRANSPORTER_TOPIC), value.getData().array()));
+                .mapValues((value) -> transporterSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_TRANSPORTER_TOPIC), value.getData().array()));
 
-        KTable<String, Transporter> transporterKTable = transporterKStream.selectKey((key, value) -> value.getTransporterId()).groupByKey(Serdes.String(), transporterSerde)
+        KTable<String, Transporter> transporterKTable = transporterKStream.selectKey((key, value) -> value.getTransporterId()).groupByKey(Serdes.String(), transporterSpecificAvroSerde)
                 .reduce((value, aggValue) -> aggValue, Context.getConfig().getString(Constants.KEY_TRANSPORTER_ID_STORE));
 
-
-       /*
-
-        */
         KStream<String, CommandOfUserGroupsAndTransporter> commandOfUserGroupsAndTransporterKStream = commandKStream
                 .mapValues((values) -> {
                     CommandOfUserGroupsAndTransporter userAndCommand = new CommandOfUserGroupsAndTransporter();
@@ -70,7 +94,7 @@ public class UserManager {
             Command command = new Command();
             command.setType("user.create.failed");
             command.setStatusCode(404);
-            command.setErrorMessage("transporter id doesn't exist");
+            command.setErrorMessage(Context.getConfig().getString(ErrorMessages.TRANSPORTER_ID_NOT_EXIST));
             command.setId(values.command.getId());
             command.setProcessTime(System.currentTimeMillis());
             command.setData(values.command.getData());
@@ -125,7 +149,7 @@ Send error message if group doesn't exist
             command.setData(value.command.getData());
             command.setId(value.command.getId());
             command.setProcessTime(System.currentTimeMillis());
-            command.setErrorMessage("Group doesn't exist");
+            command.setErrorMessage(Context.getConfig().getString(ErrorMessages.GROUP_DOES_NOT_EXIST));
             command.setStatusCode(404);
             command.setType("user.create.failed");
 
@@ -190,7 +214,7 @@ Send error message if user already exist
             command.setId(value.command.getId());
             command.setStartTime(value.command.getStartTime());
             command.setProcessTime(System.currentTimeMillis());
-            command.setErrorMessage("user already exist");
+            command.setErrorMessage(Context.getConfig().getString(ErrorMessages.USER_ALREADY_EXIST));
             command.setData(value.command.getData());
             command.setStatusCode(404);
             command.setType("user.create.failed");
@@ -222,7 +246,7 @@ Send error message if user does not exist
             command.setId(value.command.getId());
             command.setType("user.update.failed");
             command.setStatusCode(404);
-            command.setErrorMessage("user not found");
+            command.setErrorMessage(Context.getConfig().getString(ErrorMessages.USER_NOT_EXIST));
             command.setData(value.command.getData());
             command.setProcessTime(System.currentTimeMillis());
             command.setStartTime(value.command.getStartTime());
@@ -279,7 +303,7 @@ Send error message if user does not exist
  */
         branchJoinDeleteUser[0].mapValues((value) -> {
             Command command = value.command;
-            command.setErrorMessage("user not found");
+            command.setErrorMessage(Context.getConfig().getString(ErrorMessages.USER_NOT_EXIST));
             command.setType("user.delete.failed");
             command.setStatusCode(404);
             command.setProcessTime(System.currentTimeMillis());
