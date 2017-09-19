@@ -276,7 +276,6 @@ public class TransporterManager {
             return v.getId();
         }).to(Serdes.String(), commandSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
 
-
     }
 
     public static class EnrichedJoinedCommand {
