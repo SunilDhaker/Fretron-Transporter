@@ -13,11 +13,10 @@ import java.util.Properties;
 public class PropertiesUtil {
 
     /**
-     *
      * @param applicationId : Application id for stream App
      * @return properties for Stream
      */
-    public static Properties initializeProperties(String applicationId ,String schemaRegisty , String bootstrapServer, Config config){
+    public static Properties initializeProperties(String applicationId, String schemaRegisty, String bootstrapServer, Config config) {
 
         final Properties streamsConfiguration = new Properties();
         streamsConfiguration.put(StreamsConfig.APPLICATION_ID_CONFIG, applicationId);
@@ -27,6 +26,6 @@ public class PropertiesUtil {
         streamsConfiguration.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, config.getString(Constants.KEY_AUTO_OFFSET_RESET_CONFIG));
         streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, config.getString(Constants.KEY_COMMIT_INTERVAL_AUTO_CONFIG));
 
-        return  streamsConfiguration;
+        return streamsConfiguration;
     }
 }

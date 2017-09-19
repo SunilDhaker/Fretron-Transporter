@@ -11,21 +11,20 @@ public class Config {
     private final Properties properties = new Properties();
 
     public void load(String file) throws IOException {
-        try  {
+        try {
             InputStream inputStream = new FileInputStream(file);
             properties.loadFromXML(inputStream);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public boolean hasKey(String key) {
-        return properties.containsKey(key) ;
+        return properties.containsKey(key);
     }
 
     public String getString(String key) {
-        if (properties.containsKey(key) ) {
+        if (properties.containsKey(key)) {
             return properties.getProperty(key);
         }
         return null;
@@ -80,7 +79,7 @@ public class Config {
     }
 
 
-    public void put(String key , Object value){
-        properties.put(key , value);
+    public void put(String key, Object value) {
+        properties.put(key, value);
     }
 }

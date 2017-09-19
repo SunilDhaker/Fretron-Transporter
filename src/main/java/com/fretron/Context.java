@@ -10,10 +10,10 @@ package com.fretron; /**
 public final class Context {
 
     final static String ENVIRONMENT = "test";
+    private static Config config;
+
     private Context() {
     }
-
-    private static Config config;
 
     public static Config getConfig() {
         return config;
@@ -29,11 +29,10 @@ public final class Context {
         config.load(arguments[0]);
     }
 
-    public static String getEnvironmnet(){
-        if(getConfig().getString("environment") != null){
+    public static String getEnvironmnet() {
+        if (getConfig().getString("environment") != null) {
             return getConfig().getString("environment");
-        }
-        else{
+        } else {
             return ENVIRONMENT;
         }
     }

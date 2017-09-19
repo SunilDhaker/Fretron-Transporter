@@ -35,7 +35,6 @@
            "type": [
            "string",
            "null"
-
             ]
          },
          {
@@ -58,13 +57,15 @@
         },
         {
           "name":"groupId",
-          "type":"string"
+          "type":[
+            "null",
+            "string"],
+          "default":null
         },
         {
              "name": "isDeleted",
              "type": "boolean",
              "default":false
-
              }
        ]
      },
