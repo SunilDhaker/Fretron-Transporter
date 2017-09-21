@@ -2,11 +2,14 @@ import Util.EmbeddedSingleNodeKafkaCluster;
 import Util.IntegrationTestUtils;
 import com.fretron.Context;
 import com.fretron.Model.Command;
+import com.fretron.Model.CommandOfTransporter;
 import com.fretron.Model.Transporter;
 import com.fretron.Utils.SerdeUtils;
 import com.fretron.Utils.SpecificAvroSerde;
 import com.fretron.constants.Constants;
 import com.fretron.transporter.TransporterManager.TransporterManager;
+import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
+import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
@@ -53,30 +56,30 @@ public class TransportManagerTest {
 
         CLUSTER.createTopic(commandResultTopic);
         CLUSTER.createTopic(commandTopic);
+        CLUSTER.createTopic(transporterTopic);
     }
 
     @Test
     public void testTransporterCreate() throws Exception {
-//
-//        KafkaStreams streams= TransporterManager.createStream(CLUSTER.schemaRegistryUrl(),CLUSTER.bootstrapServers());
-//        streams.cleanUp();
-//        streams.start();
+
+        KafkaStreams streams= new TransporterManager().createStream(CLUSTER.schemaRegistryUrl(),CLUSTER.bootstrapServers());
+        streams.cleanUp();
+        streams.start();
 
 
         //Serdes required
-        SpecificAvroSerde<Command> commandSpecificAvroSerde= SerdeUtils.createSerde(CLUSTER.schemaRegistryUrl());
+
+
         SpecificAvroSerde<Transporter> transporterManagerSpecificAvroSerde= SerdeUtils.createSerde(CLUSTER.schemaRegistryUrl());
 
         Transporter transporter = new Transporter("123",null,null,false);
 
         String commandId=  UUID.randomUUID().toString();
-        Command command = new Command( "transporter.create.command",
-                ByteBuffer.wrap(transporterManagerSpecificAvroSerde.serializer().serialize(transporterTopic,transporter)),
-                commandId,
-                200,
-                null,
-                12345678902L,
-                System.currentTimeMillis());
+
+
+        Command command = new Command();
+        command.setType("transporter.create.command");
+        command.setData(ByteBuffer.wrap(transporterManagerSpecificAvroSerde.serializer().serialize(transporterTopic,transporter)));
         Producer<String, Command> commandProducer= getProducer(CLUSTER.bootstrapServers(),CLUSTER.schemaRegistryUrl());
         Future<RecordMetadata> md = commandProducer.send(new ProducerRecord<String, Command>(commandTopic , "key" , command ));
         System.out.println(md.get());

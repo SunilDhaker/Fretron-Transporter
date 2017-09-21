@@ -6,11 +6,11 @@
 package com.fretron.Model;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
-public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CommandOfTransporter\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"type\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"data\",\"type\":{\"type\":\"record\",\"name\":\"Transporter\",\"fields\":[{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"adminEmail\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null},{\"name\":\"groups\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Groups\",\"fields\":[{\"name\":\"groupId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"subgroups\",\"type\":{\"type\":\"array\",\"items\":\"Groups\"}},{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"admin\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"members\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}}],\"default\":null},{\"name\":\"isDeleted\",\"type\":\"boolean\",\"default\":false}]}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"statusCode\",\"type\":[\"null\",\"int\"]},{\"name\":\"errorMessage\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"startTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"},{\"name\":\"processTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"}]}");
+public class CommandOfGroups extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CommandOfGroups\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"type\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"data\",\"type\":{\"type\":\"record\",\"name\":\"Groups\",\"fields\":[{\"name\":\"groupId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"subgroups\",\"type\":{\"type\":\"array\",\"items\":\"Groups\"}},{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"admin\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"members\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"statusCode\",\"type\":[\"null\",\"int\"]},{\"name\":\"errorMessage\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"startTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"},{\"name\":\"processTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String type;
-  @Deprecated public com.fretron.Model.Transporter data;
+  @Deprecated public com.fretron.Model.Groups data;
   @Deprecated public java.lang.String id;
   @Deprecated public java.lang.Integer statusCode;
   @Deprecated public java.lang.String errorMessage;
@@ -22,12 +22,12 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>. 
    */
-  public CommandOfTransporter() {}
+  public CommandOfGroups() {}
 
   /**
    * All-args constructor.
    */
-  public CommandOfTransporter(java.lang.String type, com.fretron.Model.Transporter data, java.lang.String id, java.lang.Integer statusCode, java.lang.String errorMessage, java.lang.Long startTime, java.lang.Long processTime) {
+  public CommandOfGroups(java.lang.String type, com.fretron.Model.Groups data, java.lang.String id, java.lang.Integer statusCode, java.lang.String errorMessage, java.lang.Long startTime, java.lang.Long processTime) {
     this.type = type;
     this.data = data;
     this.id = id;
@@ -56,7 +56,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: type = (java.lang.String)value$; break;
-    case 1: data = (com.fretron.Model.Transporter)value$; break;
+    case 1: data = (com.fretron.Model.Groups)value$; break;
     case 2: id = (java.lang.String)value$; break;
     case 3: statusCode = (java.lang.Integer)value$; break;
     case 4: errorMessage = (java.lang.String)value$; break;
@@ -84,7 +84,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
   /**
    * Gets the value of the 'data' field.
    */
-  public com.fretron.Model.Transporter getData() {
+  public com.fretron.Model.Groups getData() {
     return data;
   }
 
@@ -92,7 +92,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
    * Sets the value of the 'data' field.
    * @param value the value to set.
    */
-  public void setData(com.fretron.Model.Transporter value) {
+  public void setData(com.fretron.Model.Groups value) {
     this.data = value;
   }
 
@@ -171,29 +171,29 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     this.processTime = value;
   }
 
-  /** Creates a new CommandOfTransporter RecordBuilder */
-  public static com.fretron.Model.CommandOfTransporter.Builder newBuilder() {
-    return new com.fretron.Model.CommandOfTransporter.Builder();
+  /** Creates a new CommandOfGroups RecordBuilder */
+  public static com.fretron.Model.CommandOfGroups.Builder newBuilder() {
+    return new com.fretron.Model.CommandOfGroups.Builder();
   }
   
-  /** Creates a new CommandOfTransporter RecordBuilder by copying an existing Builder */
-  public static com.fretron.Model.CommandOfTransporter.Builder newBuilder(com.fretron.Model.CommandOfTransporter.Builder other) {
-    return new com.fretron.Model.CommandOfTransporter.Builder(other);
+  /** Creates a new CommandOfGroups RecordBuilder by copying an existing Builder */
+  public static com.fretron.Model.CommandOfGroups.Builder newBuilder(com.fretron.Model.CommandOfGroups.Builder other) {
+    return new com.fretron.Model.CommandOfGroups.Builder(other);
   }
   
-  /** Creates a new CommandOfTransporter RecordBuilder by copying an existing CommandOfTransporter instance */
-  public static com.fretron.Model.CommandOfTransporter.Builder newBuilder(com.fretron.Model.CommandOfTransporter other) {
-    return new com.fretron.Model.CommandOfTransporter.Builder(other);
+  /** Creates a new CommandOfGroups RecordBuilder by copying an existing CommandOfGroups instance */
+  public static com.fretron.Model.CommandOfGroups.Builder newBuilder(com.fretron.Model.CommandOfGroups other) {
+    return new com.fretron.Model.CommandOfGroups.Builder(other);
   }
   
   /**
-   * RecordBuilder for CommandOfTransporter instances.
+   * RecordBuilder for CommandOfGroups instances.
    */
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<CommandOfTransporter>
-    implements org.apache.avro.data.RecordBuilder<CommandOfTransporter> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<CommandOfGroups>
+    implements org.apache.avro.data.RecordBuilder<CommandOfGroups> {
 
     private java.lang.String type;
-    private com.fretron.Model.Transporter data;
+    private com.fretron.Model.Groups data;
     private java.lang.String id;
     private java.lang.Integer statusCode;
     private java.lang.String errorMessage;
@@ -202,11 +202,11 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.fretron.Model.CommandOfTransporter.SCHEMA$);
+      super(com.fretron.Model.CommandOfGroups.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.fretron.Model.CommandOfTransporter.Builder other) {
+    private Builder(com.fretron.Model.CommandOfGroups.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.type)) {
         this.type = data().deepCopy(fields()[0].schema(), other.type);
@@ -238,9 +238,9 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
       }
     }
     
-    /** Creates a Builder by copying an existing CommandOfTransporter instance */
-    private Builder(com.fretron.Model.CommandOfTransporter other) {
-            super(com.fretron.Model.CommandOfTransporter.SCHEMA$);
+    /** Creates a Builder by copying an existing CommandOfGroups instance */
+    private Builder(com.fretron.Model.CommandOfGroups other) {
+            super(com.fretron.Model.CommandOfGroups.SCHEMA$);
       if (isValidValue(fields()[0], other.type)) {
         this.type = data().deepCopy(fields()[0].schema(), other.type);
         fieldSetFlags()[0] = true;
@@ -277,7 +277,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'type' field */
-    public com.fretron.Model.CommandOfTransporter.Builder setType(java.lang.String value) {
+    public com.fretron.Model.CommandOfGroups.Builder setType(java.lang.String value) {
       validate(fields()[0], value);
       this.type = value;
       fieldSetFlags()[0] = true;
@@ -290,19 +290,19 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'type' field */
-    public com.fretron.Model.CommandOfTransporter.Builder clearType() {
+    public com.fretron.Model.CommandOfGroups.Builder clearType() {
       type = null;
       fieldSetFlags()[0] = false;
       return this;
     }
 
     /** Gets the value of the 'data' field */
-    public com.fretron.Model.Transporter getData() {
+    public com.fretron.Model.Groups getData() {
       return data;
     }
     
     /** Sets the value of the 'data' field */
-    public com.fretron.Model.CommandOfTransporter.Builder setData(com.fretron.Model.Transporter value) {
+    public com.fretron.Model.CommandOfGroups.Builder setData(com.fretron.Model.Groups value) {
       validate(fields()[1], value);
       this.data = value;
       fieldSetFlags()[1] = true;
@@ -315,7 +315,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'data' field */
-    public com.fretron.Model.CommandOfTransporter.Builder clearData() {
+    public com.fretron.Model.CommandOfGroups.Builder clearData() {
       data = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -327,7 +327,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'id' field */
-    public com.fretron.Model.CommandOfTransporter.Builder setId(java.lang.String value) {
+    public com.fretron.Model.CommandOfGroups.Builder setId(java.lang.String value) {
       validate(fields()[2], value);
       this.id = value;
       fieldSetFlags()[2] = true;
@@ -340,7 +340,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'id' field */
-    public com.fretron.Model.CommandOfTransporter.Builder clearId() {
+    public com.fretron.Model.CommandOfGroups.Builder clearId() {
       id = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -352,7 +352,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'statusCode' field */
-    public com.fretron.Model.CommandOfTransporter.Builder setStatusCode(java.lang.Integer value) {
+    public com.fretron.Model.CommandOfGroups.Builder setStatusCode(java.lang.Integer value) {
       validate(fields()[3], value);
       this.statusCode = value;
       fieldSetFlags()[3] = true;
@@ -365,7 +365,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'statusCode' field */
-    public com.fretron.Model.CommandOfTransporter.Builder clearStatusCode() {
+    public com.fretron.Model.CommandOfGroups.Builder clearStatusCode() {
       statusCode = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -377,7 +377,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'errorMessage' field */
-    public com.fretron.Model.CommandOfTransporter.Builder setErrorMessage(java.lang.String value) {
+    public com.fretron.Model.CommandOfGroups.Builder setErrorMessage(java.lang.String value) {
       validate(fields()[4], value);
       this.errorMessage = value;
       fieldSetFlags()[4] = true;
@@ -390,7 +390,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'errorMessage' field */
-    public com.fretron.Model.CommandOfTransporter.Builder clearErrorMessage() {
+    public com.fretron.Model.CommandOfGroups.Builder clearErrorMessage() {
       errorMessage = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -402,7 +402,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'startTime' field */
-    public com.fretron.Model.CommandOfTransporter.Builder setStartTime(java.lang.Long value) {
+    public com.fretron.Model.CommandOfGroups.Builder setStartTime(java.lang.Long value) {
       validate(fields()[5], value);
       this.startTime = value;
       fieldSetFlags()[5] = true;
@@ -415,7 +415,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'startTime' field */
-    public com.fretron.Model.CommandOfTransporter.Builder clearStartTime() {
+    public com.fretron.Model.CommandOfGroups.Builder clearStartTime() {
       startTime = null;
       fieldSetFlags()[5] = false;
       return this;
@@ -427,7 +427,7 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Sets the value of the 'processTime' field */
-    public com.fretron.Model.CommandOfTransporter.Builder setProcessTime(java.lang.Long value) {
+    public com.fretron.Model.CommandOfGroups.Builder setProcessTime(java.lang.Long value) {
       validate(fields()[6], value);
       this.processTime = value;
       fieldSetFlags()[6] = true;
@@ -440,18 +440,18 @@ public class CommandOfTransporter extends org.apache.avro.specific.SpecificRecor
     }
     
     /** Clears the value of the 'processTime' field */
-    public com.fretron.Model.CommandOfTransporter.Builder clearProcessTime() {
+    public com.fretron.Model.CommandOfGroups.Builder clearProcessTime() {
       processTime = null;
       fieldSetFlags()[6] = false;
       return this;
     }
 
     @Override
-    public CommandOfTransporter build() {
+    public CommandOfGroups build() {
       try {
-        CommandOfTransporter record = new CommandOfTransporter();
+        CommandOfGroups record = new CommandOfGroups();
         record.type = fieldSetFlags()[0] ? this.type : (java.lang.String) defaultValue(fields()[0]);
-        record.data = fieldSetFlags()[1] ? this.data : (com.fretron.Model.Transporter) defaultValue(fields()[1]);
+        record.data = fieldSetFlags()[1] ? this.data : (com.fretron.Model.Groups) defaultValue(fields()[1]);
         record.id = fieldSetFlags()[2] ? this.id : (java.lang.String) defaultValue(fields()[2]);
         record.statusCode = fieldSetFlags()[3] ? this.statusCode : (java.lang.Integer) defaultValue(fields()[3]);
         record.errorMessage = fieldSetFlags()[4] ? this.errorMessage : (java.lang.String) defaultValue(fields()[4]);

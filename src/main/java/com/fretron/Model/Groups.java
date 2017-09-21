@@ -7,9 +7,10 @@ package com.fretron.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Groups extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Groups\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"groupId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"subgroups\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"Groups\"}]},{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"admin\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"members\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Groups\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"groupId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"subgroups\",\"type\":{\"type\":\"array\",\"items\":\"Groups\"}},{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"admin\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"members\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String groupId;
+  @Deprecated public java.lang.String transporterId;
   @Deprecated public java.util.List<com.fretron.Model.Groups> subgroups;
   @Deprecated public java.lang.String name;
   @Deprecated public java.lang.String admin;
@@ -25,8 +26,9 @@ public class Groups extends org.apache.avro.specific.SpecificRecordBase implemen
   /**
    * All-args constructor.
    */
-  public Groups(java.lang.String groupId, java.util.List<com.fretron.Model.Groups> subgroups, java.lang.String name, java.lang.String admin, java.util.List<java.lang.String> members) {
+  public Groups(java.lang.String groupId, java.lang.String transporterId, java.util.List<com.fretron.Model.Groups> subgroups, java.lang.String name, java.lang.String admin, java.util.List<java.lang.String> members) {
     this.groupId = groupId;
+    this.transporterId = transporterId;
     this.subgroups = subgroups;
     this.name = name;
     this.admin = admin;
@@ -38,10 +40,11 @@ public class Groups extends org.apache.avro.specific.SpecificRecordBase implemen
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return groupId;
-    case 1: return subgroups;
-    case 2: return name;
-    case 3: return admin;
-    case 4: return members;
+    case 1: return transporterId;
+    case 2: return subgroups;
+    case 3: return name;
+    case 4: return admin;
+    case 5: return members;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -50,10 +53,11 @@ public class Groups extends org.apache.avro.specific.SpecificRecordBase implemen
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: groupId = (java.lang.String)value$; break;
-    case 1: subgroups = (java.util.List<com.fretron.Model.Groups>)value$; break;
-    case 2: name = (java.lang.String)value$; break;
-    case 3: admin = (java.lang.String)value$; break;
-    case 4: members = (java.util.List<java.lang.String>)value$; break;
+    case 1: transporterId = (java.lang.String)value$; break;
+    case 2: subgroups = (java.util.List<com.fretron.Model.Groups>)value$; break;
+    case 3: name = (java.lang.String)value$; break;
+    case 4: admin = (java.lang.String)value$; break;
+    case 5: members = (java.util.List<java.lang.String>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -71,6 +75,21 @@ public class Groups extends org.apache.avro.specific.SpecificRecordBase implemen
    */
   public void setGroupId(java.lang.String value) {
     this.groupId = value;
+  }
+
+  /**
+   * Gets the value of the 'transporterId' field.
+   */
+  public java.lang.String getTransporterId() {
+    return transporterId;
+  }
+
+  /**
+   * Sets the value of the 'transporterId' field.
+   * @param value the value to set.
+   */
+  public void setTransporterId(java.lang.String value) {
+    this.transporterId = value;
   }
 
   /**
@@ -155,6 +174,7 @@ public class Groups extends org.apache.avro.specific.SpecificRecordBase implemen
     implements org.apache.avro.data.RecordBuilder<Groups> {
 
     private java.lang.String groupId;
+    private java.lang.String transporterId;
     private java.util.List<com.fretron.Model.Groups> subgroups;
     private java.lang.String name;
     private java.lang.String admin;
@@ -172,21 +192,25 @@ public class Groups extends org.apache.avro.specific.SpecificRecordBase implemen
         this.groupId = data().deepCopy(fields()[0].schema(), other.groupId);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.subgroups)) {
-        this.subgroups = data().deepCopy(fields()[1].schema(), other.subgroups);
+      if (isValidValue(fields()[1], other.transporterId)) {
+        this.transporterId = data().deepCopy(fields()[1].schema(), other.transporterId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.name)) {
-        this.name = data().deepCopy(fields()[2].schema(), other.name);
+      if (isValidValue(fields()[2], other.subgroups)) {
+        this.subgroups = data().deepCopy(fields()[2].schema(), other.subgroups);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.admin)) {
-        this.admin = data().deepCopy(fields()[3].schema(), other.admin);
+      if (isValidValue(fields()[3], other.name)) {
+        this.name = data().deepCopy(fields()[3].schema(), other.name);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.members)) {
-        this.members = data().deepCopy(fields()[4].schema(), other.members);
+      if (isValidValue(fields()[4], other.admin)) {
+        this.admin = data().deepCopy(fields()[4].schema(), other.admin);
         fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.members)) {
+        this.members = data().deepCopy(fields()[5].schema(), other.members);
+        fieldSetFlags()[5] = true;
       }
     }
     
@@ -197,21 +221,25 @@ public class Groups extends org.apache.avro.specific.SpecificRecordBase implemen
         this.groupId = data().deepCopy(fields()[0].schema(), other.groupId);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.subgroups)) {
-        this.subgroups = data().deepCopy(fields()[1].schema(), other.subgroups);
+      if (isValidValue(fields()[1], other.transporterId)) {
+        this.transporterId = data().deepCopy(fields()[1].schema(), other.transporterId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.name)) {
-        this.name = data().deepCopy(fields()[2].schema(), other.name);
+      if (isValidValue(fields()[2], other.subgroups)) {
+        this.subgroups = data().deepCopy(fields()[2].schema(), other.subgroups);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.admin)) {
-        this.admin = data().deepCopy(fields()[3].schema(), other.admin);
+      if (isValidValue(fields()[3], other.name)) {
+        this.name = data().deepCopy(fields()[3].schema(), other.name);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.members)) {
-        this.members = data().deepCopy(fields()[4].schema(), other.members);
+      if (isValidValue(fields()[4], other.admin)) {
+        this.admin = data().deepCopy(fields()[4].schema(), other.admin);
         fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.members)) {
+        this.members = data().deepCopy(fields()[5].schema(), other.members);
+        fieldSetFlags()[5] = true;
       }
     }
 
@@ -240,6 +268,31 @@ public class Groups extends org.apache.avro.specific.SpecificRecordBase implemen
       return this;
     }
 
+    /** Gets the value of the 'transporterId' field */
+    public java.lang.String getTransporterId() {
+      return transporterId;
+    }
+    
+    /** Sets the value of the 'transporterId' field */
+    public com.fretron.Model.Groups.Builder setTransporterId(java.lang.String value) {
+      validate(fields()[1], value);
+      this.transporterId = value;
+      fieldSetFlags()[1] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'transporterId' field has been set */
+    public boolean hasTransporterId() {
+      return fieldSetFlags()[1];
+    }
+    
+    /** Clears the value of the 'transporterId' field */
+    public com.fretron.Model.Groups.Builder clearTransporterId() {
+      transporterId = null;
+      fieldSetFlags()[1] = false;
+      return this;
+    }
+
     /** Gets the value of the 'subgroups' field */
     public java.util.List<com.fretron.Model.Groups> getSubgroups() {
       return subgroups;
@@ -247,21 +300,21 @@ public class Groups extends org.apache.avro.specific.SpecificRecordBase implemen
     
     /** Sets the value of the 'subgroups' field */
     public com.fretron.Model.Groups.Builder setSubgroups(java.util.List<com.fretron.Model.Groups> value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.subgroups = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this; 
     }
     
     /** Checks whether the 'subgroups' field has been set */
     public boolean hasSubgroups() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
     
     /** Clears the value of the 'subgroups' field */
     public com.fretron.Model.Groups.Builder clearSubgroups() {
       subgroups = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -272,21 +325,21 @@ public class Groups extends org.apache.avro.specific.SpecificRecordBase implemen
     
     /** Sets the value of the 'name' field */
     public com.fretron.Model.Groups.Builder setName(java.lang.String value) {
-      validate(fields()[2], value);
+      validate(fields()[3], value);
       this.name = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[3] = true;
       return this; 
     }
     
     /** Checks whether the 'name' field has been set */
     public boolean hasName() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[3];
     }
     
     /** Clears the value of the 'name' field */
     public com.fretron.Model.Groups.Builder clearName() {
       name = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -297,21 +350,21 @@ public class Groups extends org.apache.avro.specific.SpecificRecordBase implemen
     
     /** Sets the value of the 'admin' field */
     public com.fretron.Model.Groups.Builder setAdmin(java.lang.String value) {
-      validate(fields()[3], value);
+      validate(fields()[4], value);
       this.admin = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[4] = true;
       return this; 
     }
     
     /** Checks whether the 'admin' field has been set */
     public boolean hasAdmin() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[4];
     }
     
     /** Clears the value of the 'admin' field */
     public com.fretron.Model.Groups.Builder clearAdmin() {
       admin = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -322,21 +375,21 @@ public class Groups extends org.apache.avro.specific.SpecificRecordBase implemen
     
     /** Sets the value of the 'members' field */
     public com.fretron.Model.Groups.Builder setMembers(java.util.List<java.lang.String> value) {
-      validate(fields()[4], value);
+      validate(fields()[5], value);
       this.members = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[5] = true;
       return this; 
     }
     
     /** Checks whether the 'members' field has been set */
     public boolean hasMembers() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[5];
     }
     
     /** Clears the value of the 'members' field */
     public com.fretron.Model.Groups.Builder clearMembers() {
       members = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -345,10 +398,11 @@ public class Groups extends org.apache.avro.specific.SpecificRecordBase implemen
       try {
         Groups record = new Groups();
         record.groupId = fieldSetFlags()[0] ? this.groupId : (java.lang.String) defaultValue(fields()[0]);
-        record.subgroups = fieldSetFlags()[1] ? this.subgroups : (java.util.List<com.fretron.Model.Groups>) defaultValue(fields()[1]);
-        record.name = fieldSetFlags()[2] ? this.name : (java.lang.String) defaultValue(fields()[2]);
-        record.admin = fieldSetFlags()[3] ? this.admin : (java.lang.String) defaultValue(fields()[3]);
-        record.members = fieldSetFlags()[4] ? this.members : (java.util.List<java.lang.String>) defaultValue(fields()[4]);
+        record.transporterId = fieldSetFlags()[1] ? this.transporterId : (java.lang.String) defaultValue(fields()[1]);
+        record.subgroups = fieldSetFlags()[2] ? this.subgroups : (java.util.List<com.fretron.Model.Groups>) defaultValue(fields()[2]);
+        record.name = fieldSetFlags()[3] ? this.name : (java.lang.String) defaultValue(fields()[3]);
+        record.admin = fieldSetFlags()[4] ? this.admin : (java.lang.String) defaultValue(fields()[4]);
+        record.members = fieldSetFlags()[5] ? this.members : (java.util.List<java.lang.String>) defaultValue(fields()[5]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

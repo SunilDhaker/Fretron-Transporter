@@ -15,6 +15,7 @@
     <!-- Common topics -->
     <entry key="command.topic">command</entry>
     <entry key="command.result.topic">commandresult</entry>
+    <entry key="group.topic">group</entry>
 
     <!--Stream Configuration -->
     <entry key="application.id">transportmanagement</entry>
@@ -31,6 +32,6 @@
     <!-- State Store -->
     <entry key="user.state.store">userstatestore</entry>
     <!-- Model Classes -->
-    <entry key="model.class">user#com.fretron.Model.User#user.topic transporter#com.fretron.Model.Transporter#transporter.topic lane#com.fretron.Model.Lane#lane.topic
+    <entry key="model.class">user#com.fretron.Model.User#user.topic transporter#com.fretron.Model.Transporter#transporter.topic lane#com.fretron.Model.Lane#lane.topic group#com.fretron.Model.Groups#group.topic
     </entry>
 </properties>

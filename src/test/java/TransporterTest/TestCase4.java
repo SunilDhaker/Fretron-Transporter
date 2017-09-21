@@ -105,7 +105,7 @@ public class TestCase4 {
 
     public ArrayList<Groups> getGroups() {
         ArrayList<Groups> list=new ArrayList<>();
-        Groups groups=new Groups("001",null,"kk",null,null);
+        Groups groups=new Groups("001",null,null,null,null,null);
 
         list.add(groups);
 
