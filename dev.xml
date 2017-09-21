@@ -6,6 +6,7 @@
     <!-- Transporter Management System topic-->
     <entry key="lanes.topic">lanes</entry>
     <entry key="user.topic">user</entry>
+    <entry key="group.topic">group</entry>
     <entry key="transporter.topic">transporter</entry>
     <entry key="user.email.store">userbyemailstore</entry>
     <entry key="lane.by.uuid.store">lanebyuuidstore</entry>
@@ -15,11 +16,13 @@
     <!-- Common topics -->
     <entry key="command.topic">command</entry>
     <entry key="command.result.topic">commandresult</entry>
-    <entry key="group.topic">group</entry>
 
     <!--Stream Configuration -->
     <entry key="application.id">transportmanagement</entry>
-    <entry key="transporter.manager.id">transportManager</entry>
+    <entry key="user.manager.id">userManager</entry>
+    <entry key="lane.manager.id">laneManager</entry>
+    <entry key="group.manager.id">groupManager1</entry>
+    <entry key="transporter.manager.id">transporterManager</entry>
     <entry key="bootstrap.server">localhost:9092</entry>
     <entry key="application.server.config">localhost:2223</entry>
     <entry key="auto.offset.reset.config">earliest</entry>

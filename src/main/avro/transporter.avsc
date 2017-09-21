@@ -75,6 +75,13 @@
               "type": "record",
               "name": "Groups",
               "fields": [
+                  {
+                    "name":"transporterId",
+                    "type":[
+                    "string",
+                    "null"
+                    ]
+                  },
 
                 {
                   "name":"groupId",
@@ -86,17 +93,6 @@
                    ]
 
                 },
-                {
-                  "name":"transporterId",
-                   "type":
-                   [
-                       "null",
-                      "string"
-
-                   ]
-
-                },
-
 
               {
                   "name":"subgroups",
@@ -120,9 +116,11 @@
                "name":"admin",
                 "type":
                     [
-                      "string",
-                       "null"
-                    ]
+                      "null",
+                   {"type":"array","items":"string"}
+
+                   ],
+                     "default":null
 
             },
 

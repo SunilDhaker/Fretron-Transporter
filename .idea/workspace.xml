@@ -2,26 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c968062f-2e85-4ab6-ba2b-3994b643ea29" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/fretron/Model/CommandOfModel.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/fretron/Model/CommandOfGroups.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev.xml" afterPath="$PROJECT_DIR$/dev.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/avro/transporter.avsc" afterPath="$PROJECT_DIR$/src/main/avro/transporter.avsc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/fretron/Model/CommandOfLane.java" afterPath="$PROJECT_DIR$/src/main/java/com/fretron/Model/CommandOfLane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/fretron/transporter/LaneManager/LaneManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/fretron/transporter/LaneManager/LaneManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/fretron/transporter/LaneManager/LaneManagerDriver.java" afterPath="$PROJECT_DIR$/src/main/java/com/fretron/transporter/LaneManager/LaneManagerDriver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/fretron/transporter/TransporterManager/TransporterManager.java" afterPath="$PROJECT_DIR$/src/main/java/com/fretron/transporter/TransporterManager/TransporterManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase1.java" afterPath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase1.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase2.java" afterPath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase3.java" afterPath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase3.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase4.java" afterPath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase4.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase5.java" afterPath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase5.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase6.java" afterPath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase6.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase7.java" afterPath="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase7.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TransporterTest/UserDeleteCase1.java" afterPath="$PROJECT_DIR$/src/test/java/TransporterTest/UserDeleteCase1.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TransporterTest/UserDeleteCase2.java" afterPath="$PROJECT_DIR$/src/test/java/TransporterTest/UserDeleteCase2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TransporterTest/UserUpdateCase1.java" afterPath="$PROJECT_DIR$/src/test/java/TransporterTest/UserUpdateCase1.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TransporterTest/UserUpdateCase2.java" afterPath="$PROJECT_DIR$/src/test/java/TransporterTest/UserUpdateCase2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TransporterTest/UserUpdateCase3.java" afterPath="$PROJECT_DIR$/src/test/java/TransporterTest/UserUpdateCase3.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TransporterTest/UserUpdateCase4.java" afterPath="$PROJECT_DIR$/src/test/java/TransporterTest/UserUpdateCase4.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/fretron/Model/CommandOfModel.java" afterPath="$PROJECT_DIR$/src/main/java/com/fretron/Model/CommandOfModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/fretron/Model/Groups.java" afterPath="$PROJECT_DIR$/src/main/java/com/fretron/Model/Groups.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/fretron/Model/Transporter.java" afterPath="$PROJECT_DIR$/src/main/java/com/fretron/Model/Transporter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/fretron/constants/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/com/fretron/constants/Constants.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -40,7 +28,7 @@
       <file leaf-file-name="LaneManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/transporter/LaneManager/LaneManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-476">
+            <state relative-caret-position="954">
               <caret line="70" column="83" lean-forward="false" selection-start-line="70" selection-start-column="83" selection-end-line="70" selection-end-column="83" />
               <folding />
             </state>
@@ -50,19 +38,52 @@
       <file leaf-file-name="TransporterManagerDriver.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/transporter/TransporterManager/TransporterManagerDriver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="14" column="63" lean-forward="true" selection-start-line="14" selection-start-column="63" selection-end-line="14" selection-end-column="63" />
+            <state relative-caret-position="216">
+              <caret line="14" column="63" lean-forward="false" selection-start-line="14" selection-start-column="63" selection-end-line="14" selection-end-column="63" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TransporterManager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TransporterManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/transporter/TransporterManager/TransporterManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
               <caret line="86" column="11" lean-forward="false" selection-start-line="86" selection-start-column="11" selection-end-line="86" selection-end-column="11" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="transporter.avsc" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/avro/transporter.avsc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="94" column="18" lean-forward="false" selection-start-line="94" selection-start-column="18" selection-end-line="94" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GroupManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/transporter/GroupManager/GroupManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="151">
+              <caret line="210" column="30" lean-forward="true" selection-start-line="210" selection-start-column="30" selection-end-line="210" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Groups.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/Model/Groups.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+              <folding>
+                <marker date="1505998146031" expanded="true" signature="14005:14282" ph="{...}" />
+                <marker date="1505998146031" expanded="true" signature="14005:14286" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -176,9 +197,9 @@
         <option value="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase3.java" />
         <option value="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase2.java" />
         <option value="$PROJECT_DIR$/src/main/java/commander/Server.java" />
-        <option value="$PROJECT_DIR$/src/main/avro/transporter.avsc" />
         <option value="$PROJECT_DIR$/src/test/java/TransporterTest/UserCreationCase1.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/fretron/transporter/TransporterManager/TransporterManager.java" />
+        <option value="$PROJECT_DIR$/src/main/avro/transporter.avsc" />
       </list>
     </option>
   </component>
@@ -204,7 +225,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -251,46 +271,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fretron" type="462c0819:PsiDirectoryNode" />
-              <item name="constants" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FretronTransporter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FretronTransporter" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fretron" type="462c0819:PsiDirectoryNode" />
               <item name="Model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FretronTransporter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FretronTransporter" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fretron" type="462c0819:PsiDirectoryNode" />
-              <item name="transporter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FretronTransporter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FretronTransporter" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fretron" type="462c0819:PsiDirectoryNode" />
-              <item name="transporter" type="462c0819:PsiDirectoryNode" />
-              <item name="LaneManager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FretronTransporter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FretronTransporter" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fretron" type="462c0819:PsiDirectoryNode" />
-              <item name="transporter" type="462c0819:PsiDirectoryNode" />
-              <item name="TransporterManager" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FretronTransporter" type="b2602c69:ProjectViewProjectNode" />
@@ -325,9 +306,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="RecentsManager">
@@ -742,11 +724,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1303" height="780" extended-state="6" />
+    <frame x="65" y="-4" width="1301" height="744" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24760383" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24727838" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -754,10 +736,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5079872" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.62564105" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3115016" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5458787" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25178713" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25099602" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24886535" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -870,7 +852,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/transporter/GroupManager/GroupManagerDriver.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/transporter/GroupManager/GroupManager.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/Model/CommandOfTransporter.java" />
     <entry file="file://$PROJECT_DIR$/dev.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -1038,14 +1019,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/Model/Groups.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="47" lean-forward="false" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/Model/Transporter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1078,25 +1051,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/avro/transporter.avsc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="481" column="13" lean-forward="false" selection-start-line="481" selection-start-column="13" selection-end-line="481" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/transporter/LaneManager/LaneManagerDriver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="16" column="61" lean-forward="false" selection-start-line="16" selection-start-column="61" selection-end-line="16" selection-end-column="61" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/transporter/LaneManager/LaneManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-476">
+        <state relative-caret-position="954">
           <caret line="70" column="83" lean-forward="false" selection-start-line="70" selection-start-column="83" selection-end-line="70" selection-end-column="83" />
           <folding />
         </state>
@@ -1104,8 +1068,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/transporter/TransporterManager/TransporterManagerDriver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="14" column="63" lean-forward="true" selection-start-line="14" selection-start-column="63" selection-end-line="14" selection-end-column="63" />
+        <state relative-caret-position="216">
+          <caret line="14" column="63" lean-forward="false" selection-start-line="14" selection-start-column="63" selection-end-line="14" selection-end-column="63" />
           <folding />
         </state>
       </provider>
@@ -1114,6 +1078,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="86" column="11" lean-forward="false" selection-start-line="86" selection-start-column="11" selection-end-line="86" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/transporter/GroupManager/GroupManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="210" column="30" lean-forward="true" selection-start-line="210" selection-start-column="30" selection-end-line="210" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/fretron/Model/Groups.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="15" column="38" lean-forward="false" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+          <folding>
+            <marker date="1505998146031" expanded="true" signature="14005:14282" ph="{...}" />
+            <marker date="1505998146031" expanded="true" signature="14005:14286" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/avro/transporter.avsc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="94" column="18" lean-forward="false" selection-start-line="94" selection-start-column="18" selection-end-line="94" selection-end-column="18" />
           <folding />
         </state>
       </provider>
