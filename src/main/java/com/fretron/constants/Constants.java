@@ -17,7 +17,7 @@ public class Constants {
     public static final String KEY_GET_ERROR = "errorMessage";
     public static final String KEY_GET_STATUS = "StatusCode";
     public static final String KEY_MODEL_CLASS = "model.class";
-    public static final String KEY_USER_BYEMAIL_STORE = "user.email.store";
+    public static final String KEY_USER_BY_EMAIL_STORE = "user.email.store";
     public static final String KEY_AUTO_OFFSET_RESET_CONFIG = "auto.offset.reset.config";
     public static final String KEY_COMMIT_INTERVAL_AUTO_CONFIG = "commit.interval.auto.config";
     public static final String KEY_TRANSPORTER_APP_ID = "transporter.manager.id";

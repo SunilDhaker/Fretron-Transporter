@@ -69,17 +69,13 @@ user stream from command topic
                 .mapValues((value) -> userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), value.getData().array()))
                 .selectKey((key, value) -> value.getEmail())
                 .groupByKey(Serdes.String(), userSpecificAvroSerde)
-                .reduce((value, aggValue) -> aggValue, Context.getConfig().getString(Constants.KEY_USER_BYEMAIL_STORE));
+                .reduce((value, aggValue) -> aggValue, Context.getConfig().getString(Constants.KEY_USER_BY_EMAIL_STORE));
 
+        userKTable.print();
 
-        KStream<String, CommandOfUserGroupsAndTransporter> joinedKStreamCommandAndUser = commandOfUserGroupsAndTransporterKStream
-                .filter((key, value) -> value.command.getType().contains("user.create"))
-                .selectKey((key, value) -> value.user.getEmail())
-                .leftJoin(userKTable,
-                        (leftValue, rightValue) -> new CommandOfUserGroupsAndTransporter(leftValue.command, rightValue, leftValue.transporter, leftValue.group),
-                        Serdes.String(), commandOfUserGroupsAndTransporterSerde);
-
-
+        KStream<String, CommandOfUserGroupsAndTransporter> joinedKStreamCommandAndUser =
+                getJoinedKStream(commandOfUserGroupsAndTransporterKStream
+                        .filter((key, value) -> value.command.getType().contains("user.create")),userKTable,commandOfUserGroupsAndTransporterSerde);
         /*
         branch joined kstream
          */
@@ -87,23 +83,14 @@ user stream from command topic
                 .branch((key, value) -> value.user == null || value.user.isDeleted,
                         (key, value) -> value.user != null && value.user.isDeleted == false);
 
+        branchedKStreamCommandUser[0].print("null");
+        branchedKStreamCommandUser[1].print("not null");
+
 
         /*
         Error message if user doesn't exist
          */
-        branchedKStreamCommandUser[1].mapValues((value) -> {
-            Command command = new Command();
-            command.setId(value.command.getId());
-            command.setStartTime(value.command.getStartTime());
-            command.setProcessTime(System.currentTimeMillis());
-            command.setErrorMessage("user already exist");
-            command.setData(value.command.getData());
-            command.setStatusCode(404);
-            command.setType("user.create.failed");
-
-            return command;
-        }).selectKey((key, value) -> value.getId())
-                .to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
+        sendErrorMessage(branchedKStreamCommandUser[1],"email already exist","user.create.failed",commandSpecificAvroSerde);
 
        /*
        get transport stream from commandresult stream
@@ -115,6 +102,7 @@ user stream from command topic
         KTable<String, Transporter> transporterKTable = transporterKStream.selectKey((key, value) -> value.getTransporterId()).groupByKey(Serdes.String(), transporterSerde)
                 .reduce((value, aggValue) -> aggValue, Context.getConfig().getString(Constants.KEY_TRANSPORTER_ID_STORE));
 
+       // transporterKTable.print("transporter table");
 
         KStream<String, CommandOfUserGroupsAndTransporter> joinedKStreamUserTransporter = branchedKStreamCommandUser[0]
                 .selectKey((key, value) -> userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), value.command.getData().array()).getTransporterId())
@@ -132,19 +120,7 @@ user stream from command topic
         /*
          Send error message if transporter id doesn't match
         */
-        branchedStreamUserTransporter[0].mapValues((values) -> {
-            Command command = new Command();
-            command.setType("user.create.failed");
-            command.setStatusCode(404);
-            command.setErrorMessage("transporter id doesn't exist");
-            command.setId(values.command.getId());
-            command.setProcessTime(System.currentTimeMillis());
-            command.setData(values.command.getData());
-            command.setStartTime(values.command.getStartTime());
-
-            return command;
-        }).selectKey((k, v) -> v.getId()).to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
-
+        sendErrorMessage( branchedStreamUserTransporter[0],"transporter id doesn't exist","user.create.failed",commandSpecificAvroSerde);
 /*
    ktable of existing groups
  */
@@ -160,22 +136,13 @@ user stream from command topic
                 .groupByKey(Serdes.String(), groupsSerde)
                 .reduce((value, aggValue) -> aggValue, Context.getConfig().getString(Constants.KEY_GROUP_BY_ID_STORE));
 
-        groupsKTable.print("group kTable");
-/*
+        //groupsKTable.print("group kTable");
+
+        /*
 check whether group id provided by user exist or not
  */
-        KStream<String, CommandOfUserGroupsAndTransporter> joinedKStreamWithGroup = branchedStreamUserTransporter[1]
-                .selectKey((key, value) -> {
-                    key = userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), value.command.getData().array()).getGroupId();
-                    if (key != null)
-                        return key;
-
-                    return value.transporter.getTransporterId();
-                })
-                .leftJoin(groupsKTable,
-                        (leftValue, rightValue) -> new CommandOfUserGroupsAndTransporter(leftValue.command, leftValue.user, leftValue.transporter, rightValue),
-                        Serdes.String(),
-                        commandOfUserGroupsAndTransporterSerde);
+        KStream<String, CommandOfUserGroupsAndTransporter> joinedKStreamWithGroup =
+                getJoinedStreamUserAndGroup(branchedStreamUserTransporter[1],groupsKTable,commandOfUserGroupsAndTransporterSerde,userSpecificAvroSerde);
 /*
    Branch joinedkstream with groups to verify group exist or not
  */
@@ -193,19 +160,8 @@ check whether group id provided by user exist or not
 /*
 Send error message if group doesn't exist
  */
-        branchedJoinedKStream[0].mapValues((value) -> {
-            Command command = new Command();
-            command.setStartTime(value.command.getStartTime());
-            command.setData(value.command.getData());
-            command.setId(value.command.getId());
-            command.setProcessTime(System.currentTimeMillis());
-            command.setErrorMessage("Group doesn't exist");
-            command.setStatusCode(404);
-            command.setType("user.create.failed");
+sendErrorMessage(branchedJoinedKStream[0],"Group doesn't exist","user.create.failed",commandSpecificAvroSerde);
 
-            return command;
-        }).selectKey((key, value) -> value.getId())
-                .to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
 /*
 create user after verifying groups
  */
@@ -214,12 +170,8 @@ create user after verifying groups
 
 
 // user update topology
-        KStream<String, CommandOfUserGroupsAndTransporter> joinKStreamToUpdate = commandOfUserGroupsAndTransporterKStream
-                .filter((key, value) -> value.command.getType().contains("user.update"))
-                .selectKey((key, value) -> value.user.getEmail())
-                .leftJoin(userKTable,
-                        (leftValue, rightValue) -> new CommandOfUserGroupsAndTransporter(leftValue.command, rightValue, leftValue.transporter, leftValue.group),
-                        Serdes.String(), commandOfUserGroupsAndTransporterSerde);
+        KStream<String, CommandOfUserGroupsAndTransporter> joinKStreamToUpdate = getJoinedKStream(commandOfUserGroupsAndTransporterKStream
+                .filter((key, value) -> value.command.getType().contains("user.update")),userKTable,commandOfUserGroupsAndTransporterSerde);
 
 /*
 branch to verify existence of user
@@ -229,34 +181,15 @@ branch to verify existence of user
                         (key, value) -> value.user != null && value.user.isDeleted == false);
 
 /*
-//Send error message if user does not exist
-// */
-        branchUpdateJoinKstream[0].mapValues((value) -> {
-            Command command = new Command();
-            command.setId(value.command.getId());
-            command.setType("user.update.failed");
-            command.setStatusCode(404);
-            command.setErrorMessage("user not found");
-            command.setData(value.command.getData());
-            command.setProcessTime(System.currentTimeMillis());
-            command.setStartTime(value.command.getStartTime());
-
-            return command;
-        }).selectKey((key, value) -> value.getId()).to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
+Send error message if user does not exist
+ */
+sendErrorMessage(branchUpdateJoinKstream[0],"user not found","user.update.failed",commandSpecificAvroSerde);
 
 /*
 Update values if user exist
  */
-        KStream<String, CommandOfUserGroupsAndTransporter> checkGroup = branchUpdateJoinKstream[1]
-                .selectKey((key, value) -> {
-                    String k = userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), value.command.getData().array()).getGroupId();
-                    if (k == null)
-                        return value.user.getName();
-                    return k;
-                }).leftJoin(groupsKTable,
-                        (leftValue, rigthValue) -> new CommandOfUserGroupsAndTransporter(leftValue.command, leftValue.user, leftValue.transporter, rigthValue),
-                        Serdes.String(), commandOfUserGroupsAndTransporterSerde);
-
+        KStream<String, CommandOfUserGroupsAndTransporter> checkGroup =
+                getJoinedStreamUserAndGroup( branchUpdateJoinKstream[1],groupsKTable,commandOfUserGroupsAndTransporterSerde,userSpecificAvroSerde);
 
         /*
         Branch joined stream to verify group eistence
@@ -269,19 +202,7 @@ Update values if user exist
         /*
         Send error message if group doesn't exist
          */
-        branchcheckGroupStream[0].mapValues((value) -> {
-            Command command = new Command();
-            command.setId(value.command.getId());
-            command.setType("user.update.failed");
-            command.setStatusCode(404);
-            command.setErrorMessage("group doesn't exist");
-            command.setData(value.command.getData());
-            command.setProcessTime(System.currentTimeMillis());
-            command.setStartTime(value.command.getStartTime());
-
-            return command;
-        }).selectKey((key, value) -> value.getId()).to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
-
+        sendErrorMessage(branchcheckGroupStream[0],"group doesn't exist","user.update.failed",commandSpecificAvroSerde);
 
         /*
         update user if group exist  and send success message
@@ -290,12 +211,8 @@ Update values if user exist
         updateUser(branchcheckGroupStream[2], userSpecificAvroSerde, commandSpecificAvroSerde);
 
 //delete user topology
-        KStream<String, CommandOfUserGroupsAndTransporter> userToDeleteKStream = commandOfUserGroupsAndTransporterKStream
-                .filter((key, value) -> value.command.getType().contains("user.delete"))
-                .selectKey((key, value) -> value.user.getEmail())
-                .leftJoin(userKTable,
-                        (leftValue, rigthValue) -> new CommandOfUserGroupsAndTransporter(leftValue.command, rigthValue, leftValue.transporter, leftValue.group),
-                        Serdes.String(), commandOfUserGroupsAndTransporterSerde);
+        KStream<String, CommandOfUserGroupsAndTransporter> userToDeleteKStream = getJoinedKStream(commandOfUserGroupsAndTransporterKStream
+                        .filter((key, value) -> value.command.getType().contains("user.delete")),userKTable,commandOfUserGroupsAndTransporterSerde);
 
 /*
 branch to check wether user exists or not
@@ -307,15 +224,7 @@ branch to check wether user exists or not
 /*
 Send error message if user does not exist
  */
-        branchJoinDeleteUser[0].mapValues((value) -> {
-            Command command = value.command;
-            command.setErrorMessage("user not found");
-            command.setType("user.delete.failed");
-            command.setStatusCode(404);
-            command.setProcessTime(System.currentTimeMillis());
-
-            return command;
-        }).selectKey((key, value) -> value.getId()).to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
+sendErrorMessage(branchJoinDeleteUser[0],"user not found","user.delete.failed",commandSpecificAvroSerde);
 
 /*
 delete user if exist
@@ -344,6 +253,15 @@ delete user if exist
         return kafkaStreams;
     }
 
+    public KStream<String,CommandOfUserGroupsAndTransporter> getJoinedKStream(KStream<String,CommandOfUserGroupsAndTransporter> kStream, KTable<String,User> userKTable,SpecificAvroSerde<CommandOfUserGroupsAndTransporter> commandOfUserGroupsAndTransporterSerde) {
+       return  kStream.selectKey((key, value) -> value.user.getEmail())
+                .leftJoin(userKTable,
+                        (leftValue, rightValue) -> new CommandOfUserGroupsAndTransporter(leftValue.command, rightValue, leftValue.transporter, leftValue.group),Serdes.String(), commandOfUserGroupsAndTransporterSerde);
+    }
+
+    /*
+    method to update user
+     */
     public void updateUser(KStream<String, CommandOfUserGroupsAndTransporter> kStream, SpecificAvroSerde<User> userSpecificAvroSerde, SpecificAvroSerde<Command> commandSpecificAvroSerde) {
         kStream.mapValues((values) -> {
             User user = userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), values.command.getData().array());
@@ -372,6 +290,9 @@ delete user if exist
         }).selectKey((key, value) -> value.getId()).to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
     }
 
+    /*
+    Method to create user
+     */
     public void createUser(KStream<String, CommandOfUserGroupsAndTransporter> kStream, SpecificAvroSerde<User> userSpecificAvroSerde, SpecificAvroSerde<Command> commandSpecificAvroSerde) {
         kStream.mapValues((value) -> {
             Command command = new Command();
@@ -390,5 +311,42 @@ delete user if exist
         }).selectKey((key, value) -> value.getId())
                 .to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
     }
+
+    /*
+    Method to send error message
+     */
+    public void sendErrorMessage(KStream<String,CommandOfUserGroupsAndTransporter> stream,String errorMessage,String type,SpecificAvroSerde<Command> commandSpecificAvroSerde) {
+        stream.mapValues((value) -> {
+            Command command = new Command();
+            command.setId(value.command.getId());
+            command.setStartTime(value.command.getStartTime());
+            command.setProcessTime(System.currentTimeMillis());
+            command.setErrorMessage(errorMessage);
+            command.setData(value.command.getData());
+            command.setStatusCode(404);
+            command.setType(type);
+
+            return command;
+        }).selectKey((key, value) -> value.getId())
+                .to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
+    }
+
+    /*
+    Method to verify group existence
+     */
+
+    public KStream<String,CommandOfUserGroupsAndTransporter> getJoinedStreamUserAndGroup(KStream<String,CommandOfUserGroupsAndTransporter> kStream,KTable<String,Groups> groupsKTable,SpecificAvroSerde<CommandOfUserGroupsAndTransporter> commandOfUserGroupsAndTransporterSerde,SpecificAvroSerde<User> userSerde) {
+      return kStream.selectKey((key, value) -> {
+                    User user=userSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), value.command.getData().array());
+                    String k = user.getGroupId();
+                    if (k == null)
+                        return user.getName();
+                    return k;
+                }).leftJoin(groupsKTable,
+                (leftValue, rigthValue) -> new CommandOfUserGroupsAndTransporter(leftValue.command, leftValue.user, leftValue.transporter, rigthValue),
+                Serdes.String(), commandOfUserGroupsAndTransporterSerde);
+    }
 }
+
+
 

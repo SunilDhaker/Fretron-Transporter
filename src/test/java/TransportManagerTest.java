@@ -103,6 +103,7 @@ public class TransportManagerTest {
         props.put("value.serializer",KafkaAvroSerializer.class) ;
         return new KafkaProducer<>(props);
     }
+
     public Properties getConsumerProps(String groupId , EmbeddedSingleNodeKafkaCluster CLUSTER)
     {
         final Properties consumerProps = new Properties();
@@ -117,6 +118,4 @@ public class TransportManagerTest {
         consumerProps.put("specific.avro.reader", "true");
         return consumerProps;
     }
-
-
 }
