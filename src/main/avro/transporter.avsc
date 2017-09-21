@@ -86,6 +86,16 @@
                    ]
 
                 },
+                {
+                  "name":"transporterId",
+                   "type":
+                   [
+                       "null",
+                      "string"
+
+                   ]
+
+                },
 
 
               {
@@ -373,11 +383,18 @@
      "fields": [
        {
          "name": "type",
-         "type": "string"
+         "type":
+          [
+          "null",
+         "string"
+         ]
        },
        {
          "name": "data",
-         "type": "bytes"
+         "type":[
+         "null",
+         "bytes"
+         ]
        },
        {
          "name": "id",

@@ -13,4 +13,21 @@ public class AssertClass {
 
         return false;
     }
+
+    public static boolean assertTestActualData(List<Command> list,String expectedMessage,int expectedRecord )
+    {
+        int size=list.size();
+
+        if (size==expectedRecord && list.get(size-1).getType().contains(expectedMessage)&& list.get(size-1).getStatusCode()==200)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+
+    }
+
 }

@@ -6,8 +6,8 @@
 package com.fretron.Model;  
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
-public class CommandOfUserGroupsAndTransporter extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CommandOfUserGroupsAndTransporter\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"command\",\"type\":{\"type\":\"record\",\"name\":\"Command\",\"fields\":[{\"name\":\"type\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"data\",\"type\":\"bytes\"},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"statusCode\",\"type\":[\"null\",\"int\"]},{\"name\":\"errorMessage\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"startTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"},{\"name\":\"processTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"}]}},{\"name\":\"user\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"User\",\"fields\":[{\"name\":\"userId\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"name\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"email\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"mobile\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transporterId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"groupId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"isDeleted\",\"type\":\"boolean\",\"default\":false}]}],\"default\":null},{\"name\":\"transporter\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Transporter\",\"fields\":[{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"adminEmail\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null},{\"name\":\"groups\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Groups\",\"fields\":[{\"name\":\"groupId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"subgroups\",\"type\":{\"type\":\"array\",\"items\":\"Groups\"}},{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"admin\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"members\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}}],\"default\":null},{\"name\":\"isDeleted\",\"type\":\"boolean\",\"default\":false}]}],\"default\":null},{\"name\":\"group\",\"type\":[\"null\",\"Groups\"],\"default\":null}]}");
+public class CommandOfModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CommandOfModel\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"command\",\"type\":{\"type\":\"record\",\"name\":\"Command\",\"fields\":[{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"data\",\"type\":[\"null\",\"bytes\"]},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"statusCode\",\"type\":[\"null\",\"int\"]},{\"name\":\"errorMessage\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"startTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"},{\"name\":\"processTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"}]}},{\"name\":\"user\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"User\",\"fields\":[{\"name\":\"userId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"email\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"mobile\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transporterId\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"groupId\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"],\"default\":null},{\"name\":\"isDeleted\",\"type\":\"boolean\",\"default\":false}]}],\"default\":null},{\"name\":\"transporter\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Transporter\",\"fields\":[{\"name\":\"transporterId\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"adminEmail\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null},{\"name\":\"groups\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Groups\",\"fields\":[{\"name\":\"groupId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"subgroups\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"Groups\"}]},{\"name\":\"name\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"admin\",\"type\":[{\"type\":\"string\",\"avro.java.string\":\"String\"},\"null\"]},{\"name\":\"members\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}}],\"default\":null},{\"name\":\"isDeleted\",\"type\":\"boolean\",\"default\":false}]}],\"default\":null},{\"name\":\"group\",\"type\":[\"null\",\"Groups\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public com.fretron.Model.Command command;
   @Deprecated public com.fretron.Model.User user;
@@ -19,12 +19,12 @@ public class CommandOfUserGroupsAndTransporter extends org.apache.avro.specific.
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>. 
    */
-  public CommandOfUserGroupsAndTransporter() {}
+  public CommandOfModel() {}
 
   /**
    * All-args constructor.
    */
-  public CommandOfUserGroupsAndTransporter(com.fretron.Model.Command command, com.fretron.Model.User user, com.fretron.Model.Transporter transporter, com.fretron.Model.Groups group) {
+  public CommandOfModel(com.fretron.Model.Command command, com.fretron.Model.User user, com.fretron.Model.Transporter transporter, com.fretron.Model.Groups group) {
     this.command = command;
     this.user = user;
     this.transporter = transporter;
@@ -114,26 +114,26 @@ public class CommandOfUserGroupsAndTransporter extends org.apache.avro.specific.
     this.group = value;
   }
 
-  /** Creates a new CommandOfUserGroupsAndTransporter RecordBuilder */
-  public static com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder newBuilder() {
-    return new com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder();
+  /** Creates a new CommandOfModel RecordBuilder */
+  public static CommandOfModel.Builder newBuilder() {
+    return new CommandOfModel.Builder();
   }
   
-  /** Creates a new CommandOfUserGroupsAndTransporter RecordBuilder by copying an existing Builder */
-  public static com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder newBuilder(com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder other) {
-    return new com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder(other);
+  /** Creates a new CommandOfModel RecordBuilder by copying an existing Builder */
+  public static CommandOfModel.Builder newBuilder(CommandOfModel.Builder other) {
+    return new CommandOfModel.Builder(other);
   }
   
-  /** Creates a new CommandOfUserGroupsAndTransporter RecordBuilder by copying an existing CommandOfUserGroupsAndTransporter instance */
-  public static com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder newBuilder(com.fretron.Model.CommandOfUserGroupsAndTransporter other) {
-    return new com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder(other);
+  /** Creates a new CommandOfModel RecordBuilder by copying an existing CommandOfModel instance */
+  public static CommandOfModel.Builder newBuilder(CommandOfModel other) {
+    return new CommandOfModel.Builder(other);
   }
   
   /**
-   * RecordBuilder for CommandOfUserGroupsAndTransporter instances.
+   * RecordBuilder for CommandOfModel instances.
    */
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<CommandOfUserGroupsAndTransporter>
-    implements org.apache.avro.data.RecordBuilder<CommandOfUserGroupsAndTransporter> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<CommandOfModel>
+    implements org.apache.avro.data.RecordBuilder<CommandOfModel> {
 
     private com.fretron.Model.Command command;
     private com.fretron.Model.User user;
@@ -142,11 +142,11 @@ public class CommandOfUserGroupsAndTransporter extends org.apache.avro.specific.
 
     /** Creates a new Builder */
     private Builder() {
-      super(com.fretron.Model.CommandOfUserGroupsAndTransporter.SCHEMA$);
+      super(CommandOfModel.SCHEMA$);
     }
     
     /** Creates a Builder by copying an existing Builder */
-    private Builder(com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder other) {
+    private Builder(CommandOfModel.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.command)) {
         this.command = data().deepCopy(fields()[0].schema(), other.command);
@@ -166,9 +166,9 @@ public class CommandOfUserGroupsAndTransporter extends org.apache.avro.specific.
       }
     }
     
-    /** Creates a Builder by copying an existing CommandOfUserGroupsAndTransporter instance */
-    private Builder(com.fretron.Model.CommandOfUserGroupsAndTransporter other) {
-            super(com.fretron.Model.CommandOfUserGroupsAndTransporter.SCHEMA$);
+    /** Creates a Builder by copying an existing CommandOfModel instance */
+    private Builder(CommandOfModel other) {
+            super(CommandOfModel.SCHEMA$);
       if (isValidValue(fields()[0], other.command)) {
         this.command = data().deepCopy(fields()[0].schema(), other.command);
         fieldSetFlags()[0] = true;
@@ -193,7 +193,7 @@ public class CommandOfUserGroupsAndTransporter extends org.apache.avro.specific.
     }
     
     /** Sets the value of the 'command' field */
-    public com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder setCommand(com.fretron.Model.Command value) {
+    public CommandOfModel.Builder setCommand(com.fretron.Model.Command value) {
       validate(fields()[0], value);
       this.command = value;
       fieldSetFlags()[0] = true;
@@ -206,7 +206,7 @@ public class CommandOfUserGroupsAndTransporter extends org.apache.avro.specific.
     }
     
     /** Clears the value of the 'command' field */
-    public com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder clearCommand() {
+    public CommandOfModel.Builder clearCommand() {
       command = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -218,7 +218,7 @@ public class CommandOfUserGroupsAndTransporter extends org.apache.avro.specific.
     }
     
     /** Sets the value of the 'user' field */
-    public com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder setUser(com.fretron.Model.User value) {
+    public CommandOfModel.Builder setUser(com.fretron.Model.User value) {
       validate(fields()[1], value);
       this.user = value;
       fieldSetFlags()[1] = true;
@@ -231,7 +231,7 @@ public class CommandOfUserGroupsAndTransporter extends org.apache.avro.specific.
     }
     
     /** Clears the value of the 'user' field */
-    public com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder clearUser() {
+    public CommandOfModel.Builder clearUser() {
       user = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -243,7 +243,7 @@ public class CommandOfUserGroupsAndTransporter extends org.apache.avro.specific.
     }
     
     /** Sets the value of the 'transporter' field */
-    public com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder setTransporter(com.fretron.Model.Transporter value) {
+    public CommandOfModel.Builder setTransporter(com.fretron.Model.Transporter value) {
       validate(fields()[2], value);
       this.transporter = value;
       fieldSetFlags()[2] = true;
@@ -256,7 +256,7 @@ public class CommandOfUserGroupsAndTransporter extends org.apache.avro.specific.
     }
     
     /** Clears the value of the 'transporter' field */
-    public com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder clearTransporter() {
+    public CommandOfModel.Builder clearTransporter() {
       transporter = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -268,7 +268,7 @@ public class CommandOfUserGroupsAndTransporter extends org.apache.avro.specific.
     }
     
     /** Sets the value of the 'group' field */
-    public com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder setGroup(com.fretron.Model.Groups value) {
+    public CommandOfModel.Builder setGroup(com.fretron.Model.Groups value) {
       validate(fields()[3], value);
       this.group = value;
       fieldSetFlags()[3] = true;
@@ -281,16 +281,16 @@ public class CommandOfUserGroupsAndTransporter extends org.apache.avro.specific.
     }
     
     /** Clears the value of the 'group' field */
-    public com.fretron.Model.CommandOfUserGroupsAndTransporter.Builder clearGroup() {
+    public CommandOfModel.Builder clearGroup() {
       group = null;
       fieldSetFlags()[3] = false;
       return this;
     }
 
     @Override
-    public CommandOfUserGroupsAndTransporter build() {
+    public CommandOfModel build() {
       try {
-        CommandOfUserGroupsAndTransporter record = new CommandOfUserGroupsAndTransporter();
+        CommandOfModel record = new CommandOfModel();
         record.command = fieldSetFlags()[0] ? this.command : (com.fretron.Model.Command) defaultValue(fields()[0]);
         record.user = fieldSetFlags()[1] ? this.user : (com.fretron.Model.User) defaultValue(fields()[1]);
         record.transporter = fieldSetFlags()[2] ? this.transporter : (com.fretron.Model.Transporter) defaultValue(fields()[2]);

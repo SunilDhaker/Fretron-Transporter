@@ -1,15 +1,15 @@
+package com.fretron.trasportManagerTestCases;
+
+import TransporterTest.AssertClass;
 import Util.EmbeddedSingleNodeKafkaCluster;
 import Util.IntegrationTestUtils;
 import com.fretron.Context;
 import com.fretron.Model.Command;
-import com.fretron.Model.CommandOfTransporter;
 import com.fretron.Model.Transporter;
 import com.fretron.Utils.SerdeUtils;
 import com.fretron.Utils.SpecificAvroSerde;
 import com.fretron.constants.Constants;
 import com.fretron.transporter.TransporterManager.TransporterManager;
-import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
-import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
@@ -21,23 +21,23 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
-import org.apache.kafka.streams.state.HostInfo;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 
 import java.io.File;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-
 /**
- * Created by anurag on 15-Sep-17.
+ * Created by anurag on 21-Sep-17.
  */
-public class TransportManagerTest {
+public class TrasporterDeleteCase {
 
 
     @ClassRule
@@ -60,36 +60,81 @@ public class TransportManagerTest {
     }
 
     @Test
-    public void testTransporterCreate() throws Exception {
+    public void testTransporterDelete() throws Exception {
 
         KafkaStreams streams= new TransporterManager().createStream(CLUSTER.schemaRegistryUrl(),CLUSTER.bootstrapServers());
-        streams.cleanUp();
-        streams.start();
+
+        new Thread(()->{
+            streams.cleanUp();
+            streams.start();
+        }).start();
 
 
-        //Serdes required
+        new Thread(()-> {
 
 
-        SpecificAvroSerde<Transporter> transporterManagerSpecificAvroSerde= SerdeUtils.createSerde(CLUSTER.schemaRegistryUrl());
+            SpecificAvroSerde<Transporter> transporterManagerSpecificAvroSerde = SerdeUtils.createSerde(CLUSTER.schemaRegistryUrl());
 
-        Transporter transporter = new Transporter("123",null,null,false);
+            ArrayList<String> adminEmailList = new ArrayList<>();
+            adminEmailList.add("AA@gmail.com");
+            adminEmailList.add("BB@gmail.com");
 
-        String commandId=  UUID.randomUUID().toString();
+            //create
 
+            Transporter transporterCreate = new Transporter("1234", adminEmailList, null, false);
 
-        Command command = new Command();
-        command.setType("transporter.create.command");
-        command.setData(ByteBuffer.wrap(transporterManagerSpecificAvroSerde.serializer().serialize(transporterTopic,transporter)));
-        Producer<String, Command> commandProducer= getProducer(CLUSTER.bootstrapServers(),CLUSTER.schemaRegistryUrl());
-        Future<RecordMetadata> md = commandProducer.send(new ProducerRecord<String, Command>(commandTopic , "key" , command ));
-        System.out.println(md.get());
+            String commandId = UUID.randomUUID().toString();
 
 
-        List<Command> actual =  IntegrationTestUtils.waitUntilMinValuesRecordsReceived(getConsumerProps("my-test-transporter" , CLUSTER) ,commandTopic,1, 120000);
+            Command command = new Command();
+            command.setId(commandId);
+            command.setStatusCode(200);
+            command.setStartTime(System.currentTimeMillis());
+            command.setType("transporter.created");
+            command.setErrorMessage(null);
+            command.setData(ByteBuffer.wrap(transporterManagerSpecificAvroSerde.serializer().serialize(transporterTopic, transporterCreate)));
+            Producer<String, Command> commandProducer = getProducer(CLUSTER.bootstrapServers(), CLUSTER.schemaRegistryUrl());
+            Future<RecordMetadata> md = commandProducer.send(new ProducerRecord<String, Command>(commandResultTopic, "key", command));
+            try {
+                System.out.println(md.get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+
+//delete Command-->
+
+            try {
+                Thread.sleep(20000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Transporter transporterUpdate = new Transporter("1234", null, null, false);
+
+            Command commandUpdate = new Command();
+            commandUpdate.setId(UUID.randomUUID().toString());
+            commandUpdate.setType("transporter.delete.command");
+            commandUpdate.setData(ByteBuffer.wrap(transporterManagerSpecificAvroSerde.serializer().serialize(transporterTopic, transporterUpdate)));
+            Producer<String, Command> commandProducerUP = getProducer(CLUSTER.bootstrapServers(), CLUSTER.schemaRegistryUrl());
+            Future<RecordMetadata> mdUP = commandProducerUP.send(new ProducerRecord<String, Command>(commandTopic, "key", commandUpdate));
+            try {
+                System.out.println(mdUP.get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        List<Command> actual =  IntegrationTestUtils.waitUntilMinValuesRecordsReceived(getConsumerProps("my-test-transporter" , CLUSTER) ,commandResultTopic,2, 120000);
         for (int index = 0 ; index<actual.size() ; index++){
             System.out.println(actual.get(index).toString());
         }
-        //assert (AssertDataTest.testVehicleStateActualData(actual,VehicleState.WaitingForLoad,11));
+
+        assert (AssertClass.assertTestActualData(actual,"transporter.deleted",2));
     }
 
     public static <k,v> Producer<k , v> getProducer(String bootstrapServer,String schemaRegistry){
@@ -121,4 +166,8 @@ public class TransportManagerTest {
         consumerProps.put("specific.avro.reader", "true");
         return consumerProps;
     }
+
+
+
+
 }
