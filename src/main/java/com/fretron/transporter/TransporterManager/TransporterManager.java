@@ -29,7 +29,6 @@ public class TransporterManager {
     public  KafkaStreams createStream(String SchemaRegistryURL,String bootstrapServer)
 
     {
-
         final Properties streamsConfiguration = PropertiesUtil.initializeProperties(Context.getConfig().getString(Constants.KEY_TRANSPORTER_APP_ID),SchemaRegistryURL, bootstrapServer, Context.getConfig());
 
 
@@ -85,7 +84,7 @@ public class TransporterManager {
 
         commandCreateKStream.mapValues((values)->{
             Transporter transporter=transporterSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_TRANSPORTER_TOPIC), values.getData().array());
-          // transporter.setTransporterId(UUID.randomUUID().toString());
+            transporter.setTransporterId(UUID.randomUUID().toString());
             Command command = new Command();
             command.setStartTime(values.getStartTime());
             command.setType("transporter.created");

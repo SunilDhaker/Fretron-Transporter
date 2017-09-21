@@ -121,7 +121,7 @@ public class UserCreationCase5 {
 
     public ArrayList<Groups> getGroups() {
         ArrayList<Groups> list=new ArrayList<>();
-        Groups groups=new Groups("001","123",null,"kk",null,null);
+        Groups groups=new Groups("001",null,null,"kk",null,null);
 
         list.add(groups);
 

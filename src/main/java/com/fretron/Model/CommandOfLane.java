@@ -7,15 +7,10 @@ package com.fretron.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class CommandOfLane extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CommandOfLane\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"type\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"data\",\"type\":{\"type\":\"record\",\"name\":\"Lane\",\"fields\":[{\"name\":\"uuid\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"baseOrigin\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"FreightLocation\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":null},{\"name\":\"geofence\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Geofence\",\"fields\":[{\"name\":\"center\",\"type\":{\"type\":\"record\",\"name\":\"Location\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}},{\"name\":\"boundary\",\"type\":{\"type\":\"array\",\"items\":\"Location\"}}]}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}],\"default\":null},{\"name\":\"baseDestination\",\"type\":[\"null\",\"FreightLocation\"],\"default\":null},{\"name\":\"basePrice\",\"type\":[\"null\",\"double\"]},{\"name\":\"baseMaterial\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"consigner\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"FreightLocationOffset\",\"fields\":[{\"name\":\"freightLocation\",\"type\":\"FreightLocation\"},{\"name\":\"priceOffset\",\"type\":\"int\"},{\"name\":\"etdOffset\",\"type\":\"int\"}]}}],\"default\":null},{\"name\":\"consignee\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"FreightLocationOffset\"}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"MaterialOffset\",\"fields\":[{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"materialPriceOffset\",\"type\":\"int\"}]}],\"default\":null}]}},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"statusCode\",\"type\":[\"null\",\"int\"]},{\"name\":\"errorMessage\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"startTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"},{\"name\":\"processTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"CommandOfLane\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"command\",\"type\":{\"type\":\"record\",\"name\":\"Command\",\"fields\":[{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"data\",\"type\":[\"null\",\"bytes\"]},{\"name\":\"id\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"statusCode\",\"type\":[\"null\",\"int\"]},{\"name\":\"errorMessage\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"startTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"},{\"name\":\"processTime\",\"type\":[\"null\",\"long\"],\"default\":null,\"logicalType\":\"timestamp-millis\"}]}},{\"name\":\"lane\",\"type\":{\"type\":\"record\",\"name\":\"Lane\",\"fields\":[{\"name\":\"uuid\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"baseOrigin\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"FreightLocation\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":null},{\"name\":\"geofence\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Geofence\",\"fields\":[{\"name\":\"center\",\"type\":{\"type\":\"record\",\"name\":\"Location\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}},{\"name\":\"boundary\",\"type\":{\"type\":\"array\",\"items\":\"Location\"}}]}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}],\"default\":null},{\"name\":\"baseDestination\",\"type\":[\"null\",\"FreightLocation\"],\"default\":null},{\"name\":\"basePrice\",\"type\":[\"null\",\"double\"]},{\"name\":\"baseMaterial\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"consigner\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"FreightLocationOffset\",\"fields\":[{\"name\":\"freightLocation\",\"type\":\"FreightLocation\"},{\"name\":\"priceOffset\",\"type\":\"int\"},{\"name\":\"etdOffset\",\"type\":\"int\"}]}}],\"default\":null},{\"name\":\"consignee\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"FreightLocationOffset\"}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"MaterialOffset\",\"fields\":[{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"materialPriceOffset\",\"type\":\"int\"}]}],\"default\":null}]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
-  @Deprecated public java.lang.String type;
-  @Deprecated public com.fretron.Model.Lane data;
-  @Deprecated public java.lang.String id;
-  @Deprecated public java.lang.Integer statusCode;
-  @Deprecated public java.lang.String errorMessage;
-  @Deprecated public java.lang.Long startTime;
-  @Deprecated public java.lang.Long processTime;
+  @Deprecated public com.fretron.Model.Command command;
+  @Deprecated public com.fretron.Model.Lane lane;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -27,27 +22,17 @@ public class CommandOfLane extends org.apache.avro.specific.SpecificRecordBase i
   /**
    * All-args constructor.
    */
-  public CommandOfLane(java.lang.String type, com.fretron.Model.Lane data, java.lang.String id, java.lang.Integer statusCode, java.lang.String errorMessage, java.lang.Long startTime, java.lang.Long processTime) {
-    this.type = type;
-    this.data = data;
-    this.id = id;
-    this.statusCode = statusCode;
-    this.errorMessage = errorMessage;
-    this.startTime = startTime;
-    this.processTime = processTime;
+  public CommandOfLane(com.fretron.Model.Command command, com.fretron.Model.Lane lane) {
+    this.command = command;
+    this.lane = lane;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
   // Used by DatumWriter.  Applications should not call. 
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return type;
-    case 1: return data;
-    case 2: return id;
-    case 3: return statusCode;
-    case 4: return errorMessage;
-    case 5: return startTime;
-    case 6: return processTime;
+    case 0: return command;
+    case 1: return lane;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -55,120 +40,40 @@ public class CommandOfLane extends org.apache.avro.specific.SpecificRecordBase i
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: type = (java.lang.String)value$; break;
-    case 1: data = (com.fretron.Model.Lane)value$; break;
-    case 2: id = (java.lang.String)value$; break;
-    case 3: statusCode = (java.lang.Integer)value$; break;
-    case 4: errorMessage = (java.lang.String)value$; break;
-    case 5: startTime = (java.lang.Long)value$; break;
-    case 6: processTime = (java.lang.Long)value$; break;
+    case 0: command = (com.fretron.Model.Command)value$; break;
+    case 1: lane = (com.fretron.Model.Lane)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
 
   /**
-   * Gets the value of the 'type' field.
+   * Gets the value of the 'command' field.
    */
-  public java.lang.String getType() {
-    return type;
+  public com.fretron.Model.Command getCommand() {
+    return command;
   }
 
   /**
-   * Sets the value of the 'type' field.
+   * Sets the value of the 'command' field.
    * @param value the value to set.
    */
-  public void setType(java.lang.String value) {
-    this.type = value;
+  public void setCommand(com.fretron.Model.Command value) {
+    this.command = value;
   }
 
   /**
-   * Gets the value of the 'data' field.
+   * Gets the value of the 'lane' field.
    */
-  public com.fretron.Model.Lane getData() {
-    return data;
+  public com.fretron.Model.Lane getLane() {
+    return lane;
   }
 
   /**
-   * Sets the value of the 'data' field.
+   * Sets the value of the 'lane' field.
    * @param value the value to set.
    */
-  public void setData(com.fretron.Model.Lane value) {
-    this.data = value;
-  }
-
-  /**
-   * Gets the value of the 'id' field.
-   */
-  public java.lang.String getId() {
-    return id;
-  }
-
-  /**
-   * Sets the value of the 'id' field.
-   * @param value the value to set.
-   */
-  public void setId(java.lang.String value) {
-    this.id = value;
-  }
-
-  /**
-   * Gets the value of the 'statusCode' field.
-   */
-  public java.lang.Integer getStatusCode() {
-    return statusCode;
-  }
-
-  /**
-   * Sets the value of the 'statusCode' field.
-   * @param value the value to set.
-   */
-  public void setStatusCode(java.lang.Integer value) {
-    this.statusCode = value;
-  }
-
-  /**
-   * Gets the value of the 'errorMessage' field.
-   */
-  public java.lang.String getErrorMessage() {
-    return errorMessage;
-  }
-
-  /**
-   * Sets the value of the 'errorMessage' field.
-   * @param value the value to set.
-   */
-  public void setErrorMessage(java.lang.String value) {
-    this.errorMessage = value;
-  }
-
-  /**
-   * Gets the value of the 'startTime' field.
-   */
-  public java.lang.Long getStartTime() {
-    return startTime;
-  }
-
-  /**
-   * Sets the value of the 'startTime' field.
-   * @param value the value to set.
-   */
-  public void setStartTime(java.lang.Long value) {
-    this.startTime = value;
-  }
-
-  /**
-   * Gets the value of the 'processTime' field.
-   */
-  public java.lang.Long getProcessTime() {
-    return processTime;
-  }
-
-  /**
-   * Sets the value of the 'processTime' field.
-   * @param value the value to set.
-   */
-  public void setProcessTime(java.lang.Long value) {
-    this.processTime = value;
+  public void setLane(com.fretron.Model.Lane value) {
+    this.lane = value;
   }
 
   /** Creates a new CommandOfLane RecordBuilder */
@@ -192,13 +97,8 @@ public class CommandOfLane extends org.apache.avro.specific.SpecificRecordBase i
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<CommandOfLane>
     implements org.apache.avro.data.RecordBuilder<CommandOfLane> {
 
-    private java.lang.String type;
-    private com.fretron.Model.Lane data;
-    private java.lang.String id;
-    private java.lang.Integer statusCode;
-    private java.lang.String errorMessage;
-    private java.lang.Long startTime;
-    private java.lang.Long processTime;
+    private com.fretron.Model.Command command;
+    private com.fretron.Model.Lane lane;
 
     /** Creates a new Builder */
     private Builder() {
@@ -208,241 +108,76 @@ public class CommandOfLane extends org.apache.avro.specific.SpecificRecordBase i
     /** Creates a Builder by copying an existing Builder */
     private Builder(com.fretron.Model.CommandOfLane.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.type)) {
-        this.type = data().deepCopy(fields()[0].schema(), other.type);
+      if (isValidValue(fields()[0], other.command)) {
+        this.command = data().deepCopy(fields()[0].schema(), other.command);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.data)) {
-        this.data = data().deepCopy(fields()[1].schema(), other.data);
+      if (isValidValue(fields()[1], other.lane)) {
+        this.lane = data().deepCopy(fields()[1].schema(), other.lane);
         fieldSetFlags()[1] = true;
-      }
-      if (isValidValue(fields()[2], other.id)) {
-        this.id = data().deepCopy(fields()[2].schema(), other.id);
-        fieldSetFlags()[2] = true;
-      }
-      if (isValidValue(fields()[3], other.statusCode)) {
-        this.statusCode = data().deepCopy(fields()[3].schema(), other.statusCode);
-        fieldSetFlags()[3] = true;
-      }
-      if (isValidValue(fields()[4], other.errorMessage)) {
-        this.errorMessage = data().deepCopy(fields()[4].schema(), other.errorMessage);
-        fieldSetFlags()[4] = true;
-      }
-      if (isValidValue(fields()[5], other.startTime)) {
-        this.startTime = data().deepCopy(fields()[5].schema(), other.startTime);
-        fieldSetFlags()[5] = true;
-      }
-      if (isValidValue(fields()[6], other.processTime)) {
-        this.processTime = data().deepCopy(fields()[6].schema(), other.processTime);
-        fieldSetFlags()[6] = true;
       }
     }
     
     /** Creates a Builder by copying an existing CommandOfLane instance */
     private Builder(com.fretron.Model.CommandOfLane other) {
             super(com.fretron.Model.CommandOfLane.SCHEMA$);
-      if (isValidValue(fields()[0], other.type)) {
-        this.type = data().deepCopy(fields()[0].schema(), other.type);
+      if (isValidValue(fields()[0], other.command)) {
+        this.command = data().deepCopy(fields()[0].schema(), other.command);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.data)) {
-        this.data = data().deepCopy(fields()[1].schema(), other.data);
+      if (isValidValue(fields()[1], other.lane)) {
+        this.lane = data().deepCopy(fields()[1].schema(), other.lane);
         fieldSetFlags()[1] = true;
-      }
-      if (isValidValue(fields()[2], other.id)) {
-        this.id = data().deepCopy(fields()[2].schema(), other.id);
-        fieldSetFlags()[2] = true;
-      }
-      if (isValidValue(fields()[3], other.statusCode)) {
-        this.statusCode = data().deepCopy(fields()[3].schema(), other.statusCode);
-        fieldSetFlags()[3] = true;
-      }
-      if (isValidValue(fields()[4], other.errorMessage)) {
-        this.errorMessage = data().deepCopy(fields()[4].schema(), other.errorMessage);
-        fieldSetFlags()[4] = true;
-      }
-      if (isValidValue(fields()[5], other.startTime)) {
-        this.startTime = data().deepCopy(fields()[5].schema(), other.startTime);
-        fieldSetFlags()[5] = true;
-      }
-      if (isValidValue(fields()[6], other.processTime)) {
-        this.processTime = data().deepCopy(fields()[6].schema(), other.processTime);
-        fieldSetFlags()[6] = true;
       }
     }
 
-    /** Gets the value of the 'type' field */
-    public java.lang.String getType() {
-      return type;
+    /** Gets the value of the 'command' field */
+    public com.fretron.Model.Command getCommand() {
+      return command;
     }
     
-    /** Sets the value of the 'type' field */
-    public com.fretron.Model.CommandOfLane.Builder setType(java.lang.String value) {
+    /** Sets the value of the 'command' field */
+    public com.fretron.Model.CommandOfLane.Builder setCommand(com.fretron.Model.Command value) {
       validate(fields()[0], value);
-      this.type = value;
+      this.command = value;
       fieldSetFlags()[0] = true;
       return this; 
     }
     
-    /** Checks whether the 'type' field has been set */
-    public boolean hasType() {
+    /** Checks whether the 'command' field has been set */
+    public boolean hasCommand() {
       return fieldSetFlags()[0];
     }
     
-    /** Clears the value of the 'type' field */
-    public com.fretron.Model.CommandOfLane.Builder clearType() {
-      type = null;
+    /** Clears the value of the 'command' field */
+    public com.fretron.Model.CommandOfLane.Builder clearCommand() {
+      command = null;
       fieldSetFlags()[0] = false;
       return this;
     }
 
-    /** Gets the value of the 'data' field */
-    public com.fretron.Model.Lane getData() {
-      return data;
+    /** Gets the value of the 'lane' field */
+    public com.fretron.Model.Lane getLane() {
+      return lane;
     }
     
-    /** Sets the value of the 'data' field */
-    public com.fretron.Model.CommandOfLane.Builder setData(com.fretron.Model.Lane value) {
+    /** Sets the value of the 'lane' field */
+    public com.fretron.Model.CommandOfLane.Builder setLane(com.fretron.Model.Lane value) {
       validate(fields()[1], value);
-      this.data = value;
+      this.lane = value;
       fieldSetFlags()[1] = true;
       return this; 
     }
     
-    /** Checks whether the 'data' field has been set */
-    public boolean hasData() {
+    /** Checks whether the 'lane' field has been set */
+    public boolean hasLane() {
       return fieldSetFlags()[1];
     }
     
-    /** Clears the value of the 'data' field */
-    public com.fretron.Model.CommandOfLane.Builder clearData() {
-      data = null;
+    /** Clears the value of the 'lane' field */
+    public com.fretron.Model.CommandOfLane.Builder clearLane() {
+      lane = null;
       fieldSetFlags()[1] = false;
-      return this;
-    }
-
-    /** Gets the value of the 'id' field */
-    public java.lang.String getId() {
-      return id;
-    }
-    
-    /** Sets the value of the 'id' field */
-    public com.fretron.Model.CommandOfLane.Builder setId(java.lang.String value) {
-      validate(fields()[2], value);
-      this.id = value;
-      fieldSetFlags()[2] = true;
-      return this; 
-    }
-    
-    /** Checks whether the 'id' field has been set */
-    public boolean hasId() {
-      return fieldSetFlags()[2];
-    }
-    
-    /** Clears the value of the 'id' field */
-    public com.fretron.Model.CommandOfLane.Builder clearId() {
-      id = null;
-      fieldSetFlags()[2] = false;
-      return this;
-    }
-
-    /** Gets the value of the 'statusCode' field */
-    public java.lang.Integer getStatusCode() {
-      return statusCode;
-    }
-    
-    /** Sets the value of the 'statusCode' field */
-    public com.fretron.Model.CommandOfLane.Builder setStatusCode(java.lang.Integer value) {
-      validate(fields()[3], value);
-      this.statusCode = value;
-      fieldSetFlags()[3] = true;
-      return this; 
-    }
-    
-    /** Checks whether the 'statusCode' field has been set */
-    public boolean hasStatusCode() {
-      return fieldSetFlags()[3];
-    }
-    
-    /** Clears the value of the 'statusCode' field */
-    public com.fretron.Model.CommandOfLane.Builder clearStatusCode() {
-      statusCode = null;
-      fieldSetFlags()[3] = false;
-      return this;
-    }
-
-    /** Gets the value of the 'errorMessage' field */
-    public java.lang.String getErrorMessage() {
-      return errorMessage;
-    }
-    
-    /** Sets the value of the 'errorMessage' field */
-    public com.fretron.Model.CommandOfLane.Builder setErrorMessage(java.lang.String value) {
-      validate(fields()[4], value);
-      this.errorMessage = value;
-      fieldSetFlags()[4] = true;
-      return this; 
-    }
-    
-    /** Checks whether the 'errorMessage' field has been set */
-    public boolean hasErrorMessage() {
-      return fieldSetFlags()[4];
-    }
-    
-    /** Clears the value of the 'errorMessage' field */
-    public com.fretron.Model.CommandOfLane.Builder clearErrorMessage() {
-      errorMessage = null;
-      fieldSetFlags()[4] = false;
-      return this;
-    }
-
-    /** Gets the value of the 'startTime' field */
-    public java.lang.Long getStartTime() {
-      return startTime;
-    }
-    
-    /** Sets the value of the 'startTime' field */
-    public com.fretron.Model.CommandOfLane.Builder setStartTime(java.lang.Long value) {
-      validate(fields()[5], value);
-      this.startTime = value;
-      fieldSetFlags()[5] = true;
-      return this; 
-    }
-    
-    /** Checks whether the 'startTime' field has been set */
-    public boolean hasStartTime() {
-      return fieldSetFlags()[5];
-    }
-    
-    /** Clears the value of the 'startTime' field */
-    public com.fretron.Model.CommandOfLane.Builder clearStartTime() {
-      startTime = null;
-      fieldSetFlags()[5] = false;
-      return this;
-    }
-
-    /** Gets the value of the 'processTime' field */
-    public java.lang.Long getProcessTime() {
-      return processTime;
-    }
-    
-    /** Sets the value of the 'processTime' field */
-    public com.fretron.Model.CommandOfLane.Builder setProcessTime(java.lang.Long value) {
-      validate(fields()[6], value);
-      this.processTime = value;
-      fieldSetFlags()[6] = true;
-      return this; 
-    }
-    
-    /** Checks whether the 'processTime' field has been set */
-    public boolean hasProcessTime() {
-      return fieldSetFlags()[6];
-    }
-    
-    /** Clears the value of the 'processTime' field */
-    public com.fretron.Model.CommandOfLane.Builder clearProcessTime() {
-      processTime = null;
-      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -450,13 +185,8 @@ public class CommandOfLane extends org.apache.avro.specific.SpecificRecordBase i
     public CommandOfLane build() {
       try {
         CommandOfLane record = new CommandOfLane();
-        record.type = fieldSetFlags()[0] ? this.type : (java.lang.String) defaultValue(fields()[0]);
-        record.data = fieldSetFlags()[1] ? this.data : (com.fretron.Model.Lane) defaultValue(fields()[1]);
-        record.id = fieldSetFlags()[2] ? this.id : (java.lang.String) defaultValue(fields()[2]);
-        record.statusCode = fieldSetFlags()[3] ? this.statusCode : (java.lang.Integer) defaultValue(fields()[3]);
-        record.errorMessage = fieldSetFlags()[4] ? this.errorMessage : (java.lang.String) defaultValue(fields()[4]);
-        record.startTime = fieldSetFlags()[5] ? this.startTime : (java.lang.Long) defaultValue(fields()[5]);
-        record.processTime = fieldSetFlags()[6] ? this.processTime : (java.lang.Long) defaultValue(fields()[6]);
+        record.command = fieldSetFlags()[0] ? this.command : (com.fretron.Model.Command) defaultValue(fields()[0]);
+        record.lane = fieldSetFlags()[1] ? this.lane : (com.fretron.Model.Lane) defaultValue(fields()[1]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

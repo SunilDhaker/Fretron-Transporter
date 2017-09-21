@@ -3,7 +3,11 @@ package com.fretron.transporter.LaneManager;
 
 import com.fretron.Context;
 import com.fretron.Model.Command;
+import com.fretron.Model.CommandOfLane;
 import com.fretron.Model.Lane;
+import com.fretron.Model.Transporter;
+import com.fretron.Utils.PropertiesUtil;
+import com.fretron.Utils.SerdeUtils;
 import com.fretron.Utils.SpecificAvroSerde;
 import com.fretron.constants.Constants;
 import org.apache.kafka.common.serialization.Serdes;
@@ -18,45 +22,98 @@ import java.util.UUID;
 
 public class LaneManager {
 
-    public KafkaStreams createLane(KStreamBuilder builder, SpecificAvroSerde<Command> commandSpecificAvroSerde, SpecificAvroSerde<Lane> laneSpecificAvroSerde, Properties properties) {
-        KStream<String, Command> commandKStream = builder.stream(Serdes.String(), commandSpecificAvroSerde,
-                Context.getConfig().getString(Constants.KEY_COMMAND_TOPIC))
-                .filter((key, value) -> value.getType().contains("lane"));
+    public KafkaStreams createLane(String schemaRegistry,String bootstarpServer) {
+        KStreamBuilder builder = new KStreamBuilder();
 
-        KStream<String, Command>[] branchedKStream = commandKStream
-                .branch((key, value) -> value.getType().contains("create"),
-                        (key, value) -> value.getType().contains("update"));
+        Properties properties= PropertiesUtil.initializeProperties(Context.getConfig().getString(Constants.KEY_APPLICATION_ID),schemaRegistry,bootstarpServer,Context.getConfig());
+/*
+Serdes
+ */
+        SpecificAvroSerde<Command> commandSpecificAvroSerde= SerdeUtils.createSerde(schemaRegistry);
+        SpecificAvroSerde<Lane> laneSerde = SerdeUtils.createSerde(schemaRegistry);
+        SpecificAvroSerde<CommandOfLane> commandOfLaneSerde = SerdeUtils.createSerde(schemaRegistry);
+        SpecificAvroSerde<Transporter> transporterSerde = SerdeUtils.createSerde(schemaRegistry);
+        /*
+        KStream from command topic
+         */
+        KStream<String, CommandOfLane> commandKStream = builder.stream(Serdes.String(), commandSpecificAvroSerde,
+                Context.getConfig().getString(Constants.KEY_COMMAND_TOPIC))
+                .filter((key,value)->value.getType().contains("lane"))
+                .mapValues((values)-> new CommandOfLane(values,laneSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC),values.getData().array())));
+
+        /*
+        KStream from command result topic
+         */
+        KStream<String,Command> commandResultKS=builder.stream(Serdes.String(),commandSpecificAvroSerde,Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
+
+        /*
+        filtering from command stream
+         */
+        KStream<String, CommandOfLane>[] branchedKStream = commandKStream
+                .branch((key, value) -> value.getCommand().getType().contains("create") ,
+                        (key, value) -> value.getCommand().getType().contains("update"));
 
         commandKStream.print("command KStream : ");
 
         /*
-        Creating lane for transporter
+        create transporter ktable
          */
-        KStream<String, Command> createdLaneKStream = branchedKStream[0].mapValues((values) -> {
-            Lane lane = laneSpecificAvroSerde.deserializer().deserialize(Constants.KEY_LANES_TOPIC, values.getData().array());
-            lane.setUuid(UUID.randomUUID().toString());
-            values.setProcessTime(System.currentTimeMillis());
-            values.setStartTime(values.getStartTime());
-            values.setData(ByteBuffer.wrap(laneSpecificAvroSerde.serializer().serialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC), lane)));
-            values.setStatusCode(200);
-            values.setErrorMessage(null);
-            values.setType("lane.create.success");
+        KTable<String,Transporter> transporterKTable = commandResultKS
+                .filter((key,value)->value.getType().contains("transporter") && value.getStatusCode()==200)
+                .mapValues((values)->transporterSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_TRANSPORTER_TOPIC),values.getData().array()))
+                .selectKey((key,value)->value.getTransporterId())
+                .groupByKey(Serdes.String(),transporterSerde)
+                .reduce((value,aggValue)->aggValue,Context.getConfig().getString(Constants.KEY_TRANSPORTER_ID_STORE));
 
-            return values;
-        }).selectKey((key, value) -> value.getId());
+       /*
+       making sure that transporter id exists
+        */
+              KStream<String,CommandOfLaneAndTransporter> joinedKstream = branchedKStream[0]
+                                    .selectKey((Key,value)->value.getLane().getTransporterId())
+                                    .leftJoin(transporterKTable,
+                                            (leftValue,rightValue)->new CommandOfLaneAndTransporter(rightValue,leftValue),
+                                            Serdes.String(),commandOfLaneSerde);
 
-        createdLaneKStream.print("lane created :");
-        createdLaneKStream.to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
+              KStream<String,CommandOfLaneAndTransporter> branchJoinedStream[] = joinedKstream.branch((key,value)->value.transporter==null || value.transporter.isDeleted,
+                      (key,value)->value.transporter!=null && value.transporter.isDeleted==false);
+
+        branchJoinedStream[0].print("null");
+        branchJoinedStream[1].print("not null");
+              /*
+              create lane if transporter id exist
+               */
+              branchJoinedStream[1]
+                      .mapValues((values)->{
+                       Lane lane=values.commandOfLane.lane;
+                       lane.setUuid(UUID.randomUUID().toString());
+
+                       Command command = new Command();
+                       command.setData(ByteBuffer.wrap(laneSerde.serializer().serialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC),lane)));
+                       command.setStatusCode(200);
+                       command.setProcessTime(System.currentTimeMillis());
+                       command.setType("lane.create.success");
+                       command.setStartTime(values.commandOfLane.command.getStartTime());
+                       command.setErrorMessage(null);
+                       command.setId(values.commandOfLane.command.getId());
+
+                       return command;
+                      }).selectKey((key,value)->value.getId())
+                      .to(Serdes.String(),commandSpecificAvroSerde,Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
+/*
+Send error message if transporter id doesn't exist
+ */
+sendErrorMessage(branchJoinedStream[0],"lane.create.failed","transporter id doesn't exist",commandSpecificAvroSerde);
+
 
         //Update lane topology
         /*
         creating ktable of lanes of lanes for update
          */
-        KTable<String, Lane> laneKTable = builder.stream(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC))
-                .filter((key, value) -> value.getType().contains("lane.create.success"))
-                .mapValues(value -> laneSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC), value.getData().array()))
+        KTable<String, Lane> laneKTable = commandResultKS
+                .filter((key, value) -> value.getType().contains("lane") && value.getStatusCode()==200)
+                .mapValues(value -> laneSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC), value.getData().array()))
                 .selectKey((key, value) -> value.getUuid())
-                .groupByKey(Serdes.String(), laneSpecificAvroSerde)
+                .groupByKey(Serdes.String(), laneSerde)
                 .reduce((value, aggValue) -> aggValue, Context.getConfig().getString(Constants.KEY_LANE_BY_UUID_STORE));
 
         laneKTable.print("lane k table");
@@ -66,73 +123,59 @@ public class LaneManager {
         /*
         Join stream for existence of a lane
          */
-        KStream<String, CommandAndLane> joinedKStream = branchedKStream[1].selectKey((key, value) ->
-                laneSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC), value.getData().array())
+        KStream<String, CommandOfLaneAndTransporter> joinedKStream = branchedKStream[1].selectKey((key, value)->value.getLane()
                         .getUuid())
                 .leftJoin(laneKTable,
-                        (leftValue, rightValue) -> new CommandAndLane(rightValue, leftValue),
-                        Serdes.String(), commandSpecificAvroSerde);
+                        (leftValue, rightValue) -> new CommandOfLaneAndTransporter(null,new CommandOfLane(leftValue.command,rightValue)),
+                        Serdes.String(), commandOfLaneSerde);
 
 
       /*
       Branch joined kstream to verify existence of lane
        */
-        KStream<String, CommandAndLane>[] branchJoinedStream = joinedKStream
-                .branch((key, value) -> value.lane == null,
-                        (key, value) -> value.lane != null);
+        KStream<String, CommandOfLaneAndTransporter>[] branchJoinedLaneKStream = joinedKStream
+                .branch((key, value) -> value.commandOfLane.lane == null,
+                        (key, value) -> value.commandOfLane.lane != null);
 
 
        /*
        Send error message if lane doesn't exist
         */
-        branchJoinedStream[0].mapValues((values) -> {
-            Command command = new Command();
-            command.setId(values.command.getId());
-            command.setType("lane.update.failed");
-            command.setErrorMessage("lane doesn't exist");
-            command.setStatusCode(404);
-            command.setData(values.command.getData());
-            command.setProcessTime(System.currentTimeMillis());
-            command.setStartTime(values.command.getStartTime());
-
-            return command;
-        }).selectKey((key, value) -> value.getId())
-                .to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
+        sendErrorMessage(branchJoinedLaneKStream[0],"lane.update.failed","lane doesn't exist",commandSpecificAvroSerde);
 
       /*
       update values of lane if lane exist
        */
-        KStream<String, Command> updatedLaneKS = branchJoinedStream[1].selectKey((key, value) -> value.command.getId())
+        KStream<String, Command> updatedLaneKS = branchJoinedLaneKStream[1].selectKey((key, value) -> value.commandOfLane.command.getId())
                 .mapValues((values) -> {
-                    Lane updateLane = laneSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC), values.command.getData().array());
-
+                    Lane updateLane = laneSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC), values.commandOfLane.command.getData().array());
 
                     if (updateLane.getBaseDestination() != null)
-                        values.lane.setBaseDestination(updateLane.getBaseDestination());
+                        values.commandOfLane.lane.setBaseDestination(updateLane.getBaseDestination());
 
                     if (updateLane.getBaseOrigin() != null)
-                        values.lane.setBaseOrigin(updateLane.getBaseOrigin());
+                        values.commandOfLane.lane.setBaseOrigin(updateLane.getBaseOrigin());
 
                     if (updateLane.getBaseMaterial() != null)
-                        values.lane.setBaseMaterial(updateLane.getBaseMaterial());
+                        values.commandOfLane.lane.setBaseMaterial(updateLane.getBaseMaterial());
 
                     if (updateLane.getBasePrice() != null)
-                        values.lane.setBasePrice(updateLane.getBasePrice());
+                        values.commandOfLane.lane.setBasePrice(updateLane.getBasePrice());
 
                     if (updateLane.getConsignee() != null)
-                        values.lane.setConsignee(updateLane.getConsignee());
+                        values.commandOfLane.lane.setConsignee(updateLane.getConsignee());
 
                     if (updateLane.getConsigner() != null)
-                        values.lane.setConsigner(updateLane.getConsigner());
+                        values.commandOfLane.lane.setConsigner(updateLane.getConsigner());
 
                     if (updateLane.getMaterial() != null)
-                        values.lane.setMaterial(updateLane.getMaterial());
+                        values.commandOfLane.lane.setMaterial(updateLane.getMaterial());
 
                     Command command = new Command();
-                    command.setStartTime(values.command.getStartTime());
+                    command.setStartTime(values.commandOfLane.command.getStartTime());
                     command.setProcessTime(System.currentTimeMillis());
-                    command.setData(ByteBuffer.wrap(laneSpecificAvroSerde.serializer().serialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC), values.lane)));
-                    command.setId(values.command.getId());
+                    command.setData(ByteBuffer.wrap(laneSerde.serializer().serialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC), values.commandOfLane.lane)));
+                    command.setId(values.commandOfLane.command.getId());
                     command.setErrorMessage(null);
                     command.setStatusCode(200);
                     command.setType("lane.update.success");
@@ -141,22 +184,39 @@ public class LaneManager {
                 });
 
         updatedLaneKS.to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
-        laneKTable.print("lanekTable");
+
+        commandResultKS.print("command result : ");
 
         KafkaStreams streams = new KafkaStreams(builder, properties);
         return streams;
     }
 
+    public void sendErrorMessage(KStream<String,CommandOfLaneAndTransporter> stream,String type,String errorMessage,SpecificAvroSerde<Command> commandSpecificAvroSerde) {
+        stream.mapValues((values) -> {
+            Command command = new Command();
+            command.setId(values.commandOfLane.command.getId());
+            command.setType(type);
+            command.setErrorMessage(errorMessage);
+            command.setStatusCode(404);
+            command.setData(values.commandOfLane.command.getData());
+            command.setProcessTime(System.currentTimeMillis());
+            command.setStartTime(values.commandOfLane.command.getStartTime());
+
+            return command;
+        }).selectKey((key, value) -> value.getId())
+                .to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
+    }
+
     /*
     helper class to store command and lane object
      */
-    public static class CommandAndLane {
-        Lane lane;
-        Command command;
+    public static class CommandOfLaneAndTransporter {
+        Transporter transporter;
+        CommandOfLane commandOfLane;
 
-        CommandAndLane(Lane lane, Command command) {
-            this.lane = lane;
-            this.command = command;
+        CommandOfLaneAndTransporter(Transporter transporter, CommandOfLane commandOfLane) {
+            this.transporter = transporter;
+            this.commandOfLane = commandOfLane;
         }
     }
 }
