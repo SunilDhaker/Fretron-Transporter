@@ -26,10 +26,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
-public class TestCase13 {
+public class UserCreationCase3 {
     /*
-Update a user with group id provided
-*/
+  Test of failed creation of user if group ids do not match
+   */
     @ClassRule
     public static final EmbeddedSingleNodeKafkaCluster CLUSTER=new EmbeddedSingleNodeKafkaCluster();
     private static String commandResultTopic,commandTopic,transporterTopic,transporterIdStore,userTopic,groupByIdStore,userByEmailStore,app;
@@ -67,56 +67,50 @@ Update a user with group id provided
 
         KafkaStreams streams = new UserManager().startStream(bootStrapServer,schemaRegistry);
         streams.cleanUp();
+       new Thread(()->{
+           streams.start();
+       }).start();
+
+
+
+        User user=new User(null,"xyz","xyz@gmail.com","1234567890","123","hjh",false);
+        Transporter transporter = new Transporter("123",null,getGroups(),false);
+
         new Thread(()->{
             try {
-                System.out.println("start stream thread : " + Thread.currentThread().getName());
-                //Thread.sleep(5000);
-                streams.start();
-            }
-            catch (Exception e){
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            Command command1 = new Command( "transporter.create.success",
+                    ByteBuffer.wrap(transporterSerde.serializer().serialize(transporterTopic,transporter)),
+                    UUID.randomUUID().toString(),
+                    200,
+                    null,
+                    12345678902L,
+                    System.currentTimeMillis());
+            Producer<String, Command> commandProducer= HelperClass.getProducer(CLUSTER.bootstrapServers(),CLUSTER.schemaRegistryUrl());
+            Future<RecordMetadata> md = commandProducer.send(new ProducerRecord<String, Command>(commandResultTopic , UUID.randomUUID().toString(), command1));
+
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Command command = new Command( "user.create.command",
+                    ByteBuffer.wrap(userSerde.serializer().serialize(userTopic,user)),
+                    UUID.randomUUID().toString(),
+                    200,
+                    null,
+                    12345678902L,
+                    System.currentTimeMillis());
+
+            Producer<String,Command> producer=HelperClass.getProducer(bootStrapServer,schemaRegistry);
+            producer.send(new ProducerRecord<>(commandTopic, UUID.randomUUID().toString(),command));
         }).start();
 
-        Thread.sleep(1000);
-        System.out.println(Thread.currentThread().getName());
-        User user=new User(null,"xyz","xyz@gmail.com","1234567890","123","001",false);
-        Transporter transporter = new Transporter("123",null,getGroups(),false);
-        User existingUser=new User("565","abc","xyz@gmail.com","1234567890","123","001",false);
 
-        System.out.print(Thread.currentThread().getName());
-
-        Command command2 = new Command( "user.create.success",
-                ByteBuffer.wrap(userSerde.serializer().serialize(userTopic,existingUser)),
-                UUID.randomUUID().toString(),
-                200,
-                null,
-                12345678902L,
-                System.currentTimeMillis());
-        Producer<String, Command> commandProducer1= HelperClass.getProducer(CLUSTER.bootstrapServers(),CLUSTER.schemaRegistryUrl());
-        Future<RecordMetadata> md1 = commandProducer1.send(new ProducerRecord<String, Command>(commandResultTopic , "key", command2));
-
-        Command command1 = new Command( "transporter.create.success",
-                ByteBuffer.wrap(transporterSerde.serializer().serialize(transporterTopic,transporter)),
-                UUID.randomUUID().toString(),
-                200,
-                null,
-                12345678902L,
-                System.currentTimeMillis());
-//        Producer<String, Command> commandProducer= HelperClass.getProducer(CLUSTER.bootstrapServers(),CLUSTER.schemaRegistryUrl());
-//        Future<RecordMetadata> md = commandProducer.send(new ProducerRecord<String, Command>(commandResultTopic , UUID.randomUUID().toString(), command1));
-
-
-        Command command = new Command( "user.delete.command",
-                ByteBuffer.wrap(userSerde.serializer().serialize(userTopic,user)),
-                UUID.randomUUID().toString(),
-                200,
-                null,
-                12345678902L,
-                System.currentTimeMillis());
-
-        Producer<String,Command> producer=HelperClass.getProducer(bootStrapServer,schemaRegistry);
-        producer.send(new ProducerRecord<>(commandTopic, UUID.randomUUID().toString(),command));
 
 
 
@@ -125,12 +119,12 @@ Update a user with group id provided
         for(int i=0; i<actual.size(); i++)
             System.out.println(actual.get(i));
 
-        assert AssertClass.assertThat(actual,2,"user.delete.failed");
+        assert AssertClass.assertThat(actual,2,"Group doesn't exist");
     }
 
     public ArrayList<Groups> getGroups() {
         ArrayList<Groups> list=new ArrayList<>();
-        Groups groups=new Groups("001",null,null,"kk",null,null);
+        Groups groups=new Groups("001",null,null,null,null,null);
 
         list.add(groups);
 

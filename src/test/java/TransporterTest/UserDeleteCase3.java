@@ -26,10 +26,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
-public class TestCase9 {
+public class UserDeleteCase3 {
     /*
-   Test update a user who is deleted
-*/
+   Delete a user
+  */
     @ClassRule
     public static final EmbeddedSingleNodeKafkaCluster CLUSTER=new EmbeddedSingleNodeKafkaCluster();
     private static String commandResultTopic,commandTopic,transporterTopic,transporterIdStore,userTopic,groupByIdStore,userByEmailStore,app;
@@ -67,59 +67,58 @@ public class TestCase9 {
 
         KafkaStreams streams = new UserManager().startStream(bootStrapServer,schemaRegistry);
         streams.cleanUp();
-        streams.start();
+        new Thread(()->{
+            streams.start();
+        }).start();
+
 
 
         User user=new User(null,"xyz","xyz@gmail.com","1234567890","123",null,false);
-        Transporter transporter = new Transporter("123",null,getGroups(),false);
-        User existingUser=new User("565","xyz","xyz@gmail.com","1234567890","123",null,true);
+        User existingUser=new User(null,"xyz","xyz@gmail.com","1234567890","123",null,false);
 
-        Command command2 = new Command( "user.create.success",
-                ByteBuffer.wrap(userSerde.serializer().serialize(userTopic,existingUser)),
-                UUID.randomUUID().toString(),
-                200,
-                null,
-                12345678902L,
-                System.currentTimeMillis());
-        Producer<String, Command> commandProducer1= HelperClass.getProducer(CLUSTER.bootstrapServers(),CLUSTER.schemaRegistryUrl());
-        Future<RecordMetadata> md1 = commandProducer1.send(new ProducerRecord<String, Command>(commandResultTopic , "key", command2));
+        new Thread(()->{
 
-        Command command1 = new Command( "transporter.create.success",
-                ByteBuffer.wrap(transporterSerde.serializer().serialize(transporterTopic,transporter)),
-                UUID.randomUUID().toString(),
-                200,
-                null,
-                12345678902L,
-                System.currentTimeMillis());
-        Producer<String, Command> commandProducer= HelperClass.getProducer(CLUSTER.bootstrapServers(),CLUSTER.schemaRegistryUrl());
-        Future<RecordMetadata> md = commandProducer.send(new ProducerRecord<String, Command>(commandResultTopic , UUID.randomUUID().toString(), command1));
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
+            Command command1 = new Command( "user.create.success",
+                    ByteBuffer.wrap(userSerde.serializer().serialize(userTopic,existingUser)),
+                    UUID.randomUUID().toString(),
+                    200,
+                    null,
+                    12345678902L,
+                    System.currentTimeMillis());
 
-        Command command = new Command( "user.update.command",
-                ByteBuffer.wrap(userSerde.serializer().serialize(userTopic,user)),
-                UUID.randomUUID().toString(),
-                200,
-                null,
-                12345678902L,
-                System.currentTimeMillis());
+            Producer<String,Command> producer1=HelperClass.getProducer(bootStrapServer,schemaRegistry);
+            producer1.send(new ProducerRecord<>(commandResultTopic, UUID.randomUUID().toString(),command1));
 
-        Producer<String,Command> producer=HelperClass.getProducer(bootStrapServer,schemaRegistry);
-        producer.send(new ProducerRecord<>(commandTopic, UUID.randomUUID().toString(),command));
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-        List<Command> actual = IntegrationTestUtils.waitUntilMinValuesRecordsReceived(HelperClass.getConsumerProps("group.v1",CLUSTER),commandResultTopic,3,120000);
+            Command command = new Command( "user.delete.command",
+                    ByteBuffer.wrap(userSerde.serializer().serialize(userTopic,user)),
+                    UUID.randomUUID().toString(),
+                    200,
+                    null,
+                    12345678902L,
+                    System.currentTimeMillis());
+
+            Producer<String,Command> producer=HelperClass.getProducer(bootStrapServer,schemaRegistry);
+            producer.send(new ProducerRecord<>(commandTopic, UUID.randomUUID().toString(),command));
+        }).start();
+
+        List<Command> actual = IntegrationTestUtils.waitUntilMinValuesRecordsReceived(HelperClass.getConsumerProps("group.v1",CLUSTER),commandResultTopic,2,120000);
 
         for(int i=0; i<actual.size(); i++)
             System.out.println(actual.get(i));
 
-        assert AssertClass.assertThat(actual,3,"user.update.failed");
+        assert AssertClass.assertThat(actual,2,null);
     }
 
-    public ArrayList<Groups> getGroups() {
-        ArrayList<Groups> list=new ArrayList<>();
-        Groups groups=new Groups("001",null,null,"kk",null,null);
-
-        list.add(groups);
-
-        return list;
-    }
 }

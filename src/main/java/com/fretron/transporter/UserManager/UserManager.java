@@ -19,8 +19,7 @@ import java.util.Properties;
 import java.util.UUID;
 
 public class UserManager {
-    public KafkaStreams startStream(String bootStrapServers, String schemaRegistry) {
-
+    public KafkaStreams startStream(String bootStrapServers, String schemaRegistry) throws InterruptedException {
 
         KStreamBuilder builder = new KStreamBuilder();
         Properties properties = PropertiesUtil.initializeProperties(Context.getConfig().getString(Constants.KEY_APPLICATION_ID), schemaRegistry, bootStrapServers, Context.getConfig());
@@ -136,7 +135,7 @@ user stream from command topic
                 .groupByKey(Serdes.String(), groupsSerde)
                 .reduce((value, aggValue) -> aggValue, Context.getConfig().getString(Constants.KEY_GROUP_BY_ID_STORE));
 
-        //groupsKTable.print("group kTable");
+        groupsKTable.print("group kTable");
 
         /*
 check whether group id provided by user exist or not
