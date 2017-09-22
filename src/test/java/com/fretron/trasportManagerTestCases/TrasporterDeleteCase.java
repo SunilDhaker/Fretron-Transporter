@@ -1,6 +1,6 @@
 package com.fretron.trasportManagerTestCases;
 
-import TransporterTest.AssertClass;
+import UserManagerTests.AssertClass;
 import Util.EmbeddedSingleNodeKafkaCluster;
 import Util.IntegrationTestUtils;
 import com.fretron.Context;

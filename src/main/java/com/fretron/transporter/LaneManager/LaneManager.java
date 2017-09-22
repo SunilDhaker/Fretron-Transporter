@@ -135,8 +135,8 @@ sendErrorMessage(branchJoinedStream[0],"lane.create.failed","transporter id does
       Branch joined kstream to verify existence of lane
        */
         KStream<String, CommandOfLaneAndTransporter>[] branchJoinedLaneKStream = joinedKStream
-                .branch((key, value) -> value.commandOfLane.lane == null,
-                        (key, value) -> value.commandOfLane.lane != null);
+                .branch((key, value) -> value.commandOfLane.lane == null || value.commandOfLane.lane.isDeleted,
+                        (key, value) -> value.commandOfLane.lane != null && value.commandOfLane.lane.isDeleted==false);
 
 
        /*
@@ -172,6 +172,9 @@ sendErrorMessage(branchJoinedStream[0],"lane.create.failed","transporter id does
                     if (updateLane.getMaterial() != null)
                         values.commandOfLane.lane.setMaterial(updateLane.getMaterial());
 
+                    if(updateLane.getType()!=null)
+                        values.commandOfLane.lane.setType(updateLane.getType());
+
                     Command command = new Command();
                     command.setStartTime(values.commandOfLane.command.getStartTime());
                     command.setProcessTime(System.currentTimeMillis());
@@ -191,17 +194,9 @@ sendErrorMessage(branchJoinedStream[0],"lane.create.failed","transporter id does
 
         //Lane Delete Topology-->
 
-        KTable<String, Lane> laneKTableByUUID = commandResultKS
-                .filter((key, value) -> value.getType().contains("lane") && value.getStatusCode()==200)
-                .mapValues(value -> laneSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC), value.getData().array()))
-                .selectKey((key, value) -> value.getUuid())
-                .groupByKey(Serdes.String(), laneSerde)
-                .reduce((value, aggValue) -> aggValue, Context.getConfig().getString(Constants.KEY_LANE_BY_UUID_STORE));
-
-
         KStream<String, CommandOfLaneAndTransporter> joinedKStreamDelete = branchedKStream[2].selectKey((key, value)->value.getLane()
                 .getUuid())
-                .leftJoin(laneKTableByUUID,
+                .leftJoin(laneKTable,
                         (leftValue, rightValue) -> new CommandOfLaneAndTransporter(null,new CommandOfLane(leftValue.command,rightValue)),
                         Serdes.String(), commandOfLaneSerde);
 
