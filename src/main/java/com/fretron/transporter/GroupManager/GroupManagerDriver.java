@@ -10,6 +10,6 @@ public class GroupManagerDriver {
         Context.init(args);
         final String schema_registry = Context.getConfig().getString(Constants.KEY_SCHEMA_REGISTRY_URL);
         final String  BOOTSTRAP_SERVERS = Context.getConfig().getString(Constants.KEY_BOOTSTRAP_SERVERS);
-        new GroupManager().createStream(schema_registry,BOOTSTRAP_SERVERS).start();
+        new GroupManager().startStream(schema_registry,BOOTSTRAP_SERVERS).start();
     }
 }
