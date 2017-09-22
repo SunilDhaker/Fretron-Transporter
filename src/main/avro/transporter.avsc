@@ -437,13 +437,26 @@
 
    {
      "namespace":"com.fretron.Model",
-     "name":"CommandOfModel",
+     "name":"EnrichedTransporterCommand",
      "type":"record",
      "fields":[
        {
-         "name": "command",
-         "type":"com.fretron.Model.Command"
+        "name": "command",
+        "type":[
+            "null",
+            "com.fretron.Model.Command"
+            ],
+          "default":null
        },
+
+        {
+          "name": "lane",
+        "type":[
+             "null",
+             "com.fretron.Model.Lane"
+             ],
+           "default":null
+        },
        {
          "name":"user",
          "type":[
@@ -469,22 +482,5 @@
          "default":null
        }
      ]
-   },
-
-
-       {
-              "namespace": "com.fretron.Model",
-              "type": "record",
-              "name": "CommandOfLane",
-              "fields": [
-                {
-                  "name": "command",
-                  "type": "com.fretron.Model.Command"
-                },
-                {
-                  "name": "lane",
-                  "type": "com.fretron.Model.Lane"
-                }
-                ]
-            }
+   }
  ]

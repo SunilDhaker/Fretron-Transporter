@@ -29,7 +29,7 @@ public class UserManager {
         SpecificAvroSerde<Command> commandSpecificAvroSerde = SerdeUtils.createSerde(schemaRegistry);
         SpecificAvroSerde<Transporter> transporterSerde = SerdeUtils.createSerde(schemaRegistry);
         SpecificAvroSerde<User> userSpecificAvroSerde = SerdeUtils.createSerde(schemaRegistry);
-        SpecificAvroSerde<CommandOfModel> commandOfUserGroupsAndTransporterSerde = SerdeUtils.createSerde(schemaRegistry);
+        SpecificAvroSerde<EnrichedTransporterCommand> commandOfUserGroupsAndTransporterSerde = SerdeUtils.createSerde(schemaRegistry);
         SpecificAvroSerde<Groups> groupsSerde = SerdeUtils.createSerde(schemaRegistry);
 
 
@@ -45,9 +45,9 @@ user stream from command topic
         /*
 
          */
-        KStream<String, CommandOfModel> commandOfUserGroupsAndTransporterKStream = commandKStream
+        KStream<String, EnrichedTransporterCommand> commandOfUserGroupsAndTransporterKStream = commandKStream
                 .mapValues((values) -> {
-                    CommandOfModel userAndCommand = new CommandOfModel();
+                    EnrichedTransporterCommand userAndCommand = new EnrichedTransporterCommand();
                     userAndCommand.setCommand(values);
                     userAndCommand.setUser(userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), values.getData().array()));
 
@@ -72,13 +72,13 @@ user stream from command topic
 
         userKTable.print();
 
-        KStream<String, CommandOfModel> joinedKStreamCommandAndUser =
+        KStream<String, EnrichedTransporterCommand> joinedKStreamCommandAndUser =
                 getJoinedKStream(commandOfUserGroupsAndTransporterKStream
                         .filter((key, value) -> value.command.getType().contains("user.create")),userKTable,commandOfUserGroupsAndTransporterSerde);
         /*
         branch joined kstream
          */
-        KStream<String, CommandOfModel>[] branchedKStreamCommandUser = joinedKStreamCommandAndUser
+        KStream<String, EnrichedTransporterCommand>[] branchedKStreamCommandUser = joinedKStreamCommandAndUser
                 .branch((key, value) -> value.user == null || value.user.isDeleted,
                         (key, value) -> value.user != null && value.user.isDeleted == false);
 
@@ -103,16 +103,16 @@ user stream from command topic
 
        // transporterKTable.print("transporter table");
 
-        KStream<String, CommandOfModel> joinedKStreamUserTransporter = branchedKStreamCommandUser[0]
+        KStream<String, EnrichedTransporterCommand> joinedKStreamUserTransporter = branchedKStreamCommandUser[0]
                 .selectKey((key, value) -> userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), value.command.getData().array()).getTransporterId())
                 .leftJoin(transporterKTable,
-                        (leftValue, rightValue) -> new CommandOfModel(leftValue.command, leftValue.user, rightValue, leftValue.group),
+                        (leftValue, rightValue) -> new EnrichedTransporterCommand(leftValue.command, null,leftValue.user, rightValue, leftValue.group),
                         Serdes.String(), commandOfUserGroupsAndTransporterSerde);
 
         /*
         branch joined k stream
          */
-        KStream<String, CommandOfModel>[] branchedStreamUserTransporter = joinedKStreamUserTransporter
+        KStream<String, EnrichedTransporterCommand>[] branchedStreamUserTransporter = joinedKStreamUserTransporter
                 .branch((k, v) -> v.transporter == null || v.transporter.isDeleted,
                         (k, v) -> v.transporter != null && v.transporter.isDeleted == false);
 
@@ -140,13 +140,13 @@ user stream from command topic
         /*
 check whether group id provided by user exist or not
  */
-        KStream<String, CommandOfModel> joinedKStreamWithGroup =
+        KStream<String, EnrichedTransporterCommand> joinedKStreamWithGroup =
                 getJoinedStreamUserAndGroup(branchedStreamUserTransporter[1],groupsKTable,commandOfUserGroupsAndTransporterSerde,userSpecificAvroSerde);
 /*
    Branch joinedkstream with groups to verify group exist or not
  */
 
-        KStream<String, CommandOfModel>[] branchedJoinedKStream = joinedKStreamWithGroup
+        KStream<String, EnrichedTransporterCommand>[] branchedJoinedKStream = joinedKStreamWithGroup
                 .branch((key, value) -> value.group == null && userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), value.command.getData().array()).getGroupId() != null,
                         (key, value) -> value.group == null && userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), value.command.getData().array()).getGroupId() == null,
                         (key, value) -> value.group != null && value.transporter.isDeleted == false);
@@ -169,13 +169,13 @@ create user after verifying groups
 
 
 // user update topology
-        KStream<String, CommandOfModel> joinKStreamToUpdate = getJoinedKStream(commandOfUserGroupsAndTransporterKStream
+        KStream<String, EnrichedTransporterCommand> joinKStreamToUpdate = getJoinedKStream(commandOfUserGroupsAndTransporterKStream
                 .filter((key, value) -> value.command.getType().contains("user.update")),userKTable,commandOfUserGroupsAndTransporterSerde);
 
 /*
 branch to verify existence of user
  */
-        KStream<String, CommandOfModel>[] branchUpdateJoinKstream = joinKStreamToUpdate
+        KStream<String, EnrichedTransporterCommand>[] branchUpdateJoinKstream = joinKStreamToUpdate
                 .branch((key, value) -> value.user == null || value.user.isDeleted,
                         (key, value) -> value.user != null && value.user.isDeleted == false);
 
@@ -187,13 +187,13 @@ sendErrorMessage(branchUpdateJoinKstream[0],"user not found","user.update.failed
 /*
 Update values if user exist
  */
-        KStream<String, CommandOfModel> checkGroup =
+        KStream<String, EnrichedTransporterCommand> checkGroup =
                 getJoinedStreamUserAndGroup( branchUpdateJoinKstream[1],groupsKTable,commandOfUserGroupsAndTransporterSerde,userSpecificAvroSerde);
 
         /*
         Branch joined stream to verify group eistence
          */
-        KStream<String, CommandOfModel>[] branchcheckGroupStream = checkGroup
+        KStream<String, EnrichedTransporterCommand>[] branchcheckGroupStream = checkGroup
                 .branch((key, value) -> value.group == null && userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), value.command.getData().array()).getGroupId() != null,
                         (key, value) -> value.group == null && userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), value.command.getData().array()).getGroupId() == null,
                         (key, value) -> value.group != null);
@@ -210,13 +210,13 @@ Update values if user exist
         updateUser(branchcheckGroupStream[2], userSpecificAvroSerde, commandSpecificAvroSerde);
 
 //delete user topology
-        KStream<String, CommandOfModel> userToDeleteKStream = getJoinedKStream(commandOfUserGroupsAndTransporterKStream
+        KStream<String, EnrichedTransporterCommand> userToDeleteKStream = getJoinedKStream(commandOfUserGroupsAndTransporterKStream
                         .filter((key, value) -> value.command.getType().contains("user.delete")),userKTable,commandOfUserGroupsAndTransporterSerde);
 
 /*
 branch to check wether user exists or not
  */
-        KStream<String, CommandOfModel>[] branchJoinDeleteUser = userToDeleteKStream
+        KStream<String, EnrichedTransporterCommand>[] branchJoinDeleteUser = userToDeleteKStream
                 .branch((key, value) -> value.user == null || value.user.isDeleted,
                         (key, value) -> value.user != null && value.user.isDeleted == false);
 
@@ -252,16 +252,16 @@ delete user if exist
         return kafkaStreams;
     }
 
-    public KStream<String,CommandOfModel> getJoinedKStream(KStream<String,CommandOfModel> kStream, KTable<String,User> userKTable, SpecificAvroSerde<CommandOfModel> commandOfUserGroupsAndTransporterSerde) {
+    public KStream<String,EnrichedTransporterCommand> getJoinedKStream(KStream<String,EnrichedTransporterCommand> kStream, KTable<String,User> userKTable, SpecificAvroSerde<EnrichedTransporterCommand> commandOfUserGroupsAndTransporterSerde) {
        return  kStream.selectKey((key, value) -> value.user.getEmail())
                 .leftJoin(userKTable,
-                        (leftValue, rightValue) -> new CommandOfModel(leftValue.command, rightValue, leftValue.transporter, leftValue.group),Serdes.String(), commandOfUserGroupsAndTransporterSerde);
+                        (leftValue, rightValue) -> new EnrichedTransporterCommand(leftValue.command, null,rightValue,leftValue.transporter, leftValue.group),Serdes.String(), commandOfUserGroupsAndTransporterSerde);
     }
 
     /*
     method to update user
      */
-    public void updateUser(KStream<String, CommandOfModel> kStream, SpecificAvroSerde<User> userSpecificAvroSerde, SpecificAvroSerde<Command> commandSpecificAvroSerde) {
+    public void updateUser(KStream<String, EnrichedTransporterCommand> kStream, SpecificAvroSerde<User> userSpecificAvroSerde, SpecificAvroSerde<Command> commandSpecificAvroSerde) {
         kStream.mapValues((values) -> {
             User user = userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), values.command.getData().array());
             Command command = new Command();
@@ -292,7 +292,7 @@ delete user if exist
     /*
     Method to create user
      */
-    public void createUser(KStream<String, CommandOfModel> kStream, SpecificAvroSerde<User> userSpecificAvroSerde, SpecificAvroSerde<Command> commandSpecificAvroSerde) {
+    public void createUser(KStream<String, EnrichedTransporterCommand> kStream, SpecificAvroSerde<User> userSpecificAvroSerde, SpecificAvroSerde<Command> commandSpecificAvroSerde) {
         kStream.mapValues((value) -> {
             Command command = new Command();
             User user = userSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), value.command.getData().array());
@@ -314,7 +314,7 @@ delete user if exist
     /*
     Method to send error message
      */
-    public void sendErrorMessage(KStream<String,CommandOfModel> stream, String errorMessage, String type, SpecificAvroSerde<Command> commandSpecificAvroSerde) {
+    public void sendErrorMessage(KStream<String,EnrichedTransporterCommand> stream, String errorMessage, String type, SpecificAvroSerde<Command> commandSpecificAvroSerde) {
         stream.mapValues((value) -> {
             Command command = new Command();
             command.setId(value.command.getId());
@@ -334,7 +334,7 @@ delete user if exist
     Method to verify group existence
      */
 
-    public KStream<String,CommandOfModel> getJoinedStreamUserAndGroup(KStream<String,CommandOfModel> kStream, KTable<String,Groups> groupsKTable, SpecificAvroSerde<CommandOfModel> commandOfUserGroupsAndTransporterSerde, SpecificAvroSerde<User> userSerde) {
+    public KStream<String,EnrichedTransporterCommand> getJoinedStreamUserAndGroup(KStream<String,EnrichedTransporterCommand> kStream, KTable<String,Groups> groupsKTable, SpecificAvroSerde<EnrichedTransporterCommand> commandOfUserGroupsAndTransporterSerde, SpecificAvroSerde<User> userSerde) {
       return kStream.selectKey((key, value) -> {
                     User user=userSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_USERS_TOPIC), value.command.getData().array());
                     String k = user.getGroupId();
@@ -342,7 +342,7 @@ delete user if exist
                         return user.getName();
                     return k;
                 }).leftJoin(groupsKTable,
-                (leftValue, rigthValue) -> new CommandOfModel(leftValue.command, leftValue.user, leftValue.transporter, rigthValue),
+                (leftValue, rigthValue) -> new EnrichedTransporterCommand(leftValue.command, null,leftValue.user, leftValue.transporter, rigthValue),
                 Serdes.String(), commandOfUserGroupsAndTransporterSerde);
     }
 }

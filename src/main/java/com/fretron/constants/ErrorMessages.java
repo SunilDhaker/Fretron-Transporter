@@ -10,5 +10,6 @@ public class ErrorMessages {
 
     public final static String TRANSPORTER_ID_NOT_EXIST="Transporter id doesn't exist";
     public final static String GROUP_DOES_NOT_EXIST="Group doesn't exist";
+    public final  static String TRANSPORTER_NOT_EXIST="transporter does not exist";
 
 }

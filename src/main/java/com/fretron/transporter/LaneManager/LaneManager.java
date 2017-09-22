@@ -3,7 +3,7 @@ package com.fretron.transporter.LaneManager;
 
 import com.fretron.Context;
 import com.fretron.Model.Command;
-import com.fretron.Model.CommandOfLane;
+import com.fretron.Model.EnrichedTransporterCommand;
 import com.fretron.Model.Lane;
 import com.fretron.Model.Transporter;
 import com.fretron.Utils.PropertiesUtil;
@@ -31,15 +31,15 @@ Serdes
  */
         SpecificAvroSerde<Command> commandSpecificAvroSerde= SerdeUtils.createSerde(schemaRegistry);
         SpecificAvroSerde<Lane> laneSerde = SerdeUtils.createSerde(schemaRegistry);
-        SpecificAvroSerde<CommandOfLane> commandOfLaneSerde = SerdeUtils.createSerde(schemaRegistry);
+        SpecificAvroSerde<EnrichedTransporterCommand> commandOfLaneSerde = SerdeUtils.createSerde(schemaRegistry);
         SpecificAvroSerde<Transporter> transporterSerde = SerdeUtils.createSerde(schemaRegistry);
         /*
         KStream from command topic
          */
-        KStream<String, CommandOfLane> commandKStream = builder.stream(Serdes.String(), commandSpecificAvroSerde,
+        KStream<String, EnrichedTransporterCommand> commandKStream = builder.stream(Serdes.String(), commandSpecificAvroSerde,
                 Context.getConfig().getString(Constants.KEY_COMMAND_TOPIC))
                 .filter((key,value)->value.getType().contains("lane"))
-                .mapValues((values)-> new CommandOfLane(values,laneSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC),values.getData().array())));
+                .mapValues((values)-> new EnrichedTransporterCommand(values,laneSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC),values.getData().array()),null,null,null));
 
         /*
         KStream from command result topic
@@ -49,7 +49,7 @@ Serdes
         /*
         filtering from command stream
          */
-        KStream<String, CommandOfLane>[] branchedKStream = commandKStream
+        KStream<String, EnrichedTransporterCommand>[] branchedKStream = commandKStream
                 .branch((key, value) -> value.getCommand().getType().contains("create") ,
                         (key, value) -> value.getCommand().getType().contains("update"),
                          (key, value) -> value.getCommand().getType().contains("delete"));
@@ -69,13 +69,13 @@ Serdes
        /*
        making sure that transporter id exists
         */
-              KStream<String,CommandOfLaneAndTransporter> joinedKstream = branchedKStream[0]
+              KStream<String,EnrichedTransporterCommandAndTransporter> joinedKstream = branchedKStream[0]
                                     .selectKey((Key,value)->value.getLane().getTransporterId())
                                     .leftJoin(transporterKTable,
-                                            (leftValue,rightValue)->new CommandOfLaneAndTransporter(rightValue,leftValue),
+                                            (leftValue,rightValue)->new EnrichedTransporterCommandAndTransporter(rightValue,leftValue),
                                             Serdes.String(),commandOfLaneSerde);
 
-              KStream<String,CommandOfLaneAndTransporter> branchJoinedStream[] = joinedKstream.branch((key,value)->value.transporter==null || value.transporter.isDeleted,
+              KStream<String,EnrichedTransporterCommandAndTransporter> branchJoinedStream[] = joinedKstream.branch((key,value)->value.transporter==null || value.transporter.isDeleted,
                       (key,value)->value.transporter!=null && value.transporter.isDeleted==false);
 
         branchJoinedStream[0].print("null");
@@ -124,17 +124,17 @@ sendErrorMessage(branchJoinedStream[0],"lane.create.failed","transporter id does
         /*
         Join stream for existence of a lane
          */
-        KStream<String, CommandOfLaneAndTransporter> joinedKStream = branchedKStream[1].selectKey((key, value)->value.getLane()
+        KStream<String, EnrichedTransporterCommandAndTransporter> joinedKStream = branchedKStream[1].selectKey((key, value)->value.getLane()
                         .getUuid())
                 .leftJoin(laneKTable,
-                        (leftValue, rightValue) -> new CommandOfLaneAndTransporter(null,new CommandOfLane(leftValue.command,rightValue)),
+                        (leftValue, rightValue) -> new EnrichedTransporterCommandAndTransporter(null,new EnrichedTransporterCommand(leftValue.command,rightValue,null,null,null)),
                         Serdes.String(), commandOfLaneSerde);
 
 
       /*
       Branch joined kstream to verify existence of lane
        */
-        KStream<String, CommandOfLaneAndTransporter>[] branchJoinedLaneKStream = joinedKStream
+        KStream<String, EnrichedTransporterCommandAndTransporter>[] branchJoinedLaneKStream = joinedKStream
                 .branch((key, value) -> value.commandOfLane.lane == null,
                         (key, value) -> value.commandOfLane.lane != null);
 
@@ -199,13 +199,13 @@ sendErrorMessage(branchJoinedStream[0],"lane.create.failed","transporter id does
                 .reduce((value, aggValue) -> aggValue, Context.getConfig().getString(Constants.KEY_LANE_BY_UUID_STORE));
 
 
-        KStream<String, CommandOfLaneAndTransporter> joinedKStreamDelete = branchedKStream[2].selectKey((key, value)->value.getLane()
+        KStream<String, EnrichedTransporterCommandAndTransporter> joinedKStreamDelete = branchedKStream[2].selectKey((key, value)->value.getLane()
                 .getUuid())
                 .leftJoin(laneKTableByUUID,
-                        (leftValue, rightValue) -> new CommandOfLaneAndTransporter(null,new CommandOfLane(leftValue.command,rightValue)),
+                        (leftValue, rightValue) -> new EnrichedTransporterCommandAndTransporter(null,new EnrichedTransporterCommand(leftValue.command,rightValue,null,null,null)),
                         Serdes.String(), commandOfLaneSerde);
 
-        KStream<String, CommandOfLaneAndTransporter>[] branchJoinedLaneKStreamDelete = joinedKStreamDelete
+        KStream<String, EnrichedTransporterCommandAndTransporter>[] branchJoinedLaneKStreamDelete = joinedKStreamDelete
                 .branch((key, value) -> value.commandOfLane.lane == null|| value.commandOfLane.lane.getIsDeleted()==true ,
                         (key, value) -> value.commandOfLane.lane != null);
 
@@ -234,7 +234,7 @@ sendErrorMessage(branchJoinedStream[0],"lane.create.failed","transporter id does
         return streams;
     }
 
-    public void sendErrorMessage(KStream<String,CommandOfLaneAndTransporter> stream,String type,String errorMessage,SpecificAvroSerde<Command> commandSpecificAvroSerde) {
+    public void sendErrorMessage(KStream<String,EnrichedTransporterCommandAndTransporter> stream,String type,String errorMessage,SpecificAvroSerde<Command> commandSpecificAvroSerde) {
         stream.mapValues((values) -> {
             Command command = new Command();
             command.setId(values.commandOfLane.command.getId());
@@ -253,11 +253,11 @@ sendErrorMessage(branchJoinedStream[0],"lane.create.failed","transporter id does
     /*
     helper class to store command and lane object
      */
-    public static class CommandOfLaneAndTransporter {
+    public static class EnrichedTransporterCommandAndTransporter {
         Transporter transporter;
-        CommandOfLane commandOfLane;
+        EnrichedTransporterCommand commandOfLane;
 
-        CommandOfLaneAndTransporter(Transporter transporter, CommandOfLane commandOfLane) {
+        EnrichedTransporterCommandAndTransporter(Transporter transporter, EnrichedTransporterCommand commandOfLane) {
             this.transporter = transporter;
             this.commandOfLane = commandOfLane;
         }
