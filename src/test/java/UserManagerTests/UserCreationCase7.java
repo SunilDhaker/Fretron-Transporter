@@ -1,4 +1,4 @@
-package TransporterTest;
+package UserManagerTests;
 
 import Util.EmbeddedSingleNodeKafkaCluster;
 import Util.IntegrationTestUtils;
@@ -26,10 +26,10 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
-public class UserCreationCase3 {
+public class UserCreationCase7 {
     /*
-  Test of failed creation of user if group ids do not match
-   */
+    failed user creation if transporter id doesn't exist
+ */
     @ClassRule
     public static final EmbeddedSingleNodeKafkaCluster CLUSTER=new EmbeddedSingleNodeKafkaCluster();
     private static String commandResultTopic,commandTopic,transporterTopic,transporterIdStore,userTopic,groupByIdStore,userByEmailStore,app;
@@ -67,14 +67,15 @@ public class UserCreationCase3 {
 
         KafkaStreams streams = new UserManager().startStream(bootStrapServer,schemaRegistry);
         streams.cleanUp();
-       new Thread(()->{
-           streams.start();
-       }).start();
+        new Thread(()->{
+            streams.start();
+        }).start();
 
 
 
-        User user=new User(null,"xyz","xyz@gmail.com","1234567890","123","hjh",false);
+        User user=new User(null,"xyz","xyz@gmail.com","1234567890","null","001",false);
         Transporter transporter = new Transporter("123",null,getGroups(),false);
+
 
         new Thread(()->{
             try {
@@ -97,7 +98,6 @@ public class UserCreationCase3 {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             Command command = new Command( "user.create.command",
                     ByteBuffer.wrap(userSerde.serializer().serialize(userTopic,user)),
                     UUID.randomUUID().toString(),
@@ -110,21 +110,17 @@ public class UserCreationCase3 {
             producer.send(new ProducerRecord<>(commandTopic, UUID.randomUUID().toString(),command));
         }).start();
 
-
-
-
-
         List<Command> actual = IntegrationTestUtils.waitUntilMinValuesRecordsReceived(HelperClass.getConsumerProps("group.v1",CLUSTER),commandResultTopic,2,120000);
 
         for(int i=0; i<actual.size(); i++)
             System.out.println(actual.get(i));
 
-        assert AssertClass.assertThat(actual,2,"Group doesn't exist");
+        assert AssertClass.assertThat(actual,2,"transporter id doesn't exist");
     }
 
     public ArrayList<Groups> getGroups() {
         ArrayList<Groups> list=new ArrayList<>();
-        Groups groups=new Groups("001",null,null,null,null,null);
+        Groups groups=new Groups("001",null,null,"kk",null,null);
 
         list.add(groups);
 

@@ -1,4 +1,4 @@
-package TransporterTest;
+package UserManagerTests;
 
 import com.fretron.Model.Command;
 

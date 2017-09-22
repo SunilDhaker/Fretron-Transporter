@@ -1,4 +1,4 @@
-package TransporterTest;
+package UserManagerTests;
 
 import Util.EmbeddedSingleNodeKafkaCluster;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerDeConfig;

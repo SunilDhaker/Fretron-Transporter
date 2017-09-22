@@ -1,10 +1,9 @@
-package TransporterTest;
+package UserManagerTests;
 
 import Util.EmbeddedSingleNodeKafkaCluster;
 import Util.IntegrationTestUtils;
 import com.fretron.Context;
 import com.fretron.Model.Command;
-import com.fretron.Model.Groups;
 import com.fretron.Model.Transporter;
 import com.fretron.Model.User;
 import com.fretron.Utils.SerdeUtils;
@@ -13,7 +12,6 @@ import com.fretron.constants.Constants;
 import com.fretron.transporter.UserManager.UserManager;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.streams.KafkaStreams;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
@@ -21,10 +19,8 @@ import org.junit.Test;
 
 import java.io.File;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.Future;
 
 public class UserDeleteCase2 {
     /*
@@ -117,12 +113,4 @@ public class UserDeleteCase2 {
         assert AssertClass.assertThat(actual,2,"user not found");
     }
 
-    public ArrayList<Groups> getGroups() {
-        ArrayList<Groups> list=new ArrayList<>();
-        Groups groups=new Groups("001",null,null,null,null,null);
-
-        list.add(groups);
-
-        return list;
-    }
 }

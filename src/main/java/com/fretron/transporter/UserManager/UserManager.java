@@ -123,14 +123,11 @@ user stream from command topic
 /*
    ktable of existing groups
  */
-        KTable<String, Groups> groupsKTable = transporterKStream
-                .flatMap((key, value) -> {
-                    ArrayList<KeyValue<String, Groups>> list = new ArrayList<>();
-                    for (int i = 0; i < value.getGroups().size(); i++)
-                        list.add(KeyValue.pair(value.getTransporterId(), value.getGroups().get(i)));
-
-                    return list;
-                })
+        KTable<String, Groups> groupsKTable = commandResultKS
+                .filter((key,value)->value.getType().contains("groups") && value.getStatusCode()==200)
+                .mapValues((value) ->
+                    groupsSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_GROUP_TOPIC),value.getData().array())
+                )
                 .selectKey((key, value) -> value.getGroupId())
                 .groupByKey(Serdes.String(), groupsSerde)
                 .reduce((value, aggValue) -> aggValue, Context.getConfig().getString(Constants.KEY_GROUP_BY_ID_STORE));
