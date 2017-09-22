@@ -59,14 +59,13 @@
           "type":[
             "string",
             "null"
-            ],
-          "default":null
+            ]
         },
         {
              "name": "isDeleted",
              "type": "boolean",
              "default":false
-             }
+        }
        ]
      },
 
@@ -114,13 +113,10 @@
 
             {
                "name":"admin",
-                "type":
-                    [
-                      "null",
-                   {"type":"array","items":"string"}
-
-                   ],
-                     "default":null
+                "type": [
+                   "null",
+                   {"type" : "array", "items":"string"}
+                 ]
 
             },
 
@@ -272,108 +268,114 @@
                }
              ]
            },
-             {
+         {
 
-          "namespace": "com.fretron.Model",
-           "type": "record",
-           "name": "Lane",
+            "namespace": "com.fretron.Model",
+            "type": "record",
+            "name": "Lane",
             "fields":
             [
-            {
-             "name":"uuid",
-             "type":
-             [
-               "null",
-               "string"
+             {
+                "name":"uuid",
+                "type":
+                [
+             "null",
+             "string"
 
-             ]
+            ]
 
             },
-             {
-                 "name": "transporterId",
-                 "type":
-                  [    "null",
-                       "string"
-                  ]
-             },
-
-           {
-             "name": "type",
+            {
+             "name": "transporterId",
              "type":
-               [
-                 "null",
-                "string"
-               ]
-          },
+              [    "null",
+                   "string"
+              ]
+            },
 
-           {
-             "name": "baseOrigin",
-               "type":[
-                 "null",
-        "FreightLocation"
-          ],
+            {
+            "name": "type",
+            "type":
+            [
+             "null",
+            "string"
+            ]
+            },
+
+            {
+            "name": "baseOrigin",
+            "type":[
+             "null",
+            "FreightLocation"
+            ],
             "default":null
-          },
+            },
 
-        {
-        "name": "baseDestination",
-        "type":[
-           "null",
-        "FreightLocation"
-         ],
-           "default":null
-         },
+            {
+            "name": "baseDestination",
+            "type":[
+            "null",
+            "FreightLocation"
+            ],
+            "default":null
+            },
 
-        {
-           "name": "basePrice",
-           "type":[
-                 "null",
-                 "double"
-                 ]
-        },
-
-
-          {
-          "name": "baseMaterial",
-          "type":
-          [
-          "null",
-          "string"
-
-          ]
-          },
-
-           {
-             "name": "consigner",
-                "type":[
-                          "null",
-                          {"type":"array","items":"FreightLocationOffset"}
-                        ],
-                   "default":null
-
-             },
-
-       {
-          "name": "consignee",
-             "type":[
-                       "null",
-                       {"type":"array","items":"FreightLocationOffset"}
-                   ],
-                   "default":null
-       },
+            {
+            "name": "basePrice",
+            "type":[
+             "null",
+             "double"
+             ]
+            },
 
 
-        {
-           "name": "material",
-               "type":
-               [
-                  "null",
-                 "MaterialOffset"
+            {
+            "name": "baseMaterial",
+            "type":
+            [
+            "null",
+            "string"
+
+            ]
+            },
+
+            {
+            "name": "consigner",
+            "type":[
+                      "null",
+                      {"type":"array","items":"FreightLocationOffset"}
+                    ],
+               "default":null
+
+            },
+
+            {
+            "name": "consignee",
+            "type":[
+                   "null",
+                   {"type":"array","items":"FreightLocationOffset"}
                ],
                "default":null
-        }
-      ]
-  },
+            },
+
+
+            {
+            "name": "material",
+            "type":
+            [
+              "null",
+             "MaterialOffset"
+            ],
+            "default":null
+            },
+
+            {
+            "name": "isDeleted",
+            "type": "boolean",
+            "default":false
+            }
+            ]
+         },
    {
      "namespace": "com.fretron.Model",
      "type": "record",
@@ -469,13 +471,20 @@
      ]
    },
 
+
        {
-         "namespace": "com.fretron.Model",
+              "namespace": "com.fretron.Model",
               "type": "record",
               "name": "CommandOfLane",
               "fields": [
-                {"name" : "command", "type":"com.fretron.Model.Command"},
-                {"name" : "lane", "type" : "com.fretron.Model.Lane"}
-              ]
+                {
+                  "name": "command",
+                  "type": "com.fretron.Model.Command"
+                },
+                {
+                  "name": "lane",
+                  "type": "com.fretron.Model.Lane"
+                }
+                ]
             }
  ]

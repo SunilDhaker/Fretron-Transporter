@@ -29,6 +29,7 @@ public class TransporterManager {
     public  KafkaStreams createStream(String SchemaRegistryURL,String bootstrapServer)
 
     {
+
         final Properties streamsConfiguration = PropertiesUtil.initializeProperties(Context.getConfig().getString(Constants.KEY_TRANSPORTER_APP_ID),SchemaRegistryURL, bootstrapServer, Context.getConfig());
 
 
@@ -84,7 +85,7 @@ public class TransporterManager {
 
         commandCreateKStream.mapValues((values)->{
             Transporter transporter=transporterSpecificAvroSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_TRANSPORTER_TOPIC), values.getData().array());
-            transporter.setTransporterId(UUID.randomUUID().toString());
+          // transporter.setTransporterId(UUID.randomUUID().toString());
             Command command = new Command();
             command.setStartTime(values.getStartTime());
             command.setType("transporter.created");
@@ -138,23 +139,18 @@ public class TransporterManager {
 
             if (newTransporter.getAdminEmail()!=null)
             {
-                List<String> oldemailList=oldTransporter.getAdminEmail();
-                List <String>arrayList=newTransporter.getAdminEmail();
-                for (String s:arrayList) {
-                    oldemailList.add(s);
-                }
+                List<String> oldemailList= oldTransporter.getAdminEmail();
 
-                oldTransporter.setAdminEmail(oldemailList);
+                oldemailList.addAll(newTransporter.getAdminEmail());
+                HashSet<String> hashSet =new HashSet<>(oldemailList);
 
+                oldTransporter.setAdminEmail(new ArrayList<>(hashSet));
             }
 
             if (newTransporter.getGroups()!=null)
             {
                 List<Groups> oldGroupList=oldTransporter.getGroups();
-                List <Groups>listOfNewGroup=newTransporter.getGroups();
-                for (Groups groups:listOfNewGroup) {
-                    oldGroupList.add(groups);
-                }
+                oldGroupList.addAll(newTransporter.getGroups());
                 oldTransporter.setGroups(oldGroupList);
 
             }

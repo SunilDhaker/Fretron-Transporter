@@ -117,6 +117,7 @@ public class TransporterUpdateCase {
             ArrayList<String> updateEmailList = new ArrayList<>();
             updateEmailList.add("DDDDD@gmail.com");
             updateEmailList.add("EEEE@gmial.com");
+            updateEmailList.add("AA@gmail.com");
             Transporter transporterUpdate = new Transporter("1234", updateEmailList, null, false);
 
             Command commandUpdate = new Command();

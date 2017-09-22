@@ -7,7 +7,7 @@ package com.fretron.Model;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Lane extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Lane\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"uuid\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"baseOrigin\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"FreightLocation\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":null},{\"name\":\"geofence\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Geofence\",\"fields\":[{\"name\":\"center\",\"type\":{\"type\":\"record\",\"name\":\"Location\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}},{\"name\":\"boundary\",\"type\":{\"type\":\"array\",\"items\":\"Location\"}}]}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}],\"default\":null},{\"name\":\"baseDestination\",\"type\":[\"null\",\"FreightLocation\"],\"default\":null},{\"name\":\"basePrice\",\"type\":[\"null\",\"double\"]},{\"name\":\"baseMaterial\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"consigner\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"FreightLocationOffset\",\"fields\":[{\"name\":\"freightLocation\",\"type\":\"FreightLocation\"},{\"name\":\"priceOffset\",\"type\":\"int\"},{\"name\":\"etdOffset\",\"type\":\"int\"}]}}],\"default\":null},{\"name\":\"consignee\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"FreightLocationOffset\"}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"MaterialOffset\",\"fields\":[{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"materialPriceOffset\",\"type\":\"int\"}]}],\"default\":null}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Lane\",\"namespace\":\"com.fretron.Model\",\"fields\":[{\"name\":\"uuid\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"transporterId\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"type\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"baseOrigin\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"FreightLocation\",\"fields\":[{\"name\":\"name\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":null},{\"name\":\"geofence\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"Geofence\",\"fields\":[{\"name\":\"center\",\"type\":{\"type\":\"record\",\"name\":\"Location\",\"fields\":[{\"name\":\"latitude\",\"type\":\"double\"},{\"name\":\"longitude\",\"type\":\"double\"}]}},{\"name\":\"boundary\",\"type\":{\"type\":\"array\",\"items\":\"Location\"}}]}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"string\",\"avro.java.string\":\"String\"}}],\"default\":null}]}],\"default\":null},{\"name\":\"baseDestination\",\"type\":[\"null\",\"FreightLocation\"],\"default\":null},{\"name\":\"basePrice\",\"type\":[\"null\",\"double\"]},{\"name\":\"baseMaterial\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"consigner\",\"type\":[\"null\",{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"FreightLocationOffset\",\"fields\":[{\"name\":\"freightLocation\",\"type\":\"FreightLocation\"},{\"name\":\"priceOffset\",\"type\":\"int\"},{\"name\":\"etdOffset\",\"type\":\"int\"}]}}],\"default\":null},{\"name\":\"consignee\",\"type\":[\"null\",{\"type\":\"array\",\"items\":\"FreightLocationOffset\"}],\"default\":null},{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"record\",\"name\":\"MaterialOffset\",\"fields\":[{\"name\":\"material\",\"type\":[\"null\",{\"type\":\"string\",\"avro.java.string\":\"String\"}]},{\"name\":\"materialPriceOffset\",\"type\":\"int\"}]}],\"default\":null},{\"name\":\"isDeleted\",\"type\":\"boolean\",\"default\":false}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.String uuid;
   @Deprecated public java.lang.String transporterId;
@@ -19,6 +19,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   @Deprecated public java.util.List<com.fretron.Model.FreightLocationOffset> consigner;
   @Deprecated public java.util.List<com.fretron.Model.FreightLocationOffset> consignee;
   @Deprecated public com.fretron.Model.MaterialOffset material;
+  @Deprecated public boolean isDeleted;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -30,7 +31,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
   /**
    * All-args constructor.
    */
-  public Lane(java.lang.String uuid, java.lang.String transporterId, java.lang.String type, com.fretron.Model.FreightLocation baseOrigin, com.fretron.Model.FreightLocation baseDestination, java.lang.Double basePrice, java.lang.String baseMaterial, java.util.List<com.fretron.Model.FreightLocationOffset> consigner, java.util.List<com.fretron.Model.FreightLocationOffset> consignee, com.fretron.Model.MaterialOffset material) {
+  public Lane(java.lang.String uuid, java.lang.String transporterId, java.lang.String type, com.fretron.Model.FreightLocation baseOrigin, com.fretron.Model.FreightLocation baseDestination, java.lang.Double basePrice, java.lang.String baseMaterial, java.util.List<com.fretron.Model.FreightLocationOffset> consigner, java.util.List<com.fretron.Model.FreightLocationOffset> consignee, com.fretron.Model.MaterialOffset material, java.lang.Boolean isDeleted) {
     this.uuid = uuid;
     this.transporterId = transporterId;
     this.type = type;
@@ -41,6 +42,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     this.consigner = consigner;
     this.consignee = consignee;
     this.material = material;
+    this.isDeleted = isDeleted;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -57,6 +59,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     case 7: return consigner;
     case 8: return consignee;
     case 9: return material;
+    case 10: return isDeleted;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -74,6 +77,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     case 7: consigner = (java.util.List<com.fretron.Model.FreightLocationOffset>)value$; break;
     case 8: consignee = (java.util.List<com.fretron.Model.FreightLocationOffset>)value$; break;
     case 9: material = (com.fretron.Model.MaterialOffset)value$; break;
+    case 10: isDeleted = (java.lang.Boolean)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -228,6 +232,21 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     this.material = value;
   }
 
+  /**
+   * Gets the value of the 'isDeleted' field.
+   */
+  public java.lang.Boolean getIsDeleted() {
+    return isDeleted;
+  }
+
+  /**
+   * Sets the value of the 'isDeleted' field.
+   * @param value the value to set.
+   */
+  public void setIsDeleted(java.lang.Boolean value) {
+    this.isDeleted = value;
+  }
+
   /** Creates a new Lane RecordBuilder */
   public static com.fretron.Model.Lane.Builder newBuilder() {
     return new com.fretron.Model.Lane.Builder();
@@ -259,6 +278,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
     private java.util.List<com.fretron.Model.FreightLocationOffset> consigner;
     private java.util.List<com.fretron.Model.FreightLocationOffset> consignee;
     private com.fretron.Model.MaterialOffset material;
+    private boolean isDeleted;
 
     /** Creates a new Builder */
     private Builder() {
@@ -308,6 +328,10 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
         this.material = data().deepCopy(fields()[9].schema(), other.material);
         fieldSetFlags()[9] = true;
       }
+      if (isValidValue(fields()[10], other.isDeleted)) {
+        this.isDeleted = data().deepCopy(fields()[10].schema(), other.isDeleted);
+        fieldSetFlags()[10] = true;
+      }
     }
     
     /** Creates a Builder by copying an existing Lane instance */
@@ -352,6 +376,10 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
       if (isValidValue(fields()[9], other.material)) {
         this.material = data().deepCopy(fields()[9].schema(), other.material);
         fieldSetFlags()[9] = true;
+      }
+      if (isValidValue(fields()[10], other.isDeleted)) {
+        this.isDeleted = data().deepCopy(fields()[10].schema(), other.isDeleted);
+        fieldSetFlags()[10] = true;
       }
     }
 
@@ -605,6 +633,30 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
       return this;
     }
 
+    /** Gets the value of the 'isDeleted' field */
+    public java.lang.Boolean getIsDeleted() {
+      return isDeleted;
+    }
+    
+    /** Sets the value of the 'isDeleted' field */
+    public com.fretron.Model.Lane.Builder setIsDeleted(boolean value) {
+      validate(fields()[10], value);
+      this.isDeleted = value;
+      fieldSetFlags()[10] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'isDeleted' field has been set */
+    public boolean hasIsDeleted() {
+      return fieldSetFlags()[10];
+    }
+    
+    /** Clears the value of the 'isDeleted' field */
+    public com.fretron.Model.Lane.Builder clearIsDeleted() {
+      fieldSetFlags()[10] = false;
+      return this;
+    }
+
     @Override
     public Lane build() {
       try {
@@ -619,6 +671,7 @@ public class Lane extends org.apache.avro.specific.SpecificRecordBase implements
         record.consigner = fieldSetFlags()[7] ? this.consigner : (java.util.List<com.fretron.Model.FreightLocationOffset>) defaultValue(fields()[7]);
         record.consignee = fieldSetFlags()[8] ? this.consignee : (java.util.List<com.fretron.Model.FreightLocationOffset>) defaultValue(fields()[8]);
         record.material = fieldSetFlags()[9] ? this.material : (com.fretron.Model.MaterialOffset) defaultValue(fields()[9]);
+        record.isDeleted = fieldSetFlags()[10] ? this.isDeleted : (java.lang.Boolean) defaultValue(fields()[10]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

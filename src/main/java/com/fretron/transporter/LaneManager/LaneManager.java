@@ -51,7 +51,8 @@ Serdes
          */
         KStream<String, CommandOfLane>[] branchedKStream = commandKStream
                 .branch((key, value) -> value.getCommand().getType().contains("create") ,
-                        (key, value) -> value.getCommand().getType().contains("update"));
+                        (key, value) -> value.getCommand().getType().contains("update"),
+                         (key, value) -> value.getCommand().getType().contains("delete"));
 
         commandKStream.print("command KStream : ");
 
@@ -187,7 +188,49 @@ sendErrorMessage(branchJoinedStream[0],"lane.create.failed","transporter id does
 
         commandResultKS.print("command result : ");
 
-        KafkaStreams streams = new KafkaStreams(builder, properties);
+
+        //Lane Delete Topology-->
+
+        KTable<String, Lane> laneKTableByUUID = commandResultKS
+                .filter((key, value) -> value.getType().contains("lane") && value.getStatusCode()==200)
+                .mapValues(value -> laneSerde.deserializer().deserialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC), value.getData().array()))
+                .selectKey((key, value) -> value.getUuid())
+                .groupByKey(Serdes.String(), laneSerde)
+                .reduce((value, aggValue) -> aggValue, Context.getConfig().getString(Constants.KEY_LANE_BY_UUID_STORE));
+
+
+        KStream<String, CommandOfLaneAndTransporter> joinedKStreamDelete = branchedKStream[2].selectKey((key, value)->value.getLane()
+                .getUuid())
+                .leftJoin(laneKTableByUUID,
+                        (leftValue, rightValue) -> new CommandOfLaneAndTransporter(null,new CommandOfLane(leftValue.command,rightValue)),
+                        Serdes.String(), commandOfLaneSerde);
+
+        KStream<String, CommandOfLaneAndTransporter>[] branchJoinedLaneKStreamDelete = joinedKStreamDelete
+                .branch((key, value) -> value.commandOfLane.lane == null|| value.commandOfLane.lane.getIsDeleted()==true ,
+                        (key, value) -> value.commandOfLane.lane != null);
+
+        sendErrorMessage(branchJoinedLaneKStreamDelete[0],"lane.delete.failed","lane doesn't exist",commandSpecificAvroSerde);
+
+      /*
+      delete values of lane if lane exist
+       */
+       branchJoinedLaneKStreamDelete[1].selectKey((key, value) -> value.commandOfLane.command.getId())
+                .mapValues((values) -> {
+               Lane oldLane= values.commandOfLane.getLane();
+                oldLane.setIsDeleted(true);
+
+                    Command command = new Command();
+                    command.setStartTime(values.commandOfLane.command.getStartTime());
+                    command.setProcessTime(System.currentTimeMillis());
+                    command.setData(ByteBuffer.wrap(laneSerde.serializer().serialize(Context.getConfig().getString(Constants.KEY_LANES_TOPIC), oldLane)));
+                    command.setId(values.commandOfLane.command.getId());
+                    command.setErrorMessage(null);
+                    command.setStatusCode(200);
+                    command.setType("lane.delete.success");
+                    return command;
+                }).to(Serdes.String(), commandSpecificAvroSerde, Context.getConfig().getString(Constants.KEY_COMMAND_RESULT_TOPIC));
+
+       KafkaStreams streams = new KafkaStreams(builder, properties);
         return streams;
     }
 
